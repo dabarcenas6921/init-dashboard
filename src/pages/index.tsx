@@ -11,7 +11,6 @@ export default function Home() {
       <Head>
         <title>Init Dashboard</title>
         <meta name="description" content="Website for Init" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-primary flex min-h-screen flex-col items-center justify-center"></main>
     </>
