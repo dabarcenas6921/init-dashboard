@@ -30,4 +30,4 @@ model Event {
   rsvpLink    String
 }
 
-
+//Create an enum once we migrate to Postgres
