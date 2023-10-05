@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className="bg-primary font-poppins text-white">
+    <div className="bg-primary font-poppins font-extrabold text-white">
       <Layout>
         <Component {...pageProps} />
       </Layout>

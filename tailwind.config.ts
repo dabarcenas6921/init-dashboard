@@ -6,11 +6,12 @@ export default {
     extend: {
       colors: {
         primary: "#222222",
+        primary_yellow: "#FFD550",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config;
