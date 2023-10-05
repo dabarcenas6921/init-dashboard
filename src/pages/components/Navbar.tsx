@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="mb-5 border-gray-200 bg-primary">
-      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+    <nav className="mb-16 border-gray-200 bg-primary">
+      <div className="mx-auto flex flex-wrap items-center justify-between">
         <Link href="/" className="flex items-center">
           <span className="self-center whitespace-nowrap text-3xl text-white">
             INIT
