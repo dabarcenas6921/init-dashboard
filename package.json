@@ -11,6 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.25.1",
     "@prisma/client": "^5.1.1",
     "@t3-oss/env-nextjs": "^0.6.0",
     "@tanstack/react-query": "^4.32.6",
@@ -25,6 +26,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/eslint": "^8.44.2",
     "@types/node": "^18.16.0",
     "@types/react": "^18.2.20",
