@@ -18,3 +18,16 @@ model Example {
 
     @@index([name])
 }
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  time        DateTime
+  location    String
+  picture     String   // Assuming this is a URL or file path to the image
+  tag         String
+  rsvpLink    String
+}
+
+
