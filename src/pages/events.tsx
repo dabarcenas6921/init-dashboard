@@ -1,15 +1,23 @@
 export default function Events() {
   return (
-    <main className="min-h-screen justify-between">
-      <div>
+    <main className="min-h-screen">
+      <div className="flex items-center justify-between">
         <h1 className="text-3xl text-white">Upcoming Events</h1>
-        <button
-          type="button"
-          className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
-        >
-          Add Event
-        </button>
-        <Search />
+        <div className="flex items-center space-x-2">
+          <button
+            type="button"
+            className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+          >
+            Add Event
+          </button>
+          <Search />
+          <button
+            type="button"
+            className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+          >
+            Filter
+          </button>
+        </div>
       </div>
     </main>
   );
@@ -45,13 +53,13 @@ function Search() {
         <input
           type="search"
           id="default-search"
-          className="block w-full rounded-lg border border-gray-300 bg-white p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          className="block w-full rounded-md border border-gray-300 bg-white p-2 pl-10 text-sm text-gray-900 focus:border-yellow-500 focus:ring-yellow-500"
           placeholder="Search for events..."
           required
         />
         <button
           type="submit"
-          className="bg-primary_yellow absolute bottom-2.5 right-2.5 rounded-lg px-4 py-2 text-sm font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          className="bg-primary_yellow absolute inset-y-0 right-0 flex items-center justify-center rounded-r-lg px-4 py-2 text-sm font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300"
         >
           Search
         </button>
