@@ -1,11 +1,14 @@
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
+import Layout from "./components/Layout";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className="font-poppins">
-      <Component {...pageProps} />
+    <div className="bg-primary font-poppins text-white">
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </div>
   );
 };
