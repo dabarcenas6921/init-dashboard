@@ -11,9 +11,7 @@ export default function Home() {
         <title>Init Dashboard</title>
         <meta name="description" content="Website for Init" />
       </Head>
-      <main className="bg-primary flex min-h-screen flex-col">
-        <Navbar />
-      </main>
+      <main className="flex min-h-screen flex-col bg-primary"></main>
     </>
   );
 }
