@@ -1,4 +1,3 @@
-import React from 'react';
 import FilterJobs from './components/FilterJobs';
 
 export default function Jobs() {

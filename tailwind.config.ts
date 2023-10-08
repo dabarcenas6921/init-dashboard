@@ -1,7 +1,7 @@
 import { type Config } from "tailwindcss";
 
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}", "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -13,5 +13,5 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require('flowbite/plugin')],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config;
