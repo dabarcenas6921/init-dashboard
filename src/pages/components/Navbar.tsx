@@ -1,43 +1,63 @@
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="mb-5 border-gray-200 bg-primary">
-      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <Link href="/" className="flex items-center">
-          <span className="self-center whitespace-nowrap text-3xl text-white">
-            INIT
+    <nav className="pb-8 pt-4 border-gray-200 bg-primary">
+      <div className="mx-auto flex flex-wrap items-center justify-between">
+        <Link href="/">
+          <span className="order-1 flex cursor-pointer items-center md:order-1">
+            <span className="self-center whitespace-nowrap text-3xl text-white  hover:text-yellow-200">
+              INIT
+            </span>
           </span>
         </Link>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="mt-4 flex flex-col rounded-lg border  border-gray-700  bg-gray-800 p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0  md:bg-primary md:p-0">
-            <Link
-              href="/jobs"
-              className="block rounded py-2 pl-3 pr-4 text-white"
-            >
-              Job Opportunities
-            </Link>
-            <Link
-              href="/events"
-              className="block rounded py-2 pl-3 pr-4 text-white"
-            >
-              Events
-            </Link>
-            <Link
-              href="/programs"
-              className="block rounded py-2 pl-3 pr-4 text-white"
-            >
-              Programs
-            </Link>
-            <Link
-              href="/about"
-              className="block rounded py-2 pl-3 pr-4 text-white"
-            >
-              About Us
-            </Link>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="order-3 rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
+        >
+          <svg
+            className="h-5 w-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
+        <div
+          className={`${
+            isOpen ? "block" : "hidden"
+          } relative z-0 w-full md:block md:w-auto`}
+          id="navbar-default"
+        >
+          <ul className="mt-4 flex flex-col bg-gray-900 p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
+            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-yellow-200">
+              <Link href="/jobs">Job Opportunities</Link>
+            </li>
+            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
+              <Link href="/events">Events</Link>
+            </li>
+            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
+              <Link href="/programs">Programs</Link>
+            </li>
+            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
+              <Link href="/about">About Us</Link>
+            </li>
           </ul>
         </div>
-        <div className="flex space-x-4">
+        <div className={`${
+            isOpen ? "block" : "hidden"
+          } relative z-10 order-2 flex flex-row space-x-4 w-full p-4 border-gray-800 bg-gray-900 justify-center md:flex md:w-auto md:flex-row md:bg-primary`}>
           <a
             href="https://www.instagram.com/initofficial/"
             rel="noopener noreferrer"
