@@ -1,7 +1,7 @@
 
 export default function FilterForm() {
     return (
-      <div className="sm border-2 border-[#1A1E22] bg-[#1A1E22] md:w-48 h-[27rem] p-6 rounded-md">
+      <div className="sm border-2 border-[#1A1E22] bg-[#1A1E22] w-40 md:w-48 mx: h-[27rem] p-6 rounded-md">
         <h2 className="text-xl mb-4">Filter</h2>
         <form action="submit">
 
