@@ -5,7 +5,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="pb-8 pt-4 border-gray-200 bg-primary">
+    <nav className="border-gray-200 bg-primary pb-8 pt-4">
       <div className="mx-auto flex flex-wrap items-center justify-between">
         <Link href="/">
           <span className="order-1 flex cursor-pointer items-center md:order-1">
@@ -55,9 +55,11 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <div className={`${
+        <div
+          className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex flex-row space-x-4 w-full p-4 border-gray-800 bg-gray-900 justify-center md:flex md:w-auto md:flex-row md:bg-primary`}>
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-gray-900 p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
+        >
           <a
             href="https://www.instagram.com/initofficial/"
             rel="noopener noreferrer"
