@@ -13,5 +13,5 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("flowbite/plugin")],
 } satisfies Config;

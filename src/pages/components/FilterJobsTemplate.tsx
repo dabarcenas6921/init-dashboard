@@ -1,7 +1,10 @@
 
+
 export default function FilterForm() {
+
     return (
-      <div className="sm border-2 border-[#1A1E22] bg-[#1A1E22] w-40 md:w-48 mx: h-[27rem] p-6 rounded-md">
+  
+      <div className="sm border-2 border-[#1A1E22] bg-[#1A1E22] md:w-48 mx: h-[27rem] p-6 rounded-md">
         <h2 className="text-xl mb-4">Filter</h2>
         <form action="submit">
 
@@ -69,19 +72,20 @@ export default function FilterForm() {
             </div>
 
           </div>
-
+          
+          {/* Apply Filter Button */}
           <button
             type="submit"
             className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
-                         font-medium text-black hover:bg-yellow-500 focus:outline-none 
-                         focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+                        font-medium text-black hover:bg-yellow-500 focus:outline-none 
+                        focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
           >
             Apply Filter
           </button>
 
         </form>
-        
       </div>
+      
     );
   }
   

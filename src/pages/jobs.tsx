@@ -1,4 +1,4 @@
-import FilterJobs from './components/FilterJobs';
+import FilterJobsDropDown from './components/FilterJobsDropDown'
 import JobCard from './components/JobCard';
 
 export default function Jobs() {
@@ -8,11 +8,14 @@ export default function Jobs() {
       {/* Container to keep everything in line */}
       <div className="p-4 max-w-screen-xl mx-auto">
         <h1 className="text-3xl mb-8">Job Board</h1>
-        <div className="flex">
+
+        <div className="flex flex-col md:flex-row">
 
           {/* Filter Jobs container */}
-          <div className="mr-4 md:mr-24">
-            <FilterJobs></FilterJobs>
+          <div className="max-w-screen-md mx-auto md:mr-[5%]">
+            <div className="mr-4 ">
+              <FilterJobsDropDown></FilterJobsDropDown>
+            </div>
           </div>
           
           {/* Job Cards container */}
