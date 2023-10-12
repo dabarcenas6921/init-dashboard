@@ -1,3 +1,5 @@
+import EventCard from "./components/EventCard";
+
 export default function Events() {
   return (
     <main className="min-h-screen p-4 md:p-0">
@@ -13,6 +15,13 @@ export default function Events() {
             Add Event
           </button>
           <Search />
+        </div>
+      </div>
+      <div className="mx-auto mt-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <EventCard />
+          <EventCard />
+          <EventCard />
         </div>
       </div>
     </main>
