@@ -2,3 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add these styles to your CSS file */
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

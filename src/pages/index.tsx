@@ -13,6 +13,7 @@ export default function Home() {
         <meta name="description" content="Website for Init" />
       </Head>
 
+      {/* Navbar component */}
       {/* Main content of the Home component */}
       <main className="flex min-h-screen flex-col bg-primary">
         <Carousel />
