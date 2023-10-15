@@ -1,73 +1,27 @@
-import React, { useState } from 'react';
-import JobCard from './JobCard';
-import { jobPostings } from './jobPostingsData';
+import React from 'react'
+import { SelectedFilters } from './FilterJobPostings';
 
-// Define a type for the selected filters
-type SelectedFilters = {
-  jobType: string[];
-  jobPosition: string[];
-  jobLocation: string[];
-};
+interface FilterCardProps {
+    handleFilterChange: (category: keyof SelectedFilters, value: string) => void;
+    filterJobPostings: () => void;
+    resetFilters: () => void;
+    selectedFilters: SelectedFilters;
+  }
 
-export default function FilterForm() {
-    // State to store selected filter values
-    const [selectedFilters, setSelectedFilters] = useState({
-      jobType:     [] as string[],
-      jobPosition: [] as string[],
-      jobLocation: [] as string[],
-    });
 
-    // State to store the filtered job postings
-    const [filteredJobPostings, setFilteredJobPostings] = useState(jobPostings);
-
-    // Function to handle checkbox changes
-    const handleFilterChange = (category: keyof SelectedFilters, value: string) => {
-      setSelectedFilters((prevFilters) => {
-        const updatedFilters = { ...prevFilters };
-        if (updatedFilters[category].includes(value)) {
-          // If the value is already in the array, remove it
-          updatedFilters[category] = updatedFilters[category].filter((item) => item !== value);
-        } else {
-          // If the value is not in the array, add it
-          updatedFilters[category] = [...updatedFilters[category], value];
-        }
-        return updatedFilters;
-      });
-    };
-
-    // Function to log the selected filters when the "Apply Filter" button is clicked
-    const handleApplyFilter = () => {
-      console.log('Selected Filters:', selectedFilters);
-    };
-
-    // Function to filter job postings based on selected filters
-    const filterJobPostings = () => {
-      const { jobType, jobPosition, jobLocation } = selectedFilters;
-      const filtered = jobPostings.filter((job) => {
-        const typeMatches = jobType.length === 0 || jobType.includes(job.jobType);
-        const positionMatches = jobPosition.length === 0 || jobPosition.includes(job.jobPosition);
-        const locationMatches = jobLocation.length === 0 || jobLocation.includes(job.jobLocation);
-        return typeMatches && positionMatches && locationMatches;
-      });
-      setFilteredJobPostings(filtered);
-    };
-
-    // Function to reset filters and show all job postings
-    const resetFilters = () => {
-      setSelectedFilters({
-        jobType:     [] as string[],
-        jobPosition: [] as string[],
-        jobLocation: [] as string[],
-      });
-      setFilteredJobPostings(jobPostings);
-    };
-
+const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPostings, resetFilters, selectedFilters }) => {
     return (
+        <div className="border-2 border-[#1A1E22] bg-[#1A1E22] w-48 h-[32rem] p-6 rounded-md">
 
-      <div className="flex">
-  
-        <div className="border-2 border-[#1A1E22] bg-[#1A1E22] w-56 h-[29rem] p-6 rounded-md mr-[5%] ">
-          <h2 className="text-xl mb-4">Filter</h2>
+          <div className="flex justify-between items-baseline">
+            <h2 className="text-xl mb-4">Filter</h2>
+            {/* Reset Filters Button */}
+            <p onClick={resetFilters}
+               className="text-xs text-primary_yellow cursor-pointer "
+            >
+               Clear filters
+            </p>
+          </div>
           <form action="submit">
 
             {/* Job Hours Container */}
@@ -80,6 +34,7 @@ export default function FilterForm() {
                 name="fulltime" 
                 id="fulltime"
                 onChange={() => handleFilterChange('jobType', 'Fulltime')}
+                checked={selectedFilters.jobType.includes('Fulltime')}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="fulltime">Fulltime</label>
               </div>
@@ -90,6 +45,7 @@ export default function FilterForm() {
                 name="part-time" 
                 id="part-time"
                 onChange={() => handleFilterChange('jobType', 'Part-time')}
+                checked={selectedFilters.jobType.includes('Part-time')}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="part-time">Part-time</label>
               </div>
@@ -105,6 +61,7 @@ export default function FilterForm() {
                 name="internship" 
                 id="internship"
                 onChange={() => handleFilterChange('jobPosition', 'Internship')}
+                checked={selectedFilters.jobPosition.includes('Internship')}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="internship">Internship</label>
               </div>
@@ -115,6 +72,7 @@ export default function FilterForm() {
                 name="new-grad" 
                 id="new-grad"
                 onChange={() => handleFilterChange('jobPosition', 'New-grad')}
+                checked={selectedFilters.jobPosition.includes('New-grad')}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="new-grad">New-grad</label>
               </div>
@@ -130,6 +88,7 @@ export default function FilterForm() {
                 name="on-site" 
                 id="on-site"
                 onChange={() => handleFilterChange('jobLocation', 'On-site')}
+                checked={selectedFilters.jobLocation.includes('On-site')}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="on-site">On-site</label>
               </div>
@@ -140,6 +99,7 @@ export default function FilterForm() {
                 name="hybrid" 
                 id="hybrid" 
                 onChange={() => handleFilterChange('jobLocation', 'Hybrid')}
+                checked={selectedFilters.jobLocation.includes('Hybrid')}
                 className="mr-1.5 rounded-sm cursor-pointer"/>
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="hybrid">Hybrid</label>
               </div>
@@ -150,6 +110,7 @@ export default function FilterForm() {
                 name="remote" 
                 id="remote"
                 onChange={() => handleFilterChange('jobLocation', 'Remote')}
+                checked={selectedFilters.jobLocation.includes('Remote')}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="remote">Remote</label>
               </div>
@@ -167,24 +128,15 @@ export default function FilterForm() {
               Apply Filter
             </button>
 
+            
+
           </form>
 
           
 
 
         </div>
+    )
+};
 
-        <div className="w-full">
-            {filteredJobPostings.length > 0 ? (
-              <JobCard jobPostings={filteredJobPostings} />
-            ) : (
-              <p>No matching job postings.</p>
-            )}
-        </div>
-
-      </div>
-      
-      
-    );
-  }
-  
+export default FilterCard

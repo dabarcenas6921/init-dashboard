@@ -1,6 +1,4 @@
-import FilterJobsDropDown from './components/FilterJobsDropDown'
-import JobCard from './components/JobCard';
-import { jobPostings } from './components/jobPostingsData';
+import FilterJobPostings from './components/FilterJobPostings'
 
 export default function Jobs() {
   return (
@@ -10,18 +8,11 @@ export default function Jobs() {
       <div className="p-4 max-w-screen-xl mx-auto">
         <h1 className="text-3xl mb-8 max-[766px]:mb-4 text-center md:text-left">Job Board</h1>
 
-        {/* Filter Jobs container */}
-        <FilterJobsDropDown></FilterJobsDropDown>
-          
-          {/* Job Cards container */}
-          {/* <div>
-            <JobCard jobPostings={jobPostings}></JobCard>
-          </div> */}
-
+        {/* Filter Card and Jobs container */}
+        <FilterJobPostings></FilterJobPostings>    
         
       </div>
       
-
     </main>
     
     
