@@ -1,21 +1,22 @@
 import Image from "next/image";
 import type { EventCard } from "../interfaces/EventCard.interface";
+import initLogo from "../../assets/init.png";
 
 export default function EventCard({
   name,
   description,
   time,
   location,
-  picture,
   tag,
   rsvpLink,
 }: EventCard) {
   return (
     <div className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7]">
       <div className="relative h-52 overflow-hidden rounded-t-xl sm:h-56">
-        <img
-          src={picture}
-          alt={"Event Image"}
+        <Image
+          // Add picture of event here
+          src={initLogo}
+          alt={`${name} Event Image`}
           className="absolute h-full w-full object-cover"
         />
       </div>
@@ -30,14 +31,8 @@ export default function EventCard({
           </h3>
           <p className="sm:text-md mt-2 text-sm text-gray-500">{description}</p>
           <div className="mt-2 text-sm sm:mt-4">
-            <p className="text-gray-400">
-              {time.toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                second: "numeric",
-                hour12: true,
-              })}
-            </p>
+            <p className="text-gray-400">{time.toDateString()}</p>
+
             <p className="text-gray-400">{location}</p>
           </div>
         </div>

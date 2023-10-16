@@ -1,6 +1,8 @@
 import EventCard from "./components/EventCard";
 
 export default function Events() {
+  const testDate = new Date("2023-10-15T12:00:00Z");
+
   return (
     <main className="min-h-screen p-4 md:p-0">
       <div className="mb-4 flex flex-col items-center justify-between md:mb-0 md:flex-row">
@@ -23,9 +25,8 @@ export default function Events() {
             id={1}
             name="Sample Event"
             description="This is a sample event."
-            time={new Date()}
+            time={testDate}
             location="123 Sample Street"
-            picture="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/64e5bc37187bf4d05914b678_INIT%20Icon%20YLW.png"
             tag="Sample Tag"
             rsvpLink="https://example.com/rsvp"
           />
@@ -33,9 +34,8 @@ export default function Events() {
             id={2}
             name="Sample Event"
             description="This is a sample event."
-            time={new Date()}
+            time={testDate}
             location="123 Sample Street"
-            picture="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/64e5bc37187bf4d05914b678_INIT%20Icon%20YLW.png"
             tag="Sample Tag"
             rsvpLink="https://example.com/rsvp"
           />
@@ -43,9 +43,8 @@ export default function Events() {
             id={3}
             name="Sample Event"
             description="This is a sample event."
-            time={new Date()}
+            time={testDate}
             location="123 Sample Street"
-            picture="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/64e5bc37187bf4d05914b678_INIT%20Icon%20YLW.png"
             tag="Sample Tag"
             rsvpLink="https://example.com/rsvp"
           />

@@ -4,7 +4,7 @@ export interface EventCard {
   description: string;
   time: Date;
   location: string;
-  picture: string;
+  // picture: string;
   tag: string;
   rsvpLink: string;
 }
