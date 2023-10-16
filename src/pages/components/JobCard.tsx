@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Dropdown } from 'flowbite-react';
-import { jobPostings } from './jobPostingsData';
 
 type Job = {
   image: string;

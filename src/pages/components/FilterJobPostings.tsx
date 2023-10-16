@@ -38,11 +38,6 @@ export default function FilterForm() {
       });
     };
 
-    // Function to log the selected filters when the "Apply Filter" button is clicked
-    const handleApplyFilter = () => {
-      console.log('Selected Filters:', selectedFilters);
-    };
-
     // Function to filter job postings based on selected filters
     const filterJobPostings = () => {
       const { jobType, jobPosition, jobLocation } = selectedFilters;

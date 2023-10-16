@@ -1,4 +1,4 @@
-export let jobPostings = [
+export const jobPostings = [
     {
         image: "https://www.freepnglogos.com/uploads/netflix-logo-app-png-16.png",
         title: "Software Engineer",
