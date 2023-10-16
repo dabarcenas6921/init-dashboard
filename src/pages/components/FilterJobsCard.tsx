@@ -10,6 +10,18 @@ interface FilterCardProps {
 
 
 const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPostings, resetFilters, selectedFilters }) => {
+    console.log(selectedFilters)
+    // Job Type
+    const isFulltimeChecked = selectedFilters?.jobType?.includes('Fulltime') ?? false;
+    const isPartTimeChecked = selectedFilters?.jobType?.includes('Part-time') ?? false;
+    // Job Position
+    const isInternshipChecked = selectedFilters?.jobPosition?.includes('Internship') ?? false;
+    const isNewGradChecked = selectedFilters?.jobPosition?.includes('New-grad') ?? false;
+    // Job Location
+    const isOnSiteChecked = selectedFilters?.jobLocation?.includes('On-site') ?? false;
+    const isHybridChecked = selectedFilters?.jobLocation?.includes('Hybrid') ?? false;
+    const isRemoteChecked = selectedFilters?.jobLocation?.includes('Remote') ?? false;
+  
     return (
         <div className="border-2 border-[#1A1E22] bg-[#1A1E22] w-48 h-[32rem] p-6 rounded-md">
 
@@ -34,7 +46,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="fulltime" 
                 id="fulltime"
                 onChange={() => handleFilterChange('jobType', 'Fulltime')}
-                checked={selectedFilters.jobType.includes('Fulltime')}
+                checked={isFulltimeChecked}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="fulltime">Fulltime</label>
               </div>
@@ -45,7 +57,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="part-time" 
                 id="part-time"
                 onChange={() => handleFilterChange('jobType', 'Part-time')}
-                checked={selectedFilters.jobType.includes('Part-time')}
+                checked={isPartTimeChecked}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="part-time">Part-time</label>
               </div>
@@ -61,7 +73,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="internship" 
                 id="internship"
                 onChange={() => handleFilterChange('jobPosition', 'Internship')}
-                checked={selectedFilters.jobPosition.includes('Internship')}
+                checked={isInternshipChecked}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="internship">Internship</label>
               </div>
@@ -72,7 +84,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="new-grad" 
                 id="new-grad"
                 onChange={() => handleFilterChange('jobPosition', 'New-grad')}
-                checked={selectedFilters.jobPosition.includes('New-grad')}
+                checked={isNewGradChecked}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="new-grad">New-grad</label>
               </div>
@@ -88,7 +100,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="on-site" 
                 id="on-site"
                 onChange={() => handleFilterChange('jobLocation', 'On-site')}
-                checked={selectedFilters.jobLocation.includes('On-site')}
+                checked={isOnSiteChecked}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="on-site">On-site</label>
               </div>
@@ -99,7 +111,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="hybrid" 
                 id="hybrid" 
                 onChange={() => handleFilterChange('jobLocation', 'Hybrid')}
-                checked={selectedFilters.jobLocation.includes('Hybrid')}
+                checked={isHybridChecked}
                 className="mr-1.5 rounded-sm cursor-pointer"/>
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="hybrid">Hybrid</label>
               </div>
@@ -110,7 +122,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 name="remote" 
                 id="remote"
                 onChange={() => handleFilterChange('jobLocation', 'Remote')}
-                checked={selectedFilters.jobLocation.includes('Remote')}
+                checked={isRemoteChecked}
                 className="mr-1.5 rounded-sm cursor-pointer" />
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="remote">Remote</label>
               </div>

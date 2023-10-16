@@ -73,23 +73,28 @@ export default function FilterForm() {
         {/* Dropdown for small Screen sizes */}
         <div className="md:hidden mx-auto mb-8">
             <Dropdown className="text-white bg-[#1A1E22]" label="Filter" placement="bottom" inline>
-                <FilterJobsCard
-                  handleFilterChange={handleFilterChange}
-                  filterJobPostings={filterJobPostings}  
-                  resetFilters={resetFilters}
-                  selectedFilters={selectedFilters}
-                />
+                {selectedFilters ? (
+                  <FilterJobsCard
+                    handleFilterChange={handleFilterChange}
+                    filterJobPostings={filterJobPostings}  
+                    resetFilters={resetFilters}
+                    selectedFilters={selectedFilters}
+                  />
+                ): null}
+                
             </Dropdown>
         </div>
 
         {/* Normal Screen Sizes */}
         <div className="hidden md:block mr-[5%]">
-          <FilterJobsCard
-            handleFilterChange={handleFilterChange}
-            filterJobPostings={filterJobPostings}  
-            resetFilters={resetFilters}
-            selectedFilters={selectedFilters}
-          />
+          {selectedFilters ? (
+            <FilterJobsCard
+              handleFilterChange={handleFilterChange}
+              filterJobPostings={filterJobPostings}  
+              resetFilters={resetFilters}
+              selectedFilters={selectedFilters}
+            />
+          ): null}
         </div>
 
         <div className="w-full">

@@ -16,8 +16,12 @@ type JobCardProps = {
   jobPostings: Job[];
 };
 
-
 export default function JobCard({ jobPostings }: JobCardProps) {
+  if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
+    return <p>No matching job postings.</p>;
+  }
+
+
   return (
     <div className="w-full flex flex-wrap items-start justify-evenly xl:justify-between">
       {jobPostings.map((job, index) => (
