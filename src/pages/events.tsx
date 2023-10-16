@@ -19,9 +19,36 @@ export default function Events() {
       </div>
       <div className="mx-auto mt-4">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <EventCard />
-          <EventCard />
-          <EventCard />
+          <EventCard
+            id={1}
+            name="Sample Event"
+            description="This is a sample event."
+            time={new Date()}
+            location="123 Sample Street"
+            picture="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/64e5bc37187bf4d05914b678_INIT%20Icon%20YLW.png"
+            tag="Sample Tag"
+            rsvpLink="https://example.com/rsvp"
+          />
+          <EventCard
+            id={2}
+            name="Sample Event"
+            description="This is a sample event."
+            time={new Date()}
+            location="123 Sample Street"
+            picture="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/64e5bc37187bf4d05914b678_INIT%20Icon%20YLW.png"
+            tag="Sample Tag"
+            rsvpLink="https://example.com/rsvp"
+          />
+          <EventCard
+            id={3}
+            name="Sample Event"
+            description="This is a sample event."
+            time={new Date()}
+            location="123 Sample Street"
+            picture="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/64e5bc37187bf4d05914b678_INIT%20Icon%20YLW.png"
+            tag="Sample Tag"
+            rsvpLink="https://example.com/rsvp"
+          />
         </div>
       </div>
     </main>
