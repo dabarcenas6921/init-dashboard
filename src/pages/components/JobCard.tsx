@@ -29,7 +29,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
           key={index}
           className="max-w-xs min-w-[16rem] bg-[#1A1E22] border-[#1A1E22] mb-8 max-[820px]:mb-8"
         >
-          <div className="text-black flex justify-end px-4">
+          <div className="text-white flex justify-end px-4">
             <Dropdown inline label="" className="">
               <Dropdown.Item>
                 <a
@@ -72,19 +72,19 @@ export default function JobCard({ jobPostings }: JobCardProps) {
           {/* Job Roles Pills */}
           <div className="mb-10">
             <span
-              className="bg-blue-100 text-blue-800 text-sm max-[420px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded-full dark:bg-blue-900 dark:text-blue-300"
+              className="bg-blue-100 text-blue-800 text-sm max-[420px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300"
             >
               {job.jobType}
             </span>
 
             <span
-              className="bg-green-100 text-green-800 text-sm max-[420px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded-full  dark:bg-green-900 dark:text-green-300"
+              className="bg-green-100 text-green-800 text-sm max-[420px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded  dark:bg-green-900 dark:text-green-300"
             >
               {job.jobPosition}
             </span>
 
             <span
-              className="bg-yellow-100 text-yellow-800 text-sm max-[420px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300"
+              className="bg-yellow-100 text-yellow-800 text-sm max-[420px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded dark:bg-yellow-900 dark:text-yellow-300"
             >
               {job.jobLocation}
             </span>
