@@ -33,7 +33,6 @@ export default function FilterForm() {
           // If the value is not in the array, add it
           updatedFilters[category] = [...updatedFilters[category], value];
         }
-        console.log(updatedFilters)
         return updatedFilters;
       });
     };
