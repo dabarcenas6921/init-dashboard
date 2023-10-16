@@ -11,3 +11,13 @@
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 767px) {
+  .gallery-image {
+    width: 90% !important;
+    padding-left: 70px !important;
+  }
+  .programs {
+    padding-top: 20px !important;
+  }
+}

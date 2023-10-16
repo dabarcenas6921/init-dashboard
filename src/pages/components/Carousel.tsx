@@ -9,6 +9,7 @@ const contentStyle: React.CSSProperties = {
   textAlign: "center",
   background: "#364d79",
   margin: "auto",
+  zIndex: 0,
 };
 
 const App: React.FC = () => (
