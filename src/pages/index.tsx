@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { api } from "~/utils/api";
 import Carousel from "./components/Carousel";
-import Card from "./components/Card";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 
@@ -56,7 +56,7 @@ export default function Home() {
           <div className="pr-0 text-center sm:pr-40 sm:text-left">
             <h1 className="pb-30 text-9xl">INIT</h1>
             <p className="pt-10 text-3xl">
-              South Florida's Largest <br />
+              South Florida&apos;s Largest <br />
               Tech Community
             </p>
             <div className="flex flex-row space-x-5 pl-10 pt-10 sm:pl-0">
@@ -92,7 +92,7 @@ export default function Home() {
                   These programs attract thousands of individuals annually,
                   helping them gain technical skills, work on projects, improve
                   their resume, prepare for interviews, connect with industry,
-                  and much more.{" "}
+                  and much more. &apos;
                   <a
                     href="https://2022.shellhacks.net/"
                     target="_blank"
@@ -105,10 +105,12 @@ export default function Home() {
                   Florida and brings together 1,500 students to innovate each
                   year.
                 </p>
-                <img
-                  src="https://uploads-ssl.webflow.com/62c343d1109fa5ddcec5736b/63d0f99d550a564bc47c1ad6_Screenshot%202023-01-25%20at%204.14.08%20AM.png"
+                <Image
+                  src="/assets/images/programs.png"
                   loading="lazy"
                   alt=""
+                  width={432}
+                  height={300}
                   sizes="(max-width: 479px) 94vw, (max-width: 767px) 95vw, (max-width: 991px) 92vw, (max-width: 1439px) 43vw, 432.3984375px"
                   className="gallery-image shadow-two flex lg:pr-60"
                   style={{

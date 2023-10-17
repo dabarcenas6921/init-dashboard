@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 const images = [
   "/assets/images/people3.png",
@@ -20,7 +21,6 @@ const CarouselComponent = () => {
   return (
     <div className="carousel relative max-w-xl space-x-4 overflow-hidden bg-primary p-4">
       {" "}
-      {/* Increased max-width here */}
       <div
         className="carousel-track flex transition-transform duration-1000"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
