@@ -110,7 +110,6 @@ export default function Home() {
                   loading="lazy"
                   alt=""
                   sizes="(max-width: 479px) 94vw, (max-width: 767px) 95vw, (max-width: 991px) 92vw, (max-width: 1439px) 43vw, 432.3984375px"
-                  srcSet="...[all the srcSet links]..."
                   className="gallery-image shadow-two flex lg:pr-60"
                   style={{
                     width: "40%", // Default width
