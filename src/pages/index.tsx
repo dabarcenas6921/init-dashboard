@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { api } from "~/utils/api";
 import Carousel from "./components/Carousel";
+import Card from "./components/Card";
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 
@@ -51,7 +52,33 @@ export default function Home() {
       {/* Navbar component */}
       {/* Main content of the Home component */}
       <main className="flex min-h-screen flex-col bg-primary">
-        <Carousel />
+        <div className="hero-wrapper-2 flex flex-col items-center justify-center sm:flex-row sm:items-start sm:pt-10 md:flex-row">
+          <div className="pr-0 text-center sm:pr-40 sm:text-left">
+            <h1 className="pb-30 text-9xl">INIT</h1>
+            <p className="pt-10 text-3xl">
+              South Florida's Largest <br />
+              Tech Community
+            </p>
+            <div className="flex flex-row space-x-5 pl-10 pt-10 sm:pl-0">
+              <button
+                type="button"
+                className="rounded-lg  bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Join Now
+              </button>
+              <button
+                type="button"
+                className="rounded-lg bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Extra large
+              </button>
+            </div>
+          </div>
+          <div className="mt-10 sm:mt-0">
+            <Carousel />
+          </div>
+        </div>
+
         <div>
           <section id="Programs" className="programs">
             <div className="container-3">
@@ -59,7 +86,7 @@ export default function Home() {
                 🧠 Programs
               </h1>
               <div className="hero-wrapper-2 flex flex-col justify-center sm:flex-row sm:items-center sm:pt-10 md:flex-row">
-                <p className="programs margin-bottom-16px text-center md:p-0 lg:pl-10 lg:pr-10">
+                <p className="programs margin-bottom-16px text-left md:p-0 lg:pl-80 lg:pr-10">
                   INIT chapters carry out our signature experiential learning
                   and career development programs within their communities.
                   These programs attract thousands of individuals annually,
@@ -84,7 +111,7 @@ export default function Home() {
                   alt=""
                   sizes="(max-width: 479px) 94vw, (max-width: 767px) 95vw, (max-width: 991px) 92vw, (max-width: 1439px) 43vw, 432.3984375px"
                   srcSet="...[all the srcSet links]..."
-                  className="gallery-image shadow-two flex lg:pr-4"
+                  className="gallery-image shadow-two flex lg:pr-60"
                   style={{
                     width: "40%", // Default width
                     marginTop: "20px", // Add top margin to create space
