@@ -9,8 +9,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#222222",
+        primary: "#1A1E22",
         primary_yellow: "#FFD550",
+        light_yellow: "#FFF1B8",
+        primary_gray: "#D1D1D1",
+        secondary: "#FFFFFF",
+        light_purple: "#D0C3FC",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
