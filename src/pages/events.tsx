@@ -20,7 +20,7 @@ export default function Events() {
         </div>
       </div>
       <div className="mx-auto mt-4">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <EventCard
             id={1}
             name="Sample Event"
@@ -41,6 +41,15 @@ export default function Events() {
           />
           <EventCard
             id={3}
+            name="Sample Event"
+            description="This is a sample event."
+            time={testDate}
+            location="123 Sample Street"
+            tag="Sample Tag"
+            rsvpLink="https://example.com/rsvp"
+          />
+          <EventCard
+            id={4}
             name="Sample Event"
             description="This is a sample event."
             time={testDate}
