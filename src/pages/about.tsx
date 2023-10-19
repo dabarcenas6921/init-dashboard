@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import init_members from "../../../public/images/init-members.jpeg";
 import FIU_Logo from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/FIU-Engineering-Logo.svg";
 import knight_foundation from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/knight-foundation-logo.svg";
@@ -7,6 +7,12 @@ import lab22c from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/
 import mdc_logo from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/MDC-Logo.svg";
 import { chapters } from "../../dummy_data/chapters";
 import Chapter_card from "/Users/user/initDashboard/init-dashboard-Hassani/src/components/chapter_card";
+
+const knight_foundation_logo: StaticImageData =
+  knight_foundation as StaticImageData;
+const lab22c_logo: StaticImageData = lab22c as StaticImageData;
+const FIU_Logo_logo: StaticImageData = FIU_Logo as StaticImageData;
+const mdc_logo_logo: StaticImageData = mdc_logo as StaticImageData;
 
 export default function About() {
   return (
@@ -70,7 +76,7 @@ export default function About() {
         <br />
         <span className="flex flex-wrap items-center justify-center">
           <Image
-            src={knight_foundation}
+            src={knight_foundation_logo}
             alt="Knight Foundation Logo"
             className="mr-5  text-sm"
             width={175}
@@ -78,7 +84,7 @@ export default function About() {
             loading="lazy"
           />
           <Image
-            src={lab22c}
+            src={lab22c_logo}
             alt="Lab22c Logo"
             className="  text-sm"
             width={175}
@@ -86,7 +92,7 @@ export default function About() {
             loading="lazy"
           />
           <Image
-            src={FIU_Logo}
+            src={FIU_Logo_logo}
             alt="Init Logo"
             className="text-sm"
             width={175}
@@ -94,7 +100,7 @@ export default function About() {
             loading="lazy"
           />
           <Image
-            src={mdc_logo}
+            src={mdc_logo_logo}
             alt="MDC Logo"
             className="text-sm"
             width={175}
