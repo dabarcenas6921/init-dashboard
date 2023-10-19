@@ -7,7 +7,7 @@ export default function Programs() {
       </div>
 
       {/* Card for Init Build*/}
-      <div className="mt-12">
+      <div className="mt-12 flex flex-row space-x-4">
         <div className="dark:border-none-600 w-1/2 max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
           <a href="#">
             <img
@@ -55,9 +55,9 @@ export default function Programs() {
       </div>
 
       {/* Card for Reach Build*/}
-      <div className="build mt-12">
+      <div className="mt-12">
         <div className="dark:border-none-800 w-1/2 max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
-          <a href="#">
+          <a href="Build">
             <img
               className="rounded-t-lg"
               src="https://s3-alpha-sig.figma.com/img/0ec1/da54/6cf38b347bee1dcc6b49c386b1768072?Expires=1698624000&Signature=ku4MuOGJU-HqRhaLZG~rQ~ZMWFYb8LiSZT42juYGag3E0Piyh1oc9YyjR2dOr6HDbqd5iLrGZtTPfLLwZdRWlI~moY2YC0n2pD4QrjtWYjp0osOQtFTgKuVMNFSoxNNMXYnb-VDB05vsZLfVZDrrRAm1LPst5suNPFOnJCJQiZ1JXVVCEpAhjyYUTrQ8X~Lb19evV0zTyNZbHnJZBxwyEgwEWevONS13a8A9qV-g9sj3j9NIzJKVjeiuOIhVCvncvaeJTZstOBnCFmcT14o9jeO7eX9m1FX1SJ1i28YN8geAHACH6yS8mKLwQbMJS1OPjpRb2bTZGtPXO5z5NiD9aw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
@@ -67,7 +67,7 @@ export default function Programs() {
           <div className="p-5">
             <a href="#">
               <h5 className="light:text-blue mb-2 text-2xl font-bold tracking-tight text-blue-500">
-                Init Reach
+                Init Build
               </h5>
             </a>
             <p className="text-none-700 dark:text-none-400 mb-3 font-normal">
