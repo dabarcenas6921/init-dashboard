@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="pb-3">
-      <div className="mx-auto w-full space-y-1 rounded bg-primary_yellow p-1.5 text-primary md:flex md:items-center md:justify-between">
+    <div className="pb-3">
+      <div className="mx-auto flex flex-wrap items-center justify-between rounded bg-primary_yellow p-1.5 text-primary">
         <Link className="order-1 ml-4" href="/">
           <svg
-            className="h-4 cursor-pointer self-center whitespace-nowrap text-primary  hover:text-light_yellow"
+            className="hover:text-light_yellow h-4 cursor-pointer self-center whitespace-nowrap  text-primary"
             fill="currentColor"
             strokeWidth="0"
             id="Layer_1"
@@ -22,10 +22,12 @@ export default function Footer() {
             <ellipse cx="69.59" cy="59.18" rx="56.82" ry="56.93" />
           </svg>
         </Link>
-        <Link
-          className="order-3 mr-4 flex cursor-pointer items-center space-x-2 self-center whitespace-nowrap hover:text-light_yellow"
-          href="mailto:team@weareinit.org"
-        >
+        <div className="order-2 flex cursor-default items-center">
+          <span className="mr-4 self-center whitespace-nowrap text-sm text-primary">
+            Copyright © 2023 INIT
+          </span>
+        </div>
+        <Link className="order-3 flex cursor-pointer space-x-2 items-center self-center whitespace-nowrap hover:text-light_yellow mr-4" href="mailto:team@weareinit.org">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -35,14 +37,11 @@ export default function Footer() {
             <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
             <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
           </svg>
-          <span className="text-sm md:text-md ">team@weareinit.org</span>
-        </Link>
-        <div className="order-2 flex cursor-default">
-          <span className="mr-4 whitespace-nowrap text-sm text-primary">
-            Copyright © 2023 INIT
+          <span className="text-md">
+            team@weareinit.org
           </span>
-        </div>
+        </Link>
       </div>
-    </footer>
+    </div>
   );
 }

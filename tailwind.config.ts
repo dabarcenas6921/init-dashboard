@@ -1,7 +1,11 @@
 import { type Config } from "tailwindcss";
 
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}", "./node_modules/flowbite/**/*.js"],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js",
+    "node_modules/preline/dist/*.js",
+  ],
   theme: {
     extend: {
       colors: {
@@ -17,5 +21,9 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("flowbite/plugin")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("flowbite/plugin"),
+    require("preline/plugin"),
+  ],
 } satisfies Config;

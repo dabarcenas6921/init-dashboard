@@ -122,7 +122,7 @@ export default function Navbar() {
             href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
             rel="noopener noreferrer"
             target="_blank"
-            className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="hover:bg-light_yellow rounded bg-primary_yellow px-5 py-2 font-bold text-primary focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             Join
           </a>
