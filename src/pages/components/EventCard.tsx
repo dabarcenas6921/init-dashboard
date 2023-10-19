@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { EventCard } from "../interfaces/EventCard.interface";
+import type { EventCard } from "../../interfaces/EventCard.interface";
 import initLogo from "../../assets/init.png";
 
 export default function EventCard({
