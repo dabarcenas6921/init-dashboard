@@ -1,6 +1,6 @@
 import Image from "next/image";
-import type { EventCard } from "../../interfaces/EventCard.interface";
-import initLogo from "../../assets/init.png";
+import initLogo from "../assets/init.png";
+import type { EventCard } from "../interfaces/EventCard.interface";
 
 export default function EventCard({
   name,
@@ -31,7 +31,7 @@ export default function EventCard({
           </h3>
           <p className="sm:text-md mt-2 text-sm text-gray-500">{description}</p>
           <div className="mt-2 text-sm sm:mt-4">
-            <p className="text-gray-400">{time.toDateString()}</p>
+            <p className="text-gray-400">{time.toTimeString()}</p>
 
             <p className="text-gray-400">{location}</p>
           </div>

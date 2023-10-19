@@ -1,7 +1,7 @@
-import EventCard from "./components/EventCard";
+import EventCard from "../components/EventCard";
 
 export default function Events() {
-  const testDate = new Date("2023-10-15T12:00:00Z");
+  const testDate = new Date("2023-11-20T15:30:00Z");
 
   return (
     <main className="min-h-screen p-4 md:p-0">
