@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import JobCard from './JobCard';
-import { jobPostings } from '../../Data/jobPostingsData';
+import { jobPostings } from '../Data/jobPostingsData';
 import FilterJobsCard from './FilterJobsCard';
 import { Dropdown } from 'flowbite-react';
 
