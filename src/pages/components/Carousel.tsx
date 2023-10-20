@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const images = [
-  "/assets/images/people3.png",
-  "/assets/images/people4.png",
-  "/assets/images/people2.png",
-];
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-cards";
 
-const CarouselComponent = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+// import required modules
+import { EffectCards, Autoplay } from "swiper/modules";
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // change image every 3 seconds
-
-    return () => clearInterval(timer);
-  }, []);
-
+export default function Carousel() {
   return (
-    <div className="carousel relative max-w-xl space-x-4 overflow-hidden bg-primary p-4">
-      {" "}
-      <div
-        className="carousel-track flex transition-transform duration-1000"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+    <>
+      <Swiper
+        effect={"cards"}
+        grabCursor={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        modules={[EffectCards, Autoplay]}
+        className="mySwiper h-100 w-2/3"
       >
-        {images.map((image, index) => (
-          <div key={index} className="carousel-item w-full">
-            <img src={image} className="h-200 w-200 object-cover" alt="" />{" "}
-          </div>
-        ))}
-      </div>
-    </div>
+        <div className="pr-40">
+          <SwiperSlide>
+            <img src="/assets/images/people2.png"></img>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/assets/images/people3.jpeg"></img>
+          </SwiperSlide>
+        </div>
+      </Swiper>
+    </>
   );
-};
-
-export default CarouselComponent;
+}

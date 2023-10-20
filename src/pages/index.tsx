@@ -2,45 +2,10 @@ import Head from "next/head";
 import { api } from "~/utils/api";
 import Carousel from "./components/Carousel";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
-  const [maxY, setMaxY] = useState(0);
-
-  const squareSize = 60; // The size of the square, adjust as necessary
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      setViewportSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-      setMaxY(window.innerHeight - squareSize);
-    };
-
-    updateDimensions(); // Call once on mount
-
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
-
-  const maxX = viewportSize.width - squareSize;
-
-  const squareAnimations = {
-    loop: {
-      x: [0, maxX, maxX, 0, 0],
-      y: [0, 0, maxY, maxY, 0],
-      rotate: [0, 90, 180, 270, 360],
-      transition: {
-        duration: 20, // Adjust as needed
-        repeat: Infinity,
-        ease: "linear",
-      },
-    },
-  };
 
   return (
     <>
@@ -49,32 +14,35 @@ export default function Home() {
         <meta name="description" content="Website for Init" />
       </Head>
 
-      {/* Navbar component */}
-      {/* Main content of the Home component */}
-      <main className="flex min-h-screen flex-col bg-primary">
-        <div className="hero-wrapper-2 flex flex-col items-center justify-center sm:flex-row sm:items-start sm:pt-10 md:flex-row">
-          <div className="pr-0 text-center sm:pr-40 sm:text-left">
-            <h1 className="pb-30 text-9xl">INIT</h1>
-            <p className="pt-10 text-3xl">
-              South Florida&apos;s Largest <br />
-              Tech Community
-            </p>
-            <div className="flex flex-row space-x-5 pl-10 pt-10 sm:pl-0">
-              <button
-                type="button"
-                className="rounded-lg  bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Join Now
-              </button>
-              <button
-                type="button"
-                className="rounded-lg bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Extra large
-              </button>
+      <main className="flex flex-col items-center justify-center bg-primary">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          <div className="lg: flex justify-center md:justify-start lg:justify-end">
+            <div className="max-w-md p-4 text-center md:text-left lg:mr-10 xl:ml-80">
+              <p className="pt-3 text-4xl leading-tight md:text-5xl lg:text-6xl">
+                Empowering Tech talent in Miami and beyond 🚀
+              </p>
+              <p className="text-md pt-5 lg:text-lg">
+                INIT empowers underserved communities to launch careers in
+                technology, closing the talent gap and helping individuals
+                achieve economic mobility
+              </p>
+              <div className="flex flex-row justify-center space-x-5 pt-10 md:justify-start lg:justify-start">
+                <button
+                  type="button"
+                  className="rounded-lg  bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Join Now
+                </button>
+                <button
+                  type="button"
+                  className="rounded-lg bg-discord_purple px-6 py-3.5 text-center text-base font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Discord
+                </button>
+              </div>
             </div>
           </div>
-          <div className="mt-10 sm:mt-0">
+          <div className="mt-5 md:ml-10 md:mt-0 lg:mr-40 xl:mr-40">
             <Carousel />
           </div>
         </div>
@@ -82,11 +50,11 @@ export default function Home() {
         <div>
           <section id="Programs" className="programs">
             <div className="container-3">
-              <h1 className="centered-heading-3 margin-bottom-32px flex justify-center pt-60 text-4xl">
+              <h1 className="centered-heading-3 margin-bottom-32px mt-10 flex justify-center text-3xl md:text-4xl lg:mt-20 xl:mt-40">
                 🧠 Programs
               </h1>
-              <div className="hero-wrapper-2 flex flex-col justify-center sm:flex-row sm:items-center sm:pt-10 md:flex-row">
-                <p className="programs margin-bottom-16px text-left md:p-0 lg:pl-80 lg:pr-10">
+              <div className="hero-wrapper-2 flex flex-col items-center md:flex-row lg:ml-10 xl:ml-80">
+                <p className="programs margin-bottom-16px p-4 text-center md:text-left lg:pl-20 xl:pl-0 xl:pr-20">
                   INIT chapters carry out our signature experiential learning
                   and career development programs within their communities.
                   These programs attract thousands of individuals annually,
@@ -109,37 +77,16 @@ export default function Home() {
                   src="/assets/images/programs.png"
                   loading="lazy"
                   alt=""
-                  width={432}
-                  height={300}
+                  width={300}
+                  height={208}
                   sizes="(max-width: 479px) 94vw, (max-width: 767px) 95vw, (max-width: 991px) 92vw, (max-width: 1439px) 43vw, 432.3984375px"
-                  className="gallery-image shadow-two flex lg:pr-60"
-                  style={{
-                    width: "40%", // Default width
-                    marginTop: "20px", // Add top margin to create space
-                  }}
+                  className="gallery-image shadow-two ml-8 mt-4 md:ml-0 md:mt-0 md:w-1/2 lg:pr-20 xl:pr-60"
                 />
               </div>
             </div>
           </section>
         </div>
       </main>
-      <div style={{ position: "relative", minHeight: "50vh" }}>
-        <motion.div
-          style={{
-            width: `${squareSize}px`,
-            height: `${squareSize}px`,
-            backgroundImage: 'url("/assets/images/floatingsquare.png")', // Replace with the path to your image
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            position: "fixed",
-            top: 0,
-            right: 0,
-            left: 0,
-          }}
-          animate="loop"
-          variants={squareAnimations}
-        />
-      </div>
     </>
   );
 }
