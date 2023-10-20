@@ -26,10 +26,24 @@ export default function Carousel() {
       >
         <div className="pr-40">
           <SwiperSlide>
-            <Image src="/assets/images/people2.png" alt="Init Picture" />
+            <Image
+              src="/assets/images/people2.png"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }}
+              alt="Init Picture"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <Image src="/assets/images/people3.png" alt="Init Picture" />
+            <Image
+              src="/assets/images/people3.jpeg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }}
+              alt="Init Picture"
+            />
           </SwiperSlide>
         </div>
       </Swiper>
