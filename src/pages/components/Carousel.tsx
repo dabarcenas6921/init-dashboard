@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
@@ -26,10 +26,10 @@ export default function Carousel() {
       >
         <div className="pr-40">
           <SwiperSlide>
-            <img src="/assets/images/people2.png"></img>
+            <Image src="/assets/images/people2.png" alt="Init Picture" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/assets/images/people3.jpeg"></img>
+            <Image src="/assets/images/people3.png" alt="Init Picture" />
           </SwiperSlide>
         </div>
       </Swiper>
