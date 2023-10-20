@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Carousel from "./components/Carousel";
+import Carousel from "~/components/Carousel";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export default function Home() {
               <p className="pt-3 text-center text-4xl leading-tight md:text-left md:text-5xl lg:text-6xl">
                 Empowering Tech talent in Miami and beyond 🚀
               </p>
-              <p className="text-md pt-5 text-start lg:text-lg">
+              <p className="text-md pt-5 text-center md:text-left lg:text-lg">
                 INIT empowers underserved communities to launch careers in
                 technology, closing the talent gap and helping individuals
                 achieve economic mobility
