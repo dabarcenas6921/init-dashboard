@@ -20,7 +20,23 @@ export default function Carousel() {
           disableOnInteraction: false,
         }}
         modules={[EffectCards, Autoplay]}
-        className="mySwiper h-100 w-2/3"
+        className="mySwiper h-100 w-10/12"
+        slidesPerView={1}
+        spaceBetween={10}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+        }}
       >
         <div className="pr-40">
           <SwiperSlide>
