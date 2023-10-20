@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         <section>
-          <h1 className="xl:mt-30 flex justify-center text-3xl md:text-4xl lg:mt-20">
+          <h1 className="xl:mt-30 mt-10 flex justify-center text-3xl md:text-4xl lg:mt-20">
             🧠 Programs
           </h1>
           <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
@@ -75,7 +75,7 @@ export default function Home() {
                   These programs attract thousands of individuals annually,
                   helping them gain technical skills, work on projects, improve
                   their resume, prepare for interviews, connect with industry,
-                  and much more. &apos;
+                  and much more. &nbsp;
                   <a
                     href="https://shellhacks.net/"
                     target="_blank"
