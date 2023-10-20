@@ -1,6 +1,6 @@
-import FIU_GC from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/FIU-GC.jpeg";
-import MDC_Wolfson from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/MDC-Wolfson.png";
-import FMU_Campus from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/FMU-Campus.jpeg";
+import FIU_GC from "/src/assets/images/FIU-GC.jpeg";
+import MDC_Wolfson from "/src/assets/images/MDC-Wolfson.png";
+import FMU_Campus from "/src/assets/images/FMU-Campus.jpeg";
 
 export const chapters = [
   {

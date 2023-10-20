@@ -1,12 +1,12 @@
 import Head from "next/head";
 import Image, { StaticImageData } from "next/image";
 import init_members from "../../../public/images/init-members.jpeg";
-import FIU_Logo from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/FIU-Engineering-Logo.svg";
-import knight_foundation from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/knight-foundation-logo.svg";
-import lab22c from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/Lab2C-logo.svg";
-import mdc_logo from "/Users/user/initDashboard/init-dashboard-Hassani/src/assets/images/MDC-Logo.svg";
+import FIU_Logo from "../assets/images/FIU-Engineering-Logo.svg";
+import knight_foundation from "../assets/images/knight-foundation-logo.svg";
+import lab22c from "../assets/images/Lab2C-logo.svg";
+import mdc_logo from "../assets/images/MDC-Logo.svg";
 import { chapters } from "../../dummy_data/chapters";
-import Chapter_card from "/Users/user/initDashboard/init-dashboard-Hassani/src/components/chapter_card";
+import Chapter_card from "../components/chapter_card";
 
 const knight_foundation_logo: StaticImageData =
   knight_foundation as StaticImageData;
