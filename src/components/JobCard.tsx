@@ -27,7 +27,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
       {jobPostings.map((job, index) => (
         <Card
           key={index}
-          className="max-w-xs min-w-[16rem] bg-[#1A1E22] border-[#1A1E22] mb-8 max-[820px]:mb-8"
+          className="max-w-xs min-w-[16rem] bg-[#121415] border-[#121415] mb-8 max-[820px]:mb-8"
         >
           <div className="text-white flex justify-end px-4">
             <Dropdown inline label="" className="">

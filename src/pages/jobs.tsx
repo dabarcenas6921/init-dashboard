@@ -1,4 +1,4 @@
-import FilterJobPostings from './components/FilterJobPostings'
+import FilterJobPostings from '../components/FilterJobPostings'
 
 export default function Jobs() {
   return (

@@ -22,7 +22,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
     const isRemoteChecked = selectedFilters?.jobLocation?.includes('Remote') ?? false;
   
     return (
-        <div className="border-2 border-[#1A1E22] bg-[#1A1E22] w-48 h-[32rem] p-6 rounded-md">
+        <div className="border-2 border-[#121415] bg-[#121415] w-48 h-[32rem] p-6 rounded-md">
 
           <div className="flex justify-between items-baseline">
             <h2 className="text-xl mb-4">Filter</h2>
