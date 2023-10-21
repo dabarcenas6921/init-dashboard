@@ -22,7 +22,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
     const isRemoteChecked = selectedFilters?.jobLocation?.includes('Remote') ?? false;
   
     return (
-        <div className="border-2 border-[#121415] bg-[#121415] w-48 h-[32rem] p-6 rounded-md">
+        <div className="border-2 border-[#121415] bg-[#121415] w-48 h-[485px] p-6 rounded-md">
 
           <div className="flex justify-between items-baseline">
             <h2 className="text-xl mb-4">Filter</h2>
@@ -39,7 +39,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
             <div className="mb-2">
               <h3 className="text-base mb-2">Job Type</h3>
               {/* Full time box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="fulltime" 
@@ -50,7 +50,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="fulltime">Fulltime</label>
               </div>
               {/* Part time box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="part-time" 
@@ -66,7 +66,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
             <div className="mb-2">
               <h3 className="text-base mb-2">Position Type</h3>
               {/* Internship box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="internship" 
@@ -77,7 +77,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="internship">Internship</label>
               </div>
               {/* New-grad box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="new-grad" 
@@ -93,7 +93,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
             <div className="mb-9">
               <h3 className="text-base mb-2">Job location</h3>
               {/* On-site box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="on-site" 
@@ -104,7 +104,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="on-site">On-site</label>
               </div>
               {/* Hybrid box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="hybrid" 
@@ -115,7 +115,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPo
                 <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="hybrid">Hybrid</label>
               </div>
               {/* New-grad box */}
-              <div className="mb-1.5 flex">
+              <div className="mb-1.5 flex items-center">
                 <input 
                 type="checkbox" 
                 name="remote" 

@@ -8,9 +8,16 @@ export default function Jobs() {
       <div className="p-4 max-w-screen-xl mx-auto">
 
         {/* Title and Search Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between mb-8">
-          <h1 className="text-3xl max-[766px]:mb-4 text-center md:text-left">Job Board</h1>
-          <Search></Search>
+        <div className="flex flex-col md:flex-row items-start mb-4 md:mb-6">
+
+          <div className="mb-8 md:mr-[5%] max-[766px]:mb-4 mx-auto">
+            <h1 className="w-48 text-3xl text-center md:text-left">Job Board</h1>
+          </div>
+
+          <div className="w-full flex justify-center">
+            <Search/>
+          </div>
+
         </div>
         
 
@@ -56,7 +63,7 @@ function Search() {
         <input
           type="search"
           id="default-search"
-          className="border-yellow_primary block w-full rounded-md border bg-white p-2 pl-10 text-sm text-gray-900 focus:border-yellow-500 focus:ring-yellow-500"
+          className="border-yellow_primary block w-full rounded-md border bg-white p-2 pl-10 text-sm text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 md:w-[400px]"
           placeholder="Search jobs..."
           required
         />
