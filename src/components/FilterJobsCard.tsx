@@ -10,7 +10,7 @@ interface FilterCardProps {
 
 
 const FilterCard: React.FC<FilterCardProps> = ({ handleFilterChange, filterJobPostings, resetFilters, selectedFilters }) => {
-    // Job Type
+    // Job Type (Checks if null or not)
     const isFulltimeChecked = selectedFilters?.jobType?.includes('Fulltime') ?? false;
     const isPartTimeChecked = selectedFilters?.jobType?.includes('Part-time') ?? false;
     // Job Position
