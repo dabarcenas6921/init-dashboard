@@ -7,11 +7,10 @@ export default function Programs() {
       </div>
 
       {/* Card for Init Build*/}
-      <div className="mt-12 flex flex-row space-x-4">
-        <div className="dark:border-none-600 w-1/2 max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
+      <div className="flex">
+        <div className="dark:border-none-600 mt-12 flex w-1/2 max-w-sm flex-col space-x-4 rounded-lg border border-yellow-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
           <a href="#">
             <img
-              className="rounded-t-lg"
               src="https://s3-alpha-sig.figma.com/img/bdfa/e996/ec49d92b4a38e9615eb9f39c6126b252?Expires=1698019200&Signature=flYOVQDABPxN8w9~PQPrGi147fl0lhnXkgsf0l1hsC~eQ4myKRWMZjchmZeOQs2reqk4uEvGg0o8AgVVAKl~snuJZA00u-DN6vRps0t4Cx4Itey-sL7vPmJZ26u58DoXo6D72kkmpNBDQX2HjOZSGsxBjtplytJTvsVLf9YsfI7Nk08aJH~v2Lg40m0-U5EtSzRWvJXYwQOpAYbOvyBhVg~c7c3rejMOUVAa7hTZ7ckU91h-QEKwEv0eZ5iBiv34XpcaKk-FVdVvbOyaR2Qv-mbFBoRMCBakk8CQMZPbSzVF7mr7LYq6NwwYM76eaYu2ZN-mYWIafS0PzwkQzwffoQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
               alt=""
             />
@@ -55,8 +54,8 @@ export default function Programs() {
       </div>
 
       {/* Card for Reach Build*/}
-      <div className="mt-12">
-        <div className="dark:border-none-800 w-1/2 max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
+      <div className="2 flex">
+        <div className="dark:border-none-800 mt-12 flex w-1/2 max-w-sm flex-col rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
           <a href="Build">
             <img
               className="rounded-t-lg"
@@ -100,8 +99,8 @@ export default function Programs() {
           </div>
         </div>
       </div>
-      <div className="reach mt-12">
-        <div className="dark:border-none-700 flex-direction:row w-1/2 max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
+      <div className="flex3">
+        <div className="dark:border-none-700 flex-direction:row mt-12 flex w-1/2 max-w-sm flex-col rounded-lg border border-gray-200 bg-white shadow dark:bg-gray-800 md:w-1/4">
           <a href="#">
             <img
               className="rounded-t-lg"
