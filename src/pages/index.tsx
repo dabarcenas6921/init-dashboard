@@ -15,8 +15,8 @@ export default function Home() {
         <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
           <div className="flex justify-center md:justify-start">
             <div className="max-w-md p-4 text-center md:text-left">
-              <p className="pt-3 text-center text-4xl leading-tight md:text-left md:text-5xl lg:text-6xl">
-                Empowering Tech talent in Miami and beyond 🚀
+              <p className="pt-3 text-center text-4xl leading-tight md:text-left md:text-5xl md:leading-tight lg:text-6xl lg:leading-tight">
+                Empowering tech talent in Miami and beyond 🚀
               </p>
               <p className="text-md pt-5 text-center md:text-left lg:text-lg">
                 INIT empowers underserved communities to launch careers in
@@ -62,48 +62,44 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
-          <section id="Programs" className="programs">
-            <div className="container-3">
-              <h1 className="centered-heading-3 margin-bottom-32px mt-10 flex justify-center text-3xl md:text-4xl lg:mt-20 xl:mt-40">
-                🧠 Programs
-              </h1>
-              <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
-                <div className="flex justify-center md:justify-start">
-                  <div className="max-w-xl p-4 text-center md:text-left">
-                    <p className="text-md pt-5 text-left lg:text-lg">
-                      INIT chapters carry out our signature experiential
-                      learning and career development programs within their
-                      communities. These programs attract thousands of
-                      individuals annually, helping them gain technical skills,
-                      work on projects, improve their resume, prepare for
-                      interviews, connect with industry, and much more. &apos;
-                      <a
-                        href="https://shellhacks.net/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-span-3 text-yellow-200"
-                      >
-                        ShellHacks
-                      </a>
-                      , hosted by our INIT FIU chapter, is the largest hackathon
-                      in Florida and brings together 1,500 students to innovate
-                      each year.
-                    </p>
-                  </div>
-                </div>
-                <Image
-                  src="/assets/images/programs.png"
-                  loading="lazy"
-                  alt=""
-                  width={300}
-                  height={208}
-                  className="mt-5 w-full"
-                />
+        <section>
+          <h1 className="xl:mt-30 mt-10 flex justify-center text-3xl md:text-4xl lg:mt-20">
+            🧠 Programs
+          </h1>
+          <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
+            <div className="flex justify-center md:justify-start">
+              <div className="max-w-xl p-4 text-center md:text-left">
+                <p className="text-md pt-5 text-left lg:text-lg">
+                  INIT chapters carry out our signature experiential learning
+                  and career development programs within their communities.
+                  These programs attract thousands of individuals annually,
+                  helping them gain technical skills, work on projects, improve
+                  their resume, prepare for interviews, connect with industry,
+                  and much more. &nbsp;
+                  <a
+                    href="https://shellhacks.net/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-span-3 text-yellow-200"
+                  >
+                    ShellHacks
+                  </a>
+                  , hosted by our INIT FIU chapter, is the largest hackathon in
+                  Florida and brings together 1,500 students to innovate each
+                  year.
+                </p>
               </div>
             </div>
-          </section>
-        </div>
+            <Image
+              src="/assets/images/programs.png"
+              loading="lazy"
+              alt=""
+              width={300}
+              height={208}
+              className="mt-5 w-full"
+            />
+          </div>
+        </section>
       </main>
     </>
   );
