@@ -1,43 +1,108 @@
-import FilterJobPostings from '../components/FilterJobPostings'
-import React, { useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import { Dropdown } from 'flowbite-react';
 import { jobPostings  } from '../Data/jobPostingsData'
+import SearchInput from '~/components/SearchInput';
+import FilterJobsCard from '~/components/FilterJobsCard';
+import JobCard from '~/components/JobCard';
+import { useSearchParams } from "next/navigation";
+import useSWR from "swr";
 
+// Define a type for the selected filters
+export type SelectedFilters = {
+  jobType: string[];
+  jobPosition: string[];
+  jobLocation: string[];
+};
 
-function isSubstringContained(fullString: string, subString: string): boolean {
-  return fullString.includes(subString);
+// Fetches Job Posts 
+const fetchPosts = async (url: string) => {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch posts");
+  }
+
+  return response.json();
 }
 
 export default function Jobs() {
 
-  useEffect(() => {
-    const searchSubmitBtn = document.getElementById("search-submit-btn");
-    const searchJobsInputField = document.getElementById("search-jobs-input-field") as HTMLInputElement;
-    if (searchSubmitBtn) {
-      const handleClick = (e: MouseEvent) => {
-        e.preventDefault();
-        const searchValue = searchJobsInputField?.value.toLowerCase();
-        console.log(searchValue)
-        searchJobsInputField.value = ""; // Clears the input field
+  ///////////////////////////////
+  // LOGIC FOR FILTERING JOBS //
+  //////////////////////////////
 
-        const filteredJobs = jobPostings.filter((job) => {
-          if(isSubstringContained(job.company.toLocaleLowerCase(), searchValue)) {
-            return job.company
-          }
-        })
+  // State to store selected filter values
+  const [selectedFilters, setSelectedFilters] = useState({
+    jobType: [] as string[],
+    jobPosition: [] as string[],
+    jobLocation: [] as string[],
+  });
 
-        console.log(filteredJobs)
-        return filteredJobs
+  // State to store the filtered job postings
+  const [filteredJobPostings, setFilteredJobPostings] = useState(jobPostings);
 
-      };
+  // Function to handle checkbox changes
+  const handleFilterChange = (category: keyof SelectedFilters, value: string) => {
+    setSelectedFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters };
+      if (updatedFilters[category].includes(value)) {
+        // If the value is already in the array, remove it
+        updatedFilters[category] = updatedFilters[category].filter((item) => item !== value);
+      } else {
+        // If the value is not in the array, add it
+        updatedFilters[category] = [...updatedFilters[category], value];
+      }
+      return updatedFilters;
+    });
+  };
 
-      searchSubmitBtn.addEventListener("click", handleClick);
+  // Function to filter job postings based on selected filters
+  const filterJobPostings = () => {
+    const { jobType, jobPosition, jobLocation } = selectedFilters;
+    const filtered = jobPostings.filter((job) => {
+      const typeMatches = jobType.length === 0 || jobType.includes(job.jobType);
+      const positionMatches = jobPosition.length === 0 || jobPosition.includes(job.jobPosition);
+      const locationMatches = jobLocation.length === 0 || jobLocation.includes(job.jobLocation);
+      return typeMatches && positionMatches && locationMatches;
+    });
+    setFilteredJobPostings(filtered);
+  };
 
-      // Return a cleanup function to remove the event listener when the component unmounts
-      return () => {
-        searchSubmitBtn.removeEventListener("click", handleClick);
-      };
-    }
-  }, []);
+  // Function to reset filters and show all job postings
+  const resetFilters = () => {
+    setSelectedFilters({
+      jobType:     [] as string[],
+      jobPosition: [] as string[],
+      jobLocation: [] as string[],
+    });
+    // Uncheck the checkboxes by setting their checked state to false
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+      const inputCheckbox = checkbox as HTMLInputElement;
+      inputCheckbox.checked = false;
+    });
+    setFilteredJobPostings(jobPostings);
+  };
+
+  ///////////////////////////////
+  // LOGIC FOR SEARCHING JOBS  //
+  //////////////////////////////
+  
+
+  const search = useSearchParams();
+  const searchQuery = search ? search.get("q") : null;
+  const encodedSearchQuery = encodeURI(searchQuery || "")
+
+  const { data, isLoading } = useSWR(`/api/trpc/search?q=${encodedSearchQuery}`, fetchPosts)
+
+
+  if (!data?.jobPosts) {
+    return null;
+  }
+
+
+  console.log("HERE IS DATA: ", data)
 
   return (
     <main className="min-h-screen">
@@ -51,64 +116,54 @@ export default function Jobs() {
             <h1 className="w-48 text-3xl text-center md:text-left">Job Board</h1>
           </div>
           <div className="w-full flex justify-center">
-            <Search/>
+            <SearchInput/>
           </div>
         </div>
         
         {/* Filter Card and Jobs container */}
-        <FilterJobPostings></FilterJobPostings>    
+        <div className="flex flex-col md:flex-row">
+  
+          {/* Dropdown for small Screen sizes */}
+          <div className="md:hidden mx-auto mb-8">
+              <Dropdown className="text-white bg-[#1A1E22]" label="Filter" placement="bottom" inline>
+                  {selectedFilters ? (
+                    <FilterJobsCard
+                      handleFilterChange={handleFilterChange}
+                      filterJobPostings={filterJobPostings}  
+                      resetFilters={resetFilters}
+                      selectedFilters={selectedFilters}
+                    />
+                  ): null}
+                  
+              </Dropdown>
+          </div>
+
+          {/* Normal Screen Sizes */}
+          <div className="hidden md:block mr-[5%]">
+            {selectedFilters ? (
+              <FilterJobsCard
+                handleFilterChange={handleFilterChange}
+                filterJobPostings={filterJobPostings}  
+                resetFilters={resetFilters}
+                selectedFilters={selectedFilters}
+              />
+            ): null}
+          </div>
+
+          <div className="w-full">
+              {filteredJobPostings.length > 0 ? (
+                <JobCard jobPostings={filteredJobPostings} />
+              ) : (
+                <p>No matching job postings.</p>
+              )}
+          </div>
+
+        </div>   
         
       </div>
       
     </main>
     
     
-  );
-}
-
-
-function Search() {
-  return (
-    <form className="flex items-center" id="search-jobs">
-      <label
-        htmlFor="search-jobs-input-field"
-        className="sr-only text-sm font-medium text-gray-900"
-      >
-        Search
-      </label>
-      <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <svg
-            className="h-4 w-4 text-gray-500"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-        </div>
-        <input
-          type="search"
-          id="search-jobs-input-field"
-          className="border-yellow_primary block w-full rounded-md border bg-white p-2 pl-10 text-sm text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 md:w-[400px]"
-          placeholder="Search jobs..."
-          required
-        />
-        <button
-          id="search-submit-btn"
-          className="bg-primary_yellow absolute inset-y-0 right-0 flex items-center justify-center rounded-r-lg px-4 py-2 text-sm font-medium text-black hover-bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300"
-          // onClick={handleSearch}
-        >
-          Search
-        </button>
-      </div>
-    </form>
   );
 }

@@ -24,7 +24,7 @@ model Event {
 //Create an enum once we migrate to Postgres
 
 model JobPosting {
-  id          Int    @id @default(autoincrement())
+  id          String @id @default(uuid())
   image       String
   title       String
   company     String

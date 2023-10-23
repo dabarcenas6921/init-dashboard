@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectedFilters } from './FilterJobPostings';
+import { SelectedFilters } from '../pages/jobs';
 
 interface FilterCardProps {
     handleFilterChange: (category: keyof SelectedFilters, value: string) => void;
