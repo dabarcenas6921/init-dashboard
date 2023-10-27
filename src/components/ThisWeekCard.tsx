@@ -8,7 +8,7 @@ export default function ThisWeekCard() {
           </h5>
           <div className="mt-7 flex justify-center">
             <a
-              href="/events"
+              href="<events />"
               className="rounded-lg bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
               Register Now!
