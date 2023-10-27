@@ -62,7 +62,7 @@ export default function Home() {
             <Carousel />
           </div>
         </div>
-        <div>
+        <div className="w-full max-w-6xl px-4">
           <ThisWeekCard />
         </div>
         <section>
