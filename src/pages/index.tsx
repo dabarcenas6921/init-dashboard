@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Carousel from "~/components/Carousel";
+import ThisWeekCard from "~/components/ThisWeekCard";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -61,9 +62,11 @@ export default function Home() {
             <Carousel />
           </div>
         </div>
-
+        <div className="w-full max-w-6xl px-4">
+          <ThisWeekCard />
+        </div>
         <section>
-          <h1 className="xl:mt-30 mt-10 flex justify-center text-3xl md:text-4xl lg:mt-20">
+          <h1 className="xl:mt-30 mt-10 flex justify-center text-3xl md:text-4xl lg:mt-10">
             🧠 Programs
           </h1>
           <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
