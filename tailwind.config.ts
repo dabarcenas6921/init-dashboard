@@ -5,6 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/flowbite/**/*.js",
     "node_modules/preline/dist/*.js",
+    "./node_modules/flowbite-react/**/*.js",
   ],
   theme: {
     extend: {
