@@ -1,4 +1,3 @@
-import { Button, CustomFlowbiteTheme, Datepicker } from "flowbite-react";
 import { useState, ReactElement } from "react";
 import Build from "~/components/DashboardCards/Build";
 import Explore from "~/components/DashboardCards/Explore";
@@ -6,12 +5,6 @@ import Guilds from "~/components/DashboardCards/Guilds";
 import Main from "~/components/DashboardCards/Main";
 import Reach from "~/components/DashboardCards/Reach";
 import ShellHacks from "~/components/DashboardCards/ShellHacks";
-
-const customButtonTheme: CustomFlowbiteTheme["button"] = {
-  color: {
-    gray: "text-gray-900 bg-white border border-gray-200 enabled:hover:bg-gray-100 :ring-cyan-700 focus:ring-2",
-  },
-};
 
 type CardName =
   | "Main"
@@ -33,62 +26,33 @@ export default function Dashboard() {
     Guilds: <Guilds />,
   };
 
-  const cards = [
+  const buttonLabels: CardName[] = [
     "Main",
     "ShellHacks",
     "Explore",
     "Build",
     "Reach",
     "Guilds",
-  ] as CardName[];
+  ];
 
   return (
     <div className="mx-auto min-h-screen w-auto max-w-screen-2xl">
       <div className="mb-4">
         <h1 className="text-2xl text-white md:text-3xl">Dashboard</h1>
       </div>
-      <div className="flex justify-between">
-        <Button.Group>
-          {cards.map((name) => (
-            <Button
-              key={name}
-              theme={customButtonTheme}
-              color="gray"
-              onClick={() => setActiveCard(name)}
-            >
-              {name}
-            </Button>
-          ))}
-        </Button.Group>
-        <div className="flex items-center">
-          <div className="relative">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg
-                className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+      <div className="mb-4 flex flex-col justify-between sm:flex-row">
+        <div className="mb-4 sm:mb-0">
+          <div className="flex flex-col rounded-md shadow-sm sm:inline-flex sm:flex-row">
+            {buttonLabels.map((label) => (
+              <button
+                key={label}
+                type="button"
+                onClick={() => setActiveCard(label)}
+                className="-ml-px -mt-px inline-flex items-center justify-center gap-2 border bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 transition-all first:rounded-t-lg last:rounded-b-lg hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-slate-800 sm:mt-0 sm:first:ml-0 sm:first:rounded-l-lg sm:first:rounded-tr-none sm:last:rounded-r-lg sm:last:rounded-bl-none"
               >
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-              </svg>
-            </div>
-            <Datepicker />
-          </div>
-          <span className="mx-4 text-white">to</span>
-          <div className="relative">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg
-                className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-              </svg>
-            </div>
-            <Datepicker />
+                {label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
