@@ -1,4 +1,11 @@
 import { Button, CustomFlowbiteTheme, Datepicker } from "flowbite-react";
+import { useState, ReactElement } from "react";
+import Build from "~/components/DashboardCards/Build";
+import Explore from "~/components/DashboardCards/Explore";
+import Guilds from "~/components/DashboardCards/Guilds";
+import Main from "~/components/DashboardCards/Main";
+import Reach from "~/components/DashboardCards/Reach";
+import ShellHacks from "~/components/DashboardCards/ShellHacks";
 
 const customButtonTheme: CustomFlowbiteTheme["button"] = {
   color: {
@@ -6,8 +13,34 @@ const customButtonTheme: CustomFlowbiteTheme["button"] = {
   },
 };
 
+type CardName =
+  | "Main"
+  | "ShellHacks"
+  | "Explore"
+  | "Build"
+  | "Reach"
+  | "Guilds";
+
 export default function Dashboard() {
-  const buttons = ["Main", "ShellHacks", "Explore", "Build", "Reach", "Guilds"];
+  const [activeCard, setActiveCard] = useState<CardName>("Main");
+
+  const cardComponents: Record<CardName, ReactElement> = {
+    Main: <Main />,
+    ShellHacks: <ShellHacks />,
+    Explore: <Explore />,
+    Build: <Build />,
+    Reach: <Reach />,
+    Guilds: <Guilds />,
+  };
+
+  const cards = [
+    "Main",
+    "ShellHacks",
+    "Explore",
+    "Build",
+    "Reach",
+    "Guilds",
+  ] as CardName[];
 
   return (
     <div className="mx-auto min-h-screen w-auto max-w-screen-2xl">
@@ -16,13 +49,18 @@ export default function Dashboard() {
       </div>
       <div className="flex justify-between">
         <Button.Group>
-          {buttons.map((name) => (
-            <Button key={name} theme={customButtonTheme} color="gray">
+          {cards.map((name) => (
+            <Button
+              key={name}
+              theme={customButtonTheme}
+              color="gray"
+              onClick={() => setActiveCard(name)}
+            >
               {name}
             </Button>
           ))}
         </Button.Group>
-        <div date-rangepicker className="flex items-center">
+        <div className="flex items-center">
           <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
@@ -54,6 +92,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      <div className="mt-10">{cardComponents[activeCard]}</div>
     </div>
   );
 }
