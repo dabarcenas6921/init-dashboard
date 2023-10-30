@@ -18,4 +18,9 @@ export const chapters = [
     name: "Florida Memorial University",
     description: "South Florida's HBCU & oldest academic center",
   },
+  {
+    image: FIU_GC,
+    name: "Alumni / Professional",
+    description: "Alumni and professionals in the tech industry",
+  },
 ];

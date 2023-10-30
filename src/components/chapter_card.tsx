@@ -1,12 +1,6 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
-interface ChapterCardProps {
-  image: StaticImageData;
-  name: string;
-  description: string;
-}
+import type { ChapterCardProps } from "../interfaces/Chapter_Card.interface";
 
 export default function chapter_card({
   image,

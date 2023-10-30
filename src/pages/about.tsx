@@ -1,12 +1,14 @@
 import Head from "next/head";
 import Image, { StaticImageData } from "next/image";
-import init_members from "../../../public/images/init-members.jpeg";
+import init_members from "../assets/images/init-members.jpeg";
 import FIU_Logo from "../assets/images/FIU-Engineering-Logo.svg";
 import knight_foundation from "../assets/images/knight-foundation-logo.svg";
 import lab22c from "../assets/images/Lab2C-logo.svg";
 import mdc_logo from "../assets/images/MDC-Logo.svg";
 import { chapters } from "../../dummy_data/chapters";
-import Chapter_card from "../components/chapter_card";
+import { team_members } from "../../dummy_data/InitTeam";
+import Chapter_card from "../components/Chapter_card";
+import Init_Team from "~/components/Init_Team";
 
 const knight_foundation_logo: StaticImageData =
   knight_foundation as StaticImageData;
@@ -16,94 +18,97 @@ const mdc_logo_logo: StaticImageData = mdc_logo as StaticImageData;
 
 export default function About() {
   return (
-    console.log(chapters),
-    (
-      <>
+    <>
+      <section className="mx-auto max-w-screen-lg ">
         <Head>
           <title>About Init</title>
           <meta name="description" content="About us for Init" />
         </Head>
-        <h1 className="text-center text-4xl text-white">💻 About Us</h1>
+        <main className="flex flex-col bg-primary"></main>
+        <h1 className="mb-10 text-center text-4xl text-white">💻 About Us</h1>
         <br />
-        {/*<section className="flex ">
-        <div className="mx-auto h-auto w-1/3 text-sm">
-          <p>
-            INIT is a non-profit organization empowering underserved communities
-            to launch careers in technology. We establish INIT chapters at
-            schools, colleges, and municipalities, providing free experiential
-            learning and career development programs for everyone. We also
-            partner with employers to foster a diverse talent pipeline into the
-            tech industry, closing the talent gap and helping low-income
-            individuals achieve economic mobility.
-          </p>
-          <br />
-          <p>
-            INIT was founded by the student and alumni leaders behind the
-            successful UPE student organization at FIU, who have helped
-            thousands of students land jobs in tech since 2014. Seeing the need
-            to help more students and the opportunity to scale, our team decided
-            to start our very own non-profit to drive this work moving forward.
-          </p>
-          <br />
-          <p>
-            INIT is supported by the Knight Foundation, Lab22c, Venture Miami,
-            and academic institutions in Miami-Dade County including FIU, MDC,
-            FMU, and more.
-          </p>
-        </div>
-        <div className=" mx-auto h-auto max-w-lg">
+        <span className=" flex flex-wrap  ">
+          <div className="mx-auto mb-10 h-auto w-full text-sm  ">
+            <div className="mb-5">
+              <iframe
+                className=""
+                src="https://www.youtube.com/embed/q44VgsbcBkw"
+                title="INIT Launch Announcement"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+                height={500}
+                style={{ width: "100%" }}
+              ></iframe>
+            </div>
+          </div>
+        </span>
+        <br />
+
+        <h1 className="mb-10 text-center text-4xl text-white">❤️Impact</h1>
+        <br />
+        <div className="mx-auto mb-10 flex h-auto w-auto flex-wrap items-start justify-center ">
           <Image
             src={init_members}
             alt="Init Members"
-            className="mx-auto text-sm"
+            className="rounded-lg"
+            width={400}
+            height={300}
+            loading="lazy"
           />
+          <span className=" mb-5 ml-5 mt-5 flex flex-wrap items-center text-sm md:w-1/2 ">
+            <p>
+              Originally as UPE, INIT developed a successful pipeline of diverse
+              talent in partnership with academia and industry. We helped
+              prepare thousands of students through our very own experiential
+              learning and career programs, helping them land interviews and
+              placing them in job opportunities. Thousands of INIT members now
+              work at top companies such as Google, Microsoft, Meta, and many
+              more.
+            </p>
+            <br />
+            <p>
+              As we evolve into a non-profit, we are now scaling this proven
+              model and bringing it to other underserved communities, impacting
+              even more individuals and growing our pipeline of diverse tech
+              talent into industry.
+            </p>
+          </span>
         </div>
-  </section>*/}
         <br />
-        <div className="flex items-center justify-center">
-          <iframe
-            className=" mx-auto text-sm"
-            width="100%"
-            height="500px"
-            src="https://www.youtube.com/embed/q44VgsbcBkw"
-            title="INIT Launch Announcement"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen={true}
-          ></iframe>
-        </div>
+
         <br />
         <h1 className="text-center text-4xl text-white">🤝Partners</h1>
         <br />
-        <span className="flex flex-wrap items-center justify-center">
+        <span className="flex w-full flex-wrap items-center justify-center">
           <Image
             src={knight_foundation_logo}
             alt="Knight Foundation Logo"
-            className="mr-5  text-sm"
-            width={175}
+            className="mb-5  mr-5"
+            width={200}
             height={50}
             loading="lazy"
           />
           <Image
             src={lab22c_logo}
             alt="Lab22c Logo"
-            className="  text-sm"
-            width={175}
+            className="mb-5  text-sm"
+            width={200}
             height={50}
             loading="lazy"
           />
           <Image
             src={FIU_Logo_logo}
             alt="Init Logo"
-            className="text-sm"
-            width={175}
+            className=" mb-5 text-sm"
+            width={200}
             height={50}
             loading="lazy"
           />
           <Image
             src={mdc_logo_logo}
             alt="MDC Logo"
-            className="text-sm"
-            width={175}
+            className="mb-5 text-sm"
+            width={200}
             height={50}
             loading="lazy"
           />
@@ -125,11 +130,24 @@ export default function About() {
               />
             ))}
           </div>
+          <div className="flex flex-wrap justify-center gap-5 "></div>
         </section>
         <br />
-
-        <main className="flex min-h-screen flex-col bg-primary"></main>
-      </>
-    )
+        <h1 className="text-center text-4xl text-white">✨ Our Team</h1>
+        <div className="flex flex-wrap justify-center">
+          {team_members.map((member) => (
+            <div key={member.name} className="w-full p-4 md:w-1/3">
+              <Init_Team
+                name={member.name}
+                position={member.position}
+                linkedin={member.linkedin}
+                image={member.image}
+                key={member.name}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
