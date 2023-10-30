@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   return (
@@ -50,6 +51,7 @@ export default function Navbar() {
           <button className="h-10 w-10 rounded-full bg-pink-500 focus:outline-none focus:ring-2 focus:ring-gray-600">
             {/* Instagram Icon Here */}
           </button>
+          <UserButton afterSignOutUrl="/" />
         </div>
       </div>
     </nav>
