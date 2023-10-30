@@ -90,20 +90,6 @@ export default function Jobs() {
   //////////////////////////////
   
 
-  const search = useSearchParams();
-  const searchQuery = search ? search.get("q") : null;
-  const encodedSearchQuery = encodeURI(searchQuery || "")
-
-  const { data, isLoading } = useSWR(`/api/trpc/search?q=${encodedSearchQuery}`, fetchPosts)
-
-
-  if (!data?.jobPosts) {
-    return null;
-  }
-
-
-  console.log("HERE IS DATA: ", data)
-
   return (
     <main className="min-h-screen">
 
