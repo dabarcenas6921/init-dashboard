@@ -7,7 +7,7 @@ import lab22c from "../assets/images/Lab2C-logo.svg";
 import mdc_logo from "../assets/images/MDC-Logo.svg";
 import { chapters } from "../../dummy_data/chapters";
 import { team_members } from "../../dummy_data/InitTeam";
-import Chapter_card from "../components/Chapter_card";
+import Chapter_card from "~/components/Chapter_card";
 import Init_Team from "~/components/Init_Team";
 
 const knight_foundation_logo: StaticImageData =
@@ -118,7 +118,7 @@ export default function About() {
           <p>More partners to be announced soon!</p>
         </section>
         <br />
-        <h1 className="text-center text-4xl text-white">🍎 Chapters</h1>
+        <h1 className="mb-10 text-center text-4xl text-white">🍎 Chapters</h1>
         <section className="flex justify-center">
           <div className="flex flex-wrap justify-center gap-9 ">
             {chapters.map((chapter) => (
