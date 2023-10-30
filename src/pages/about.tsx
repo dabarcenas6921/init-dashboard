@@ -8,7 +8,7 @@ import mdc_logo from "../assets/images/MDC-Logo.svg";
 import { chapters } from "../../dummy_data/chapters";
 import { team_members } from "../../dummy_data/InitTeam";
 import Init_Team from "~/components/Init_Team";
-import Chapter_card from "~/components/Chapter_card";
+import Chapter_card from "../components/Chapter_card";
 
 const knight_foundation_logo: StaticImageData =
   knight_foundation as StaticImageData;
