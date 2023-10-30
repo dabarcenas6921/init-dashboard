@@ -1,41 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { jobPostings } from "~/Data/jobPostingsData";
+import React, { useEffect } from "react";
 import { api } from "~/utils/api";
 
 
 export default function SearchInput() {
 
-  async function fetchData() {
-    try {
-      const query = await api.jobs.getAll.useQuery();
-      if (query.data) {
-        return query.data
-      }
-    } 
-    catch(error) {
-      console.log(error)
-    }
+  const data = api.jobs.getAll.useQuery()
+  const jobsData = data.data
+  // if (jobsData) {
+  //   console.log(jobsData)
+  // }
+
+  // async function fetchData() {
+  //   try {
+  //     const query = await api.jobs.getAll.useQuery();
+  //     if (query.data) {
+  //       return query.data
+  //     }
+  //   } 
+  //   catch(error) {
+  //     console.log(error)
+  //   }
   
-  }
+  // }
   
-  async function getData() {
-      await fetchData()
-      .then((res) => {
-        res?.forEach((job) => {
-          console.log(job)
-        })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }
+  // async function getData() {
+  //     await fetchData()
+  //     .then((res) => {
+  //       res?.forEach((job) => {
+  //         console.log(job)
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       console.error(error)
+  //     })
+  // }
 
   
   useEffect(() => {
     const formEl = document.getElementById("search-jobs");
     formEl?.addEventListener("submit", (e) => {
       e.preventDefault();
-      console.log("YEOO")
+      if (jobsData) {
+        console.log(jobsData)
+      }
+      
   
     })
   }, []); 
@@ -77,7 +85,7 @@ export default function SearchInput() {
           <button
             id="search-submit-btn"
             className="bg-primary_yellow absolute inset-y-0 right-0 flex items-center justify-center rounded-r-lg px-4 py-2 text-sm font-medium text-black hover-bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300"
-            onClick={() => getData()}
+            // onClick={() => getData()}
           >
             Search
           </button>
