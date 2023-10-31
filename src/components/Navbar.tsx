@@ -9,7 +9,7 @@ export default function Navbar() {
       <div className="mx-auto flex flex-wrap items-center justify-between">
         <Link href="/">
           <span className="order-1 flex cursor-pointer items-center md:order-1">
-            <span className="self-center whitespace-nowrap text-3xl text-white  hover:text-yellow-200">
+            <span className="font-bulky self-center whitespace-nowrap text-3xl text-white  hover:text-yellow-200">
               INIT
             </span>
           </span>
@@ -41,16 +41,16 @@ export default function Navbar() {
           id="navbar-default"
         >
           <ul className="mt-4 flex flex-col bg-gray-900 p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-yellow-200">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-yellow-200">
               <Link href="/jobs">Job Opportunities</Link>
             </li>
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
               <Link href="/events">Events</Link>
             </li>
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
               <Link href="/programs">Programs</Link>
             </li>
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
               <Link href="/about">About Us</Link>
             </li>
           </ul>

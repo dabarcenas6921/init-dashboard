@@ -1,4 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@font-face {
+  font-family: "PolysansBulky";
+  src: url("../fonts/PolysansBulky.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PolysansNeutralMono";
+  src: url("../fonts/PolySansNeutralMono.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PolysansNeutral";
+  src: url("../fonts/PolySansNeutral.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PolysansMedian";
+  src: url("../fonts/PolySansMedian.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+p {
+  @apply font-neutralMono;
+}
+
+h1 {
+  @apply font-bulky;
+}
+
+h2 {
+  @apply font-median;
+}
+
+h3 {
+  @apply font-neutral;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
