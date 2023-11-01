@@ -15,6 +15,7 @@ export default function Programs() {
       open: true,
       //pages that applications will be filled up
       url: "https://generalassemb.ly/education/data-analytics-immersive",
+      color: "#6FA4F4",
     },
     {
       // {index 2} index in mapping
@@ -25,6 +26,7 @@ export default function Programs() {
         "INIT Reach is a program focused on the hardware development side of technology. Using all sorts of machinery, large or small, this program aims inspire members to create their own devices with the technology available today.",
       open: true,
       url: "https://generalassemb.ly/education/software-engineering-immersive",
+      color: "init_reach",
     },
     {
       // {index 3} index in mapping
@@ -35,6 +37,7 @@ export default function Programs() {
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
+      color: "#6FA4F4",
     },
     {
       // {index 4} index in mapping
@@ -45,6 +48,7 @@ export default function Programs() {
         "INIT Ignite is a program focused on information technology, a field in technology. Commonly overlooked, information technology ensures that the systems running the software are secured and works. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
+      color: "#6FA4F4",
     },
     {
       // {index 5} index in mapping
@@ -55,6 +59,7 @@ export default function Programs() {
         "INIT Hack is a program focused on the community in Computer Science. Across the country, there are various coding competitions, Hackathons, where students must create a solution by the end of a given time frame. Most students work as teams, with the members being fellow students in the same school. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
+      color: "#6FA4F4",
     },
     {
       // {index 6} index in mapping
@@ -65,6 +70,7 @@ export default function Programs() {
         "INIT Discover is a program focused on the academic side of technology. Though often overlooked, research is a viable career path for students interested in academics or furthering advancements in the field. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
+      color: "#6FA4F4",
     },
     {
       // {index 7} index in mapping
@@ -75,6 +81,7 @@ export default function Programs() {
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
+      color: "#6FA4F4",
     },
     {
       // {index 8} index in mapping
@@ -85,6 +92,7 @@ export default function Programs() {
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
+      color: "#6FA4F4",
     },
   ];
   return (
@@ -94,11 +102,11 @@ export default function Programs() {
           Programs
         </h1>
       </div>
-      <div className=" grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-8 ">
         {/* what ever comes first in the array thats the objects in the array and whats second is the Index */}
         {sampleData.map((programData, index) => {
           return (
-            <div key={index} className="mx-auto mt-4 ">
+            <div key={index} className="relative mx-auto mt-4 ">
               <div
                 className=" w-full max-w-sm  bg-white shadow dark:bg-gray-900"
                 style={{ height: "100%" }}
@@ -110,9 +118,11 @@ export default function Programs() {
                     src={programData.image}
                   />
                 </a>
-                <div className="p-5" style={{ height: "100%" }}>
+                <div className="p-5">
                   <a href="#">
-                    <h5 className="light:text-red mb-2 text-2xl font-bold tracking-tight text-red-500">
+                    <h5
+                      className={`light:text-red text-${programData.color} mb-2 text-2xl font-bold tracking-tight`}
+                    >
                       {programData.title}
                     </h5>
                   </a>
@@ -122,59 +132,61 @@ export default function Programs() {
                   {/* (Ternary.Operator) anything before ? is the condition if the conditon is true it
                   needs to show whats on the left : and if its false everything
                   on thr right on the : exampleOne.true ? : exampleTwo.false */}
-                  {programData.open ? (
-                    <>
-                      <a
-                        // This helps Url open in a different tab
-                        target="_blank"
-                        href={programData.url}
-                        className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                      >
-                        Apply Now
-                        <svg
-                          className="ml-2 h-3.5 w-3.5"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
+                  <div className="botton-container absolute bottom-0 mb-2 ">
+                    {programData.open ? (
+                      <>
+                        <a
+                          // This helps Url open in a different tab
+                          target="_blank"
+                          href={programData.url}
+                          className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                         >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                          />
-                        </svg>
-                      </a>
-                    </>
-                  ) : (
-                    <>
-                      <a
-                        // This helps Url open in a different tab
-                        target="_blank"
-                        // href={programData.url}
-                        className=" inline-flex items-center rounded-lg bg-blue-300 px-3 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-gray-400"
-                      >
-                        Applications Closed
-                        <svg
-                          className="ml-2 h-3.5 w-3.5"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
+                          Apply Now
+                          <svg
+                            className="ml-2 h-3.5 w-3.5"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 14 10"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M1 5h12m0 0L9 1m4 4L9 9"
+                            />
+                          </svg>
+                        </a>
+                      </>
+                    ) : (
+                      <>
+                        <a
+                          // This helps Url open in a different tab
+                          target="_blank"
+                          // href={programData.url}
+                          className=" inline-flex items-center rounded-lg bg-blue-300 px-3 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-gray-400"
                         >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                          />
-                        </svg>
-                      </a>
-                    </>
-                  )}
+                          Applications Closed
+                          <svg
+                            className="ml-2 h-3.5 w-3.5"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 14 10"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M1 5h12m0 0L9 1m4 4L9 9"
+                            />
+                          </svg>
+                        </a>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
