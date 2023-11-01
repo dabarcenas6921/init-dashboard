@@ -47,11 +47,13 @@ export const jobRouter = createTRPCRouter({
     )
     .query(async ({ input, ctx }) => {
       try {
+        const decodedQuery = input.q.replace(/\+/g, ' ').replace(/%20/g, ' ');
+
         const jobPostings = await ctx.db.jobPosting.findMany({
           where: {
             OR: [
-              { title: { contains: input.q.toLowerCase() } },
-              { company: { contains: input.q.toLowerCase() } },
+              { title: { contains: decodedQuery.toLowerCase() } },
+              { company: { contains: decodedQuery.toLowerCase() } },
             ],
           },
         });

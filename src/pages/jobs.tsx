@@ -1,12 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'flowbite-react';
 import { jobPostings  } from '../Data/jobPostingsData'
 import SearchInput from '~/components/SearchInput';
 import FilterJobsCard from '~/components/FilterJobsCard';
 import JobCard from '~/components/JobCard';
 import { useSearchParams } from "next/navigation";
-import useSWR from "swr";
+import { api } from "~/utils/api";
+
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -89,6 +90,16 @@ export default function Jobs() {
   // LOGIC FOR SEARCHING JOBS  //
   //////////////////////////////
   
+
+  const search = useSearchParams();
+  const searchQuery = search ? search.get("q") : null
+  const encodedSearchQuery = encodeURI(searchQuery ?? "")
+
+  console.log("SEARCH PARAMS", encodedSearchQuery);
+  const input = { q: encodedSearchQuery };
+  const query = api.jobs.getByQuery.useQuery(input);
+  
+  console.log(query.data)
 
   return (
     <main className="min-h-screen">

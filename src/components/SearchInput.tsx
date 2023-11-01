@@ -1,33 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { api } from "~/utils/api";
+"use client"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation"
+
 
 export default function SearchInput() {
-  const query = api.jobs.getAll.useQuery();
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
 
-  useEffect(() => {
-    const formEl = document.getElementById("search-jobs");
-    formEl?.addEventListener("submit", (e) => {
-      e.preventDefault();
-      console.log("Form submitted");
-    });
+  const onSearch = (event: React.FormEvent) => {
+    event.preventDefault();
 
-    return () => {
-      formEl?.removeEventListener("submit", (e) => {
-        e.preventDefault();
-      });
-    };
-  }, []);
+    const encodedSearchQuery = encodeURI(searchQuery);
+    router.push(`/jobs?q=${encodedSearchQuery}`)
+    console.log("Search Query: ", encodedSearchQuery)
+  }
 
-  const getData = () => {
-    if (query.data) {
-      query.data.forEach((job) => {
-        console.log(job);
-      });
-    }
-  };
 
   return (
-    <form className="flex items-center" id="search-jobs">
+    <form className="flex items-center" id="search-jobs" onSubmit={onSearch}>
       <label
         htmlFor="search-jobs-input-field"
         className="sr-only text-sm font-medium text-gray-900"
@@ -54,6 +44,8 @@ export default function SearchInput() {
         </div>
         <input
           type="search"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
           id="search-jobs-input-field"
           className="border-yellow_primary block w-full rounded-md border bg-white p-2 pl-10 text-sm text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 md:w-[400px]"
           placeholder="Search jobs..."
@@ -62,7 +54,7 @@ export default function SearchInput() {
         <button
           id="search-submit-btn"
           className="hover-bg-yellow-500 absolute inset-y-0 right-0 flex items-center justify-center rounded-r-lg bg-primary_yellow px-4 py-2 text-sm font-medium text-black focus:outline-none focus:ring-4 focus:ring-yellow-300"
-          onClick={getData}
+          // onClick={onSearch}
         >
           Search
         </button>
