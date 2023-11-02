@@ -42,4 +42,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # fonts
-/src/fonts
+src/fonts/*
