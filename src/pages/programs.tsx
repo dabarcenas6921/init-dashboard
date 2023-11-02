@@ -44,7 +44,7 @@ export default function Programs() {
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
-      color: "#6FA4F4",
+      color: "#FC6C3F",
     },
     {
       // {index 4} index in mapping
@@ -55,7 +55,7 @@ export default function Programs() {
         "INIT Ignite is a program focused on information technology, a field in technology. Commonly overlooked, information technology ensures that the systems running the software are secured and works. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
-      color: "#6FA4F4",
+      color: "#87DE65",
     },
     {
       // {index 5} index in mapping
@@ -66,7 +66,7 @@ export default function Programs() {
         "INIT Hack is a program focused on the community in Computer Science. Across the country, there are various coding competitions, Hackathons, where students must create a solution by the end of a given time frame. Most students work as teams, with the members being fellow students in the same school. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
-      color: "#6FA4F4",
+      color: "#A27BFC",
     },
     {
       // {index 6} index in mapping
@@ -77,29 +77,30 @@ export default function Programs() {
         "INIT Discover is a program focused on the academic side of technology. Though often overlooked, research is a viable career path for students interested in academics or furthering advancements in the field. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
-      color: "#6FA4F4",
+      color: "#7F88A0",
     },
     {
       // {index 7} index in mapping
-      title: "",
+      title: "Init Uplift",
       image:
         "https://s3-alpha-sig.figma.com/img/bdfa/e996/ec49d92b4a38e9615eb9f39c6126b252?Expires=1699228800&Signature=dftADo4bJNSyWDw8ZDgxKAgQmRS86965Ckp3piZEAAQTQdTiqizRrCtSIyOeCuL1jszTfA9qYNxyfc2mPZ2aCOtDVSSTid13ov6DCQu-x4EwSFmpkGucnkvdLOJM8cgpzHul3Mf4cLRGU2LWLfdmWGg6DyVG4e1YZUaBtfz3fsAtI4ocjbeHyVHs43gm4y61DiX~79T7iQpnSY~KZ0lBLQrRhqMqHJ13DibK-JEAIbRrUm2vVS~ljaVTQIUZ06T~-PJBQWrcm4E4yqc6RV-MPXXs6BTSguZRjhTW-eZ9Tz9NJnhX2ny89QA8HMPnnQ6yTKdlksoSFl6jRkaV5sQobw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
       discription:
-        "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
+        "INIT Uplift is a program focused on mentorship. Many incoming freshmen are overwhelmed by the amount of information available to them from the start. Our program aims to guide these new students and help them kickstart their tech careers. Those with experience in the field or program help to navigate freshmen during these rough times and allow them to establish a network or two. Mentor with us or get a mentor today",
+
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
-      color: "#6FA4F4",
+      color: "#FF3E9E",
     },
     {
       // {index 8} index in mapping
-      title: "",
+      title: "Init Launch",
       image:
-        "https://s3-alpha-sig.figma.com/img/0ec1/da54/6cf38b347bee1dcc6b49c386b1768072?Expires=1698624000&Signature=ku4MuOGJU-HqRhaLZG~rQ~ZMWFYb8LiSZT42juYGag3E0Piyh1oc9YyjR2dOr6HDbqd5iLrGZtTPfLLwZdRWlI~moY2YC0n2pD4QrjtWYjp0osOQtFTgKuVMNFSoxNNMXYnb-VDB05vsZLfVZDrrRAm1LPst5suNPFOnJCJQiZ1JXVVCEpAhjyYUTrQ8X~Lb19evV0zTyNZbHnJZBxwyEgwEWevONS13a8A9qV-g9sj3j9NIzJKVjeiuOIhVCvncvaeJTZstOBnCFmcT14o9jeO7eX9m1FX1SJ1i28YN8geAHACH6yS8mKLwQbMJS1OPjpRb2bTZGtPXO5z5NiD9aw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+        "https://s3-alpha-sig.figma.com/img/bdfa/e996/ec49d92b4a38e9615eb9f39c6126b252?Expires=1699228800&Signature=dftADo4bJNSyWDw8ZDgxKAgQmRS86965Ckp3piZEAAQTQdTiqizRrCtSIyOeCuL1jszTfA9qYNxyfc2mPZ2aCOtDVSSTid13ov6DCQu-x4EwSFmpkGucnkvdLOJM8cgpzHul3Mf4cLRGU2LWLfdmWGg6DyVG4e1YZUaBtfz3fsAtI4ocjbeHyVHs43gm4y61DiX~79T7iQpnSY~KZ0lBLQrRhqMqHJ13DibK-JEAIbRrUm2vVS~ljaVTQIUZ06T~-PJBQWrcm4E4yqc6RV-MPXXs6BTSguZRjhTW-eZ9Tz9NJnhX2ny89QA8HMPnnQ6yTKdlksoSFl6jRkaV5sQobw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
       discription:
-        "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
+        "INIT Launch is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots, this program aims teach you the fundamentals of project development in the real world. No experience is required to spark up your portfolio with us.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
-      color: "#6FA4F4",
+      color: "#11CEBB",
     },
   ];
   return (
@@ -147,7 +148,7 @@ export default function Programs() {
                       {programData.title}
                     </h5>
                   </a>
-                  <p className="text-none-500 dark:text-none-500 mb-6 font-poppins">
+                  <p className="text-none-500 dark:text-none-500 mb-8 font-poppins">
                     {/* {programData.discription} */}
                     INIT
                     <span style={{ color: `${programData.color}` }}>
