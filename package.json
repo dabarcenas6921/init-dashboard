@@ -9,7 +9,7 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "fonts:fetch": "wget -O Fonts.zip https://www.dropbox.com/scl/fi/nfarsaanze6htcugo90cz/InitFonts.zip?rlkey=hses3ycoftwhr01tjk3h31f5e&dl=1; unzip Fonts.zip -d ./src/fonts; rm Fonts.zip"
+    "fonts:fetch": "wget -O InitFonts.zip https://www.dropbox.com/scl/fi/nfarsaanze6htcugo90cz/InitFonts.zip?rlkey=hses3ycoftwhr01tjk3h31f5e&dl=1 && sleep 2 && unzip InitFonts.zip -d ./src/fonts && rm InitFonts.zip"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.1",
