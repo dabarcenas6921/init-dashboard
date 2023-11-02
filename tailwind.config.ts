@@ -24,10 +24,11 @@ export default {
         "160": "40rem", // Adds h-160 for 40rem/640px height
       },
       fontFamily: {
-        bulky: ["PolysansBulky", "sans-serif"],
-        neutralMono: ["PolysansNeutralMono", "sans-serif"],
-        neutral: ["PolysansNeutral", "sans-serif"],
-        median: ["PolysansMedian", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+        bulky: ["PolysansBulky", "Poppins", "sans-serif"],
+        neutralMono: ["PolysansNeutralMono", "Poppins", "sans-serif"],
+        neutral: ["PolysansNeutral", "Poppins", "sans-serif"],
+        median: ["PolysansMedian", "Poppins", "sans-serif"],
       },
     },
   },
