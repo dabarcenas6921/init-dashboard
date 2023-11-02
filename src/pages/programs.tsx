@@ -3,7 +3,14 @@
 // import { Card } from "flowbite-react";
 
 export default function Programs() {
-  const sampleData = [
+  const sampleData: {
+    title: string;
+    image: string;
+    discription: string;
+    open: boolean;
+    url: string;
+    color: string;
+  }[] = [
     {
       // {index 1} index in mapping
       title: "Init Explore",
@@ -15,7 +22,7 @@ export default function Programs() {
       open: true,
       //pages that applications will be filled up
       url: "https://generalassemb.ly/education/data-analytics-immersive",
-      color: "#6FA4F4",
+      color: "#EB6A65",
     },
     {
       // {index 2} index in mapping
@@ -26,7 +33,7 @@ export default function Programs() {
         "INIT Reach is a program focused on the hardware development side of technology. Using all sorts of machinery, large or small, this program aims inspire members to create their own devices with the technology available today.",
       open: true,
       url: "https://generalassemb.ly/education/software-engineering-immersive",
-      color: "init_reach",
+      color: "#6FA4F4",
     },
     {
       // {index 3} index in mapping
@@ -105,6 +112,20 @@ export default function Programs() {
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-8 ">
         {/* what ever comes first in the array thats the objects in the array and whats second is the Index */}
         {sampleData.map((programData, index) => {
+          const afterINITArray = programData.discription.split("INIT")[1];
+          const initArrayWords = afterINITArray.split(" ");
+          const firstWord = afterINITArray.split(" ")[1];
+          let pAfterFirstWord = "";
+          initArrayWords.forEach((word, i) => {
+            if (i > 1) {
+              pAfterFirstWord += word + " ";
+            }
+          });
+          console.log(programData.color, "color");
+          // console.log(firstWord, "firstWord");
+          // console.log(pAfterFirstWord, "pAfterFirstWord");
+          // console.log(initArrayWords, "firstWord");
+          // console.log(afterINITArray, "afterINITArray");
           return (
             <div key={index} className="relative mx-auto mt-4 ">
               <div
@@ -121,13 +142,19 @@ export default function Programs() {
                 <div className="p-5">
                   <a href="#">
                     <h5
-                      className={`light:text-red text-${programData.color} mb-2 text-2xl font-bold tracking-tight`}
+                      className={`light:text-red mb-2 text-2xl font-bold tracking-tight text-${programData.color}`}
                     >
                       {programData.title}
                     </h5>
                   </a>
                   <p className="text-none-500 dark:text-none-500 mb-6 font-poppins">
-                    {programData.discription}
+                    {/* {programData.discription} */}
+                    INIT
+                    <span style={{ color: `${programData.color}` }}>
+                      {" "}
+                      {firstWord}{" "}
+                    </span>
+                    {pAfterFirstWord}
                   </p>
                   {/* (Ternary.Operator) anything before ? is the condition if the conditon is true it
                   needs to show whats on the left : and if its false everything

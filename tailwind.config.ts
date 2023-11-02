@@ -7,6 +7,7 @@ export default {
       colors: {
         primary: "#222222",
         primary_yellow: "#FFD550",
+        init_explore: "#EB6A65",
         init_reach: "#6FA4F4",
       },
       fontFamily: {
