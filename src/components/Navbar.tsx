@@ -5,18 +5,29 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="border-gray-200 bg-primary pb-8 pt-4">
-      <div className="mx-auto flex flex-wrap items-center justify-between">
+    <nav className=" border-gray-200 bg-primary pb-8 pt-4">
+      <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link href="/">
-          <span className="order-1 flex cursor-pointer items-center md:order-1">
-            <span className="font-bulky self-center whitespace-nowrap text-3xl text-white  hover:text-yellow-200">
-              INIT
-            </span>
-          </span>
+          <svg
+            className="h-6 cursor-pointer self-center whitespace-nowrap text-white  hover:text-primary_yellow"
+            fill="currentColor"
+            strokeWidth="0"
+            id="Footer INIT Logo"
+            data-name="Footer INIT Logo"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 480.12"
+          >
+            <path d="m499.17,75.78c-79.68,0-131.34,62.17-153.23,108.58-3.5,7.01-7.88,17.51-18.39,13.13-11.38-4.38-2.63-21.89,4.38-35.9,7-14.01,11.38-28.9,11.38-49.91v-21.89h0c-77.37,0-140.1,62.73-140.1,140.1v250.23h140.1l1.02-163.32c0-87.13,37.48-123.43,94.39-123.43,49.91,0,86.72,30.4,86.72,134.6v152.16h140.1v-208.2c0-131.34-66.55-196.14-166.37-196.14Z" />
+            <path d="m1140.2,201.87c33.02,0,59.8-26.77,59.8-59.8v-52.28h-126.09V0h-140.1v338.26c0,111.2,43.78,141.85,136.6,141.85h129.59v-112.08h-84.06c-40.28,0-42.03-1.75-42.03-45.53v-120.64h66.29Z" />
+            <path d="m800.09,142.42c-27,0-51.55-12.01-69.82-31.6v369.3h138.95V111.55c-18.19,19.17-42.47,30.87-69.13,30.87Z" />
+            <path d="m799.86,116.1c31.38,0,56.82-25.49,56.82-56.93s-25.44-56.93-56.82-56.93-56.82,25.49-56.82,56.93,25.44,56.93,56.82,56.93Z" />
+            <path d="m69.82,142.42c-27,0-51.55-12.01-69.82-31.6v369.3h138.95V111.55c-18.19,19.17-42.47,30.87-69.13,30.87Z" />
+            <ellipse cx="69.59" cy="59.18" rx="56.82" ry="56.93" />
+          </svg>
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="order-3 rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
+          className="rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
         >
           <svg
             className="h-5 w-5"
@@ -58,7 +69,7 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-gray-900 p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
         >
           <a
             href="https://www.instagram.com/initofficial/"
@@ -85,8 +96,8 @@ export default function Navbar() {
               className="h-5 w-5"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               viewBox="0 0 24 24"
             >
               <path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v21.528l-2.58-2.28-1.452-1.344-1.536-1.428.636 2.22h-13.608c-1.356 0-2.46-1.104-2.46-2.472v-16.224c0-1.368 1.104-2.472 2.46-2.472h16.08zm-4.632 15.672c2.652-.084 3.672-1.824 3.672-1.824 0-3.864-1.728-6.996-1.728-6.996-1.728-1.296-3.372-1.26-3.372-1.26l-.168.192c2.04.624 2.988 1.524 2.988 1.524-1.248-.684-2.472-1.02-3.612-1.152-.864-.096-1.692-.072-2.424.024l-.204.024c-.42.036-1.44.192-2.724.756-.444.204-.708.348-.708.348s.996-.948 3.156-1.572l-.12-.144s-1.644-.036-3.372 1.26c0 0-1.728 3.132-1.728 6.996 0 0 1.008 1.74 3.66 1.824 0 0 .444-.54.804-.996-1.524-.456-2.1-1.416-2.1-1.416l.336.204.048.036.047.027.014.006.047.027c.3.168.6.3.876.408.492.192 1.08.384 1.764.516.9.168 1.956.228 3.108.012.564-.096 1.14-.264 1.74-.516.42-.156.888-.384 1.38-.708 0 0-.6.984-2.172 1.428.36.456.792.972.792.972zm-5.58-5.604c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332.012-.732-.54-1.332-1.224-1.332zm4.38 0c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332 0-.732-.54-1.332-1.224-1.332z" />
@@ -111,7 +122,7 @@ export default function Navbar() {
             href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
             rel="noopener noreferrer"
             target="_blank"
-            className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             Join
           </a>
