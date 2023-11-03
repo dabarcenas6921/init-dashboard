@@ -12,6 +12,19 @@ const JobData = z.object({
   url: z.string(),
 });
 
+type JobPostingType = z.infer<typeof JobData>;
+
+// Define the input schema for the filtering procedure
+const FilterInput = z.object({
+  jobType: z.array(z.string()).optional(),
+  jobPosition: z.array(z.string()).optional(),
+  jobLocation: z.array(z.string()).optional(),
+});
+
+
+// Define the output schema for the filtered job postings
+const FilteredJobPostings = z.array(JobData);
+
 export const jobRouter = createTRPCRouter({
   // Create Job Procedure
   create: publicProcedure.input(JobData).mutation(async ({ input, ctx }) => {
@@ -63,6 +76,83 @@ export const jobRouter = createTRPCRouter({
         throw new Error("Failed to get job postings by query");
       }
     }),
+
+
+    filterBySelectedFilters: publicProcedure
+    .input(FilterInput)
+    .query(async ({ input, ctx }) => {
+      try {
+        console.log("input.jobType:", input.jobType);
+        console.log("input.jobPosition:", input.jobPosition);
+        console.log("input.jobLocation:", input.jobLocation);
+        if (input.jobType?.length === 0 && input.jobPosition?.length === 0 && input.jobLocation?.length === 0) {
+          // If no filters are provided, return all job postings
+          const jobPostings = await ctx.db.jobPosting.findMany();
+          console.log("YOOOOO")
+          return jobPostings;
+        }
+
+        const jobPostings: JobPostingType[] = []; // Initialize an array to collect job postings
+        if (input.jobType) {
+          
+          for (const type of input.jobType) {
+            const postingsOfType = await ctx.db.jobPosting.findMany({
+              where: {
+                jobType: {
+                  contains: type 
+                }
+              }
+            });
+            jobPostings.push(...postingsOfType);
+          }
+  
+        }
+        if (input.jobPosition) {
+          console.log(input.jobPosition)
+          for (let pos of input.jobPosition) {
+            if (pos === "newGrad") {
+              pos = "New-grad"
+            }
+            const postingsOfType = await ctx.db.jobPosting.findMany({
+              where: {
+                jobPosition: {
+                  contains: pos
+                }
+              }
+            });
+            jobPostings.push(...postingsOfType);
+          }
+      
+        } 
+
+        if (input.jobLocation) {
+          console.log(input.jobLocation)
+          for (let loc of input.jobLocation) {
+            if (loc === "onSite") {
+              loc = "On-site"
+            }
+            const postingsOfType = await ctx.db.jobPosting.findMany({
+              where: {
+                jobLocation: {
+                  contains: loc
+                }
+              }
+            });
+            jobPostings.push(...postingsOfType);
+          }
+      
+        }
+       
+        return jobPostings;
+
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to filter job postings");
+      }
+    }),
+  
+
+
 
   // Delete Job Posting Procedure
   delete: publicProcedure

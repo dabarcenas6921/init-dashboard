@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { Dropdown } from 'flowbite-react';
-import { jobPostings  } from '../Data/jobPostingsData'
 import SearchInput from '~/components/SearchInput';
-import FilterJobsCard from '~/components/FilterJobsCard';
+import type { FilterInput } from '~/components/FilterJobsCard';
+import FilterJobsCard from '~/components/FilterJobsCard'
 import JobCard from '~/components/JobCard';
 import { useSearchParams } from "next/navigation";
 import { api } from "~/utils/api";
@@ -16,90 +16,44 @@ export type SelectedFilters = {
   jobLocation: string[];
 };
 
-// Fetches Job Posts 
-const fetchPosts = async (url: string) => {
-  const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch posts");
-  }
-
-  return response.json();
-}
 
 export default function Jobs() {
 
-  ///////////////////////////////
-  // LOGIC FOR FILTERING JOBS //
-  //////////////////////////////
-
-  // State to store selected filter values
-  const [selectedFilters, setSelectedFilters] = useState({
-    jobType: [] as string[],
-    jobPosition: [] as string[],
-    jobLocation: [] as string[],
-  });
-
-  // State to store the filtered job postings
-  const [filteredJobPostings, setFilteredJobPostings] = useState(jobPostings);
-
-  // Function to handle checkbox changes
-  const handleFilterChange = (category: keyof SelectedFilters, value: string) => {
-    setSelectedFilters((prevFilters) => {
-      const updatedFilters = { ...prevFilters };
-      if (updatedFilters[category].includes(value)) {
-        // If the value is already in the array, remove it
-        updatedFilters[category] = updatedFilters[category].filter((item) => item !== value);
-      } else {
-        // If the value is not in the array, add it
-        updatedFilters[category] = [...updatedFilters[category], value];
-      }
-      return updatedFilters;
-    });
-  };
-
-  // Function to filter job postings based on selected filters
-  const filterJobPostings = () => {
-    const { jobType, jobPosition, jobLocation } = selectedFilters;
-    const filtered = jobPostings.filter((job) => {
-      const typeMatches = jobType.length === 0 || jobType.includes(job.jobType);
-      const positionMatches = jobPosition.length === 0 || jobPosition.includes(job.jobPosition);
-      const locationMatches = jobLocation.length === 0 || jobLocation.includes(job.jobLocation);
-      return typeMatches && positionMatches && locationMatches;
-    });
-    setFilteredJobPostings(filtered);
-  };
-
-  // Function to reset filters and show all job postings
-  const resetFilters = () => {
-    setSelectedFilters({
-      jobType:     [] as string[],
-      jobPosition: [] as string[],
-      jobLocation: [] as string[],
-    });
-    // Uncheck the checkboxes by setting their checked state to false
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => {
-      const inputCheckbox = checkbox as HTMLInputElement;
-      inputCheckbox.checked = false;
-    });
-    setFilteredJobPostings(jobPostings);
-  };
-
-  ///////////////////////////////
+   ///////////////////////////////
   // LOGIC FOR SEARCHING JOBS  //
   //////////////////////////////
-  
 
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null
   const encodedSearchQuery = encodeURI(searchQuery ?? "")
 
-  console.log("SEARCH PARAMS", encodedSearchQuery);
   const input = { q: encodedSearchQuery };
   const query = api.jobs.getByQuery.useQuery(input);
+
+  ///////////////////////////////
+  // LOGIC FOR FILTERING JOBS //
+  //////////////////////////////
+
+
+  const [selectedFilters, setSelectedFilters] = useState<FilterInput>({
+    jobType: [],
+    jobPosition: [],
+    jobLocation: [],
+  });
+
+  // console.log(selectedFilters)
+  const filteredJobs = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {});
   
-  console.log(query.data)
+  const resetFilters = () => {
+    // Reset selected filters to their initial empty values
+    setSelectedFilters({
+      jobType: [],
+      jobPosition: [],
+      jobLocation: [],
+    });
+  };
+  
 
   return (
     <main className="min-h-screen">
@@ -123,33 +77,25 @@ export default function Jobs() {
           {/* Dropdown for small Screen sizes */}
           <div className="md:hidden mx-auto mb-8">
               <Dropdown className="text-white bg-[#1A1E22]" label="Filter" placement="bottom" inline>
-                  {selectedFilters ? (
-                    <FilterJobsCard
-                      handleFilterChange={handleFilterChange}
-                      filterJobPostings={filterJobPostings}  
-                      resetFilters={resetFilters}
-                      selectedFilters={selectedFilters}
+                    <FilterJobsCard  
+                      onFilterChange={setSelectedFilters}
+                      onResetFilters={resetFilters}
                     />
-                  ): null}
-                  
+                
               </Dropdown>
           </div>
 
           {/* Normal Screen Sizes */}
           <div className="hidden md:block mr-[5%]">
-            {selectedFilters ? (
               <FilterJobsCard
-                handleFilterChange={handleFilterChange}
-                filterJobPostings={filterJobPostings}  
-                resetFilters={resetFilters}
-                selectedFilters={selectedFilters}
+                onFilterChange={setSelectedFilters}
+                onResetFilters={resetFilters}
               />
-            ): null}
           </div>
 
           <div className="w-full">
-              {filteredJobPostings.length > 0 ? (
-                <JobCard jobPostings={filteredJobPostings} />
+              {query.data && query.data.length > 0 ? (
+                <JobCard jobPostings={query.data} />
               ) : (
                 <p>No matching job postings.</p>
               )}
@@ -164,3 +110,26 @@ export default function Jobs() {
     
   );
 }
+
+
+
+
+/*
+
+<div className="w-full">
+  {filtersApplied ? (
+    filteredJobPostings.length > 0 ? (
+      <JobCard jobPostings={filteredJobPostings} />
+    ) : (
+      <p>No matching job postings based on filters.</p>
+    )
+  ) : (
+    query.data && query.data.length > 0 ? (
+      <JobCard jobPostings={query.data} />
+    ) : (
+      <p>No matching job postings based on search.</p>
+    )
+  )}
+</div>
+
+*/

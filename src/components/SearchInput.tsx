@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation"
 export default function SearchInput() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+  // const searchInputEl = document.getElementById("search-jobs-input-field") 
 
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault();
 
     const encodedSearchQuery = encodeURI(searchQuery);
     router.push(`/jobs?q=${encodedSearchQuery}`)
-    console.log("Search Query: ", encodedSearchQuery)
+    
   }
 
 
