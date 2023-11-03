@@ -116,22 +116,24 @@ export default function Programs() {
           const afterINITArray = programData.discription.split("INIT")[1];
           const initArrayWords = afterINITArray.split(" ");
           const firstWord = afterINITArray.split(" ")[1];
+
+          //for discription title colors
           let pAfterFirstWord = "";
           initArrayWords.forEach((word, i) => {
             if (i > 1) {
               pAfterFirstWord += word + " ";
             }
           });
-          console.log(programData.color, "color");
+          // console.log(programData.color, "color");
           // console.log(firstWord, "firstWord");
           // console.log(pAfterFirstWord, "pAfterFirstWord");
-          // console.log(initArrayWords, "firstWord");
-          // console.log(afterINITArray, "afterINITArray");
+          console.log(initArrayWords, "firstWord");
+          console.log(programData.discription, "programData.discription");
           return (
             <div key={index} className="relative mx-auto mt-4 ">
               <div
                 className=" w-full max-w-sm shadow dark:bg-gray-500"
-                style={{ height: "100%",backgroundColor:"#121827" }}
+                style={{ height: "100%", backgroundColor: "#121827" }}
               >
                 <a href="#">
                   <img
@@ -164,6 +166,7 @@ export default function Programs() {
                     {programData.open ? (
                       <>
                         <a
+                          style={{ backgroundColor: `${programData.color}` }}
                           // This helps Url open in a different tab
                           target="_blank"
                           href={programData.url}
@@ -188,8 +191,13 @@ export default function Programs() {
                         </a>
                       </>
                     ) : (
+                      //Else
                       <>
                         <a
+                          style={{
+                            backgroundColor: `${programData.color}`,
+                            opacity: ".45",
+                          }}
                           // This helps Url open in a different tab
                           target="_blank"
                           // href={programData.url}
