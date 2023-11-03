@@ -130,8 +130,8 @@ export default function Programs() {
           return (
             <div key={index} className="relative mx-auto mt-4 ">
               <div
-                className=" w-full max-w-sm  bg-white shadow dark:bg-gray-900"
-                style={{ height: "100%" }}
+                className=" w-full max-w-sm shadow dark:bg-gray-500"
+                style={{ height: "100%",backgroundColor:"#121827" }}
               >
                 <a href="#">
                   <img

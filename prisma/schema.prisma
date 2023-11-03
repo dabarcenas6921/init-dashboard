@@ -9,12 +9,16 @@ datasource db {
     provider = "sqlite"
     url      = env("DATABASE_URL")
 }
-//Example for reference:
-model Example {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 
-    @@index([name])
+model Event {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  time        DateTime
+  location    String
+  picture     String   // Assuming this is a URL or file path to the image
+  tag         String
+  rsvpLink    String
 }
+
+//Create an enum once we migrate to Postgres

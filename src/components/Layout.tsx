@@ -1,11 +1,15 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="m-auto p-8">
+    <div className="max-w-full pl-8 pr-8">
       <Navbar />
       {children}
+      <Footer />
     </div>
   );
 };
 export default Layout;
+
