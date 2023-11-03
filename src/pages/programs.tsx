@@ -21,7 +21,7 @@ export default function Programs() {
 
       open: true,
       //pages that applications will be filled up
-      url: "https://generalassemb.ly/education/data-analytics-immersive",
+      url: "https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog",
       color: "#EB6A65",
     },
     {
@@ -32,7 +32,7 @@ export default function Programs() {
       discription:
         "INIT Reach is a program focused on the hardware development side of technology. Using all sorts of machinery, large or small, this program aims inspire members to create their own devices with the technology available today.",
       open: true,
-      url: "https://generalassemb.ly/education/software-engineering-immersive",
+      url: "https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog",
       color: "#6FA4F4",
     },
     {
