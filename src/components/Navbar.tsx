@@ -51,17 +51,17 @@ export default function Navbar() {
           } relative z-0 w-full md:block md:w-auto`}
           id="navbar-default"
         >
-          <ul className="mt-4 flex flex-col bg-primary p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
+          <ul className="mt-4 flex flex-col bg-gray-900 p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-yellow-200">
               <Link href="/jobs">Job Opportunities</Link>
             </li>
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-primary_yellow">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
               <Link href="/events">Events</Link>
             </li>
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-primary_yellow">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
               <Link href="/programs">Programs</Link>
             </li>
-            <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-primary_yellow">
+            <li className="font-bulky block cursor-pointer rounded py-2 pl-3 pr-4 text-white  hover:text-yellow-200">
               <Link href="/about">About Us</Link>
             </li>
           </ul>

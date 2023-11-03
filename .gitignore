@@ -40,3 +40,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# fonts
+src/fonts/*
+!src/fonts/.gitkeep

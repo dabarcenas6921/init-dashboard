@@ -10,7 +10,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <div className="bg-primary font-poppins font-extrabold text-white">
+    <div className="bg-primary text-white">
       <Layout>
         <Component {...pageProps} />
       </Layout>

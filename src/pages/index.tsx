@@ -16,9 +16,9 @@ export default function Home() {
         <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
           <div className="flex justify-center md:justify-start">
             <div className="max-w-md p-4 text-center md:text-left">
-              <p className="pt-3 text-center text-4xl leading-tight md:text-left md:text-5xl md:leading-tight lg:text-6xl lg:leading-tight">
+              <h1 className="pt-3 text-center text-4xl leading-tight md:text-left md:text-5xl md:leading-tight lg:text-6xl lg:leading-tight">
                 Empowering tech talent in Miami and beyond 🚀
-              </p>
+              </h1>
               <p className="text-md pt-5 text-center md:text-left lg:text-lg">
                 INIT empowers underserved communities to launch careers in
                 technology, closing the talent gap and helping individuals
@@ -34,7 +34,7 @@ export default function Home() {
                 <Link href="https://discord.gg/init">
                   <button
                     type="button"
-                    className="flex w-full items-center justify-center rounded-lg bg-discord_purple px-6 py-3.5 text-base font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    className="bg-discord_purple flex w-full items-center justify-center rounded-lg px-6 py-3.5 text-base font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
                   >
                     <div className="mr-2 h-6 w-6">
                       <svg

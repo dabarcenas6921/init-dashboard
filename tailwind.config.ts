@@ -25,6 +25,10 @@ export default {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        bulky: ["PolysansBulky", "Poppins", "sans-serif"],
+        neutralMono: ["PolysansNeutralMono", "Poppins", "sans-serif"],
+        neutral: ["PolysansNeutral", "Poppins", "sans-serif"],
+        median: ["PolysansMedian", "Poppins", "sans-serif"],
       },
     },
   },
