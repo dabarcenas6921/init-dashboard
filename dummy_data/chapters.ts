@@ -11,7 +11,7 @@ export const chapters = [
   {
     image: MDC_Wolfson,
     name: "Miami Dade College",
-    description: "The most diverse institution in the nation",
+    description: "The most diverse educational institution in the nation",
   },
   {
     image: FMU_Campus,

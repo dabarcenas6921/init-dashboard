@@ -1,4 +1,3 @@
-import Image, { StaticImageData } from "next/image";
 export interface Init_Member {
   name: string;
   position: string;

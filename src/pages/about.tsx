@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import init_members from "../assets/images/init-members.jpeg";
 import FIU_Logo from "../assets/images/FIU-Engineering-Logo.svg";
 import knight_foundation from "../assets/images/knight-foundation-logo.svg";

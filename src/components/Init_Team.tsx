@@ -1,4 +1,3 @@
-import Image, { StaticImageData } from "next/image";
 import type { Init_Member } from "~/interfaces/Init_Member.interface";
 
 export default function init_member({
