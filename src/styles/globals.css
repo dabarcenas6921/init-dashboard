@@ -2,28 +2,29 @@
 
 @font-face {
   font-family: "PolysansBulky";
-  src: url("../fonts/InitFonts/PolySansBulky.otf") format("opentype");
+  src: url("../../public/assets/fonts/PolySansBulky.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PolysansNeutralMono";
-  src: url("../fonts/InitFonts/PolySansNeutralMono.otf") format("opentype");
+  src: url("../../public/assets/fonts/PolySansNeutralMono.otf")
+    format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PolysansNeutral";
-  src: url("../fonts/InitFonts/PolySansNeutral.otf") format("opentype");
+  src: url("../../public/assets/fonts/PolySansNeutral.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PolysansMedian";
-  src: url("../fonts/InitFonts/PolySansMedian.otf") format("opentype");
+  src: url("../../public/assets/fonts/PolySansMedian.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
