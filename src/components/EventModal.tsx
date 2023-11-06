@@ -1,9 +1,24 @@
 import { useState } from "react";
 import { Modal } from "flowbite-react";
+import { useForm } from "react-hook-form";
 import { CldUploadWidget } from "next-cloudinary";
+
+interface IFormInputs {
+  name: string;
+  program: string;
+  description: string;
+  location: string;
+  dateTime: Date;
+  rsvpLink: string;
+}
 
 export default function EventModal() {
   const [openModal, setOpenModal] = useState(false);
+  const { register, handleSubmit } = useForm<IFormInputs>();
+
+  const onSubmit = (data: IFormInputs) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -21,56 +36,61 @@ export default function EventModal() {
         popup
         onClose={() => setOpenModal(false)}
       >
-        <div className="flex justify-end bg-primary">
-          <button
-            type="button"
-            className="mr-5 mt-5 inline-flex items-center justify-center rounded-none"
-            aria-label="Close"
-            onClick={() => setOpenModal(false)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="h-6 w-6 text-white hover:text-primary_yellow"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
         <Modal.Body className="bg-primary text-primary_gray">
-          <div className="space-y-6">
-            <h3 className="flex justify-center text-xl font-medium text-primary_yellow">
-              Add a New Event
-            </h3>
-            <form className="space-y-6" action="#">
-              <div className="flex items-center justify-between whitespace-nowrap text-sm">
-                <div className="mr-2 w-full">
+          <div className="space-y-5">
+            <div className="mt-5 flex items-center whitespace-nowrap">
+              <h3 className="flex w-full justify-center text-xl font-medium text-primary_yellow">
+                Add a New Event
+              </h3>
+              <div>
+                <button
+                  type="button"
+                  className="flex items-center justify-center rounded-none"
+                  aria-label="Close"
+                  onClick={() => setOpenModal(false)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="h-6 w-6 text-white hover:text-primary_yellow"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-5"
+              action="#"
+            >
+              <div className="space-y-5 whitespace-nowrap text-sm sm:flex sm:items-center sm:justify-between sm:space-y-0">
+                <div className="w-full sm:mr-2">
                   <label htmlFor="name" className="mb-1 block font-medium">
                     Event Name
                   </label>
                   <input
+                    {...register("name")}
                     type="text"
-                    name="name"
-                    id="name"
-                    className="block w-full rounded-sm text-sm text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                    className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
                     placeholder="e.g. Workshop, Hackathon, ..."
                     required
                   />
                 </div>
-                <div className="ml-2 w-full">
+                <div className="w-full sm:ml-2">
                   <label htmlFor="program" className="mb-1 block font-medium">
                     Program
                   </label>
                   <select
-                    id="program"
-                    className="block w-full cursor-pointer rounded-sm text-sm text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                    {...register("program")}
+                    className="block w-full cursor-pointer rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
                   >
                     <option className="italic">-- Select a Program --</option>
                     <option>Build</option>
@@ -122,28 +142,56 @@ export default function EventModal() {
                   );
                 }}
               </CldUploadWidget>
-              <div className="mr-2 w-full text-sm">
-                <label htmlFor="location" className="mb-1 block font-medium">
-                  Location
+              <div className="w-full text-sm">
+                <label htmlFor="description" className="mb-1 block font-medium">
+                  Description
                 </label>
-                <input
-                  type="text"
-                  name="location"
-                  id="location"
-                  className="block w-full rounded-sm text-sm text-primary shadow-sm focus:border-none focus:ring-light_yellow"
-                  placeholder="e.g. MMC, BBC, Room, ..."
-                  required
-                />
+                <textarea
+                  {...register("description")}
+                  id="decription"
+                  rows={4}
+                  className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                  placeholder="Write about the event here..."
+                ></textarea>
               </div>
-              <div className="mr-2 w-full text-sm">
-                <label htmlFor="date-time" className="mb-1 block font-medium">
-                  Date and Time
+              <div className="space-y-5 whitespace-nowrap text-sm sm:flex sm:items-center sm:justify-between sm:space-y-0">
+                <div className="w-full text-sm sm:mr-2">
+                  <label htmlFor="location" className="mb-1 block font-medium">
+                    Location
+                  </label>
+                  <input
+                    {...register("location")}
+                    type="text"
+                    name="location"
+                    id="location"
+                    className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                    placeholder="e.g. MMC, BBC, Room, ..."
+                    required
+                  />
+                </div>
+                <div className="w-full text-sm sm:ml-2">
+                  <label htmlFor="date-time" className="mb-1 block font-medium">
+                    Date and Time
+                  </label>
+                  <input
+                    {...register("dateTime")}
+                    type="datetime-local"
+                    className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="w-full text-sm">
+                <label htmlFor="rsvpLink" className="mb-1 block font-medium">
+                  RSVP Link
                 </label>
                 <input
-                  type="datetime-local"
-                  name="date-time"
-                  id="date-tinme"
-                  className="block w-full rounded-sm text-sm text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                  {...register("rsvpLink")}
+                  type="url"
+                  name="rsvpLink"
+                  id="rsvpLink"
+                  className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                  placeholder="e.g. https://lu.ma/..."
                   required
                 />
               </div>
