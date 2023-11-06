@@ -1,7 +1,10 @@
 import EventCard from "../components/EventCard";
+import EventModal from "../components/EventModal";
+import { useState } from "react";
 
 export default function Events() {
   const testDate = new Date("2023-11-20T15:30:00Z");
+  const [visible, setVisible] = useState(false);
 
   return (
     <main className="min-h-screen p-4 md:p-0">
@@ -10,12 +13,7 @@ export default function Events() {
           Upcoming Events
         </h1>
         <div className="flex w-full flex-col items-center space-y-4 md:w-auto md:flex-row md:space-x-5 md:space-y-0">
-          <button
-            type="button"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary_yellow px-4 py-3 text-sm font-semibold text-black transition-all hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-offset-gray-800 md:w-auto"
-          >
-            Add Event
-          </button>
+          <EventModal />
           <Search />
         </div>
       </div>
@@ -75,12 +73,12 @@ function Search() {
           id="hs-trailing-button-add-on-with-icon"
           name="hs-trailing-button-add-on-with-icon"
           placeholder="Search for events"
-          className="block w-full rounded-l-md px-4 py-3 text-sm text-gray-900 shadow-sm focus:border-none focus:ring-yellow-500 dark:bg-slate-900 dark:text-gray-400"
+          className="block w-full rounded-l-md px-4 py-3 text-sm text-primary shadow-sm focus:border-none focus:ring-light_yellow dark:bg-primary dark:text-primary_gray"
         />
 
         <button
           type="button"
-          className="inline-flex h-[2.875rem] w-[2.875rem] flex-shrink-0 items-center justify-center rounded-r-md bg-primary_yellow text-sm font-semibold text-black transition-all hover:bg-yellow-500 focus:z-10 focus:outline-none focus:ring-4 focus:ring-yellow-300"
+          className="inline-flex h-[2.875rem] w-[2.875rem] flex-shrink-0 items-center justify-center rounded-r-md bg-primary_yellow text-sm font-semibold text-primary transition-all hover:bg-light_yellow focus:z-10 focus:outline-none focus:ring-2 focus:ring-light_yellow"
         >
           <svg
             className="h-4 w-4"
