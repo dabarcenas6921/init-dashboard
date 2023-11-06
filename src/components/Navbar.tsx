@@ -90,7 +90,7 @@ export default function Navbar() {
             href="https://discord.gg/init"
             rel="noopener noreferrer"
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-discord_purple hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             <svg
               className="h-5 w-5"
