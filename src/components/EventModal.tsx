@@ -67,6 +67,7 @@ export default function EventModal() {
               </div>
             </div>
             <form
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onSubmit={handleSubmit(onSubmit)}
               className="space-y-5"
               action="#"
@@ -112,7 +113,9 @@ export default function EventModal() {
                 uploadPreset="<Upload Preset>"
               >
                 {({ open }) => {
-                  function handleOnClick(e: any) {
+                  function handleOnClick(
+                    e: React.MouseEvent<Element, MouseEvent>,
+                  ) {
                     e.preventDefault();
                     open();
                   }
