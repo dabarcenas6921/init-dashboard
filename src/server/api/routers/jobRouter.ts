@@ -12,7 +12,7 @@ const JobData = z.object({
   url: z.string(),
 });
 
-type JobPostingType = z.infer<typeof JobData>;
+export type JobPostingType = z.infer<typeof JobData>;
 
 // Define the input schema for the filtering procedure
 const FilterInput = z.object({
@@ -21,9 +21,6 @@ const FilterInput = z.object({
   jobLocation: z.array(z.string()).optional(),
 });
 
-
-// Define the output schema for the filtered job postings
-const FilteredJobPostings = z.array(JobData);
 
 export const jobRouter = createTRPCRouter({
   // Create Job Procedure
@@ -93,9 +90,10 @@ export const jobRouter = createTRPCRouter({
         }
 
         const jobPostings: JobPostingType[] = []; // Initialize an array to collect job postings
+        const addedJobPostingIds = new Set<number>(); // Initialize a set to store added job posting IDs
         if (input.jobType) {
           
-          for (const type of input.jobType) {
+          for (const type of input.jobType) {           
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
                 jobType: {
@@ -103,7 +101,15 @@ export const jobRouter = createTRPCRouter({
                 }
               }
             });
-            jobPostings.push(...postingsOfType);
+
+            postingsOfType.forEach((post) => {
+              // Check if the job posting's ID is in the set of added IDs
+              if (!addedJobPostingIds.has(post.id)) {
+                // If not, add the job posting to the array and set
+                jobPostings.push(post);
+                addedJobPostingIds.add(post.id);
+              }
+            });
           }
   
         }
@@ -120,7 +126,15 @@ export const jobRouter = createTRPCRouter({
                 }
               }
             });
-            jobPostings.push(...postingsOfType);
+
+            postingsOfType.forEach((post) => {
+              // Check if the job posting's ID is in the set of added IDs
+              if (!addedJobPostingIds.has(post.id)) {
+                // If not, add the job posting to the array and set
+                jobPostings.push(post);
+                addedJobPostingIds.add(post.id);
+              }
+            });
           }
       
         } 
@@ -138,7 +152,15 @@ export const jobRouter = createTRPCRouter({
                 }
               }
             });
-            jobPostings.push(...postingsOfType);
+
+            postingsOfType.forEach((post) => {
+              // Check if the job posting's ID is in the set of added IDs
+              if (!addedJobPostingIds.has(post.id)) {
+                // If not, add the job posting to the array and set
+                jobPostings.push(post);
+                addedJobPostingIds.add(post.id);
+              }
+            });
           }
       
         }

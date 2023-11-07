@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Dropdown } from 'flowbite-react';
 
-type Job = {
+export type Job = {
   image: string;
   title: string;
   company: string;
@@ -17,17 +17,17 @@ type JobCardProps = {
 };
 
 export default function JobCard({ jobPostings }: JobCardProps) {
+
   if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
     return <p>No matching job postings.</p>;
   }
-
-
+  
   return (
-    <div className="w-full flex flex-wrap items-start justify-evenly xl:justify-between">
+    <div className={`w-full flex flex-wrap items-start justify-evenly ${jobPostings.length === 2 ? 'xl:justify-evenly' : 'xl:justify-between'}`}>
       {jobPostings.map((job, index) => (
         <Card
           key={index}
-          className="max-w-xs min-w-[16rem] bg-[#121415] border-[#121415] mb-8 max-[820px]:mb-8 transform transition-transform hover:scale-105"
+          className="max-w-xs min-w-[16rem] bg-[#121415] border-[#121415] mb-8 max-[820px]:mb-8"
         >
           <div className="text-white flex justify-end px-4">
             <Dropdown inline label="" className="">

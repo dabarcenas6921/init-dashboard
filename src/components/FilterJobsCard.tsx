@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { setWasSearchBtnClicked } from './SearchInput';
 
 interface CheckboxState {
   fulltime: boolean;
@@ -20,6 +21,16 @@ export type FilterInput = {
 type FilterJobsCardProps = {
   onFilterChange: (filterInput: FilterInput) => void;
   onResetFilters: () => void; // Define a prop for the reset filters function
+}
+
+let wasApplyFilterClicked = false
+
+export function setWasApplyFilterClicked(value: boolean) {
+  wasApplyFilterClicked = value
+}
+
+export function getWasApplyFilterClicked() {
+  return wasApplyFilterClicked
 }
 
 const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => {
@@ -82,6 +93,9 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
     setJobLocArr([]);
 
     onResetFilters();
+
+    setWasApplyFilterClicked(false)
+    setWasSearchBtnClicked(false)
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -95,6 +109,9 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
     };
 
     onFilterChange(filterInput);
+
+    setWasApplyFilterClicked(true)
+    setWasSearchBtnClicked(false)
     
   };
 
@@ -210,6 +227,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
           
           {/* Apply Filter Button */}
           <button
+            id="filter-btn"
             type="button"
             className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
                         font-medium text-black hover:bg-yellow-500 focus:outline-none 

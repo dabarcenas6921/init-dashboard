@@ -1,7 +1,17 @@
 "use client"
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"
+import { setWasApplyFilterClicked } from "./FilterJobsCard";
 
+let wasSearchBtnClicked = false
+
+export function setWasSearchBtnClicked(value: boolean) {
+  wasSearchBtnClicked = value
+}
+
+export function getWasSearchBtnClicked() {
+  return wasSearchBtnClicked
+}
 
 export default function SearchInput() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +23,11 @@ export default function SearchInput() {
 
     const encodedSearchQuery = encodeURI(searchQuery);
     router.push(`/jobs?q=${encodedSearchQuery}`)
+
+    setWasApplyFilterClicked(false)
+    setWasSearchBtnClicked(true)
+   
+    setSearchQuery("");
     
   }
 

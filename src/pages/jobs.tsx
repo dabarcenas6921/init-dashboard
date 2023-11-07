@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dropdown } from 'flowbite-react';
 import SearchInput from '~/components/SearchInput';
 import type { FilterInput } from '~/components/FilterJobsCard';
@@ -7,7 +7,9 @@ import FilterJobsCard from '~/components/FilterJobsCard'
 import JobCard from '~/components/JobCard';
 import { useSearchParams } from "next/navigation";
 import { api } from "~/utils/api";
-
+import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
+import { getWasSearchBtnClicked } from "~/components/SearchInput";
+import type { JobPostingType } from "~/server/api/routers/jobRouter";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -17,8 +19,10 @@ export type SelectedFilters = {
 };
 
 
-
 export default function Jobs() {
+
+  let jobPostingsArr: (JobPostingType[] | undefined) = [];
+
 
    ///////////////////////////////
   // LOGIC FOR SEARCHING JOBS  //
@@ -27,14 +31,11 @@ export default function Jobs() {
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null
   const encodedSearchQuery = encodeURI(searchQuery ?? "")
-
   const input = { q: encodedSearchQuery };
-  const query = api.jobs.getByQuery.useQuery(input);
 
   ///////////////////////////////
   // LOGIC FOR FILTERING JOBS //
   //////////////////////////////
-
 
   const [selectedFilters, setSelectedFilters] = useState<FilterInput>({
     jobType: [],
@@ -42,9 +43,6 @@ export default function Jobs() {
     jobLocation: [],
   });
 
-  // console.log(selectedFilters)
-  const filteredJobs = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {});
-  
   const resetFilters = () => {
     // Reset selected filters to their initial empty values
     setSelectedFilters({
@@ -53,6 +51,21 @@ export default function Jobs() {
       jobLocation: [],
     });
   };
+
+
+  if (getWasApplyFilterClicked()) {
+    jobPostingsArr = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {}).data;
+  }
+  else if (getWasSearchBtnClicked()) {
+    jobPostingsArr = api.jobs.getByQuery.useQuery(input).data
+  }
+  else {
+    jobPostingsArr = api.jobs.getAll.useQuery().data
+  }
+
+  console.log("JOB POSTINGS ARRAY!!: ", jobPostingsArr)
+
+
   
 
   return (
@@ -94,12 +107,13 @@ export default function Jobs() {
           </div>
 
           <div className="w-full">
-              {query.data && query.data.length > 0 ? (
-                <JobCard jobPostings={query.data} />
+              {jobPostingsArr && jobPostingsArr.length > 0 ? (
+                <JobCard jobPostings={jobPostingsArr} />
               ) : (
                 <p>No matching job postings.</p>
               )}
           </div>
+
 
         </div>   
         
@@ -131,5 +145,32 @@ export default function Jobs() {
     )
   )}
 </div>
+
+
+
+
+<div className="w-full">
+            {query.data && query.data.length > 0 ? (
+              <JobCard jobPostings={query.data} filteredJobs={filteredJobs.data} />
+            ) : (
+              <p>No matching job postings.</p>
+            )}
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
 
 */
