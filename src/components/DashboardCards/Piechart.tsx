@@ -31,11 +31,9 @@ export default function Piechart() {
       <p className="flex justify-center font-medium text-white">
         Company Funding
       </p>
-      <div
-        className="flex max-w-3xl justify-center"
-        style={{ width: "100%", height: "100%" }}
-      >
-        <ResponsiveContainer>
+      <div className="flex justify-center">
+        {/* Set a specific aspect ratio for the ResponsiveContainer */}
+        <ResponsiveContainer width="100%" aspect={1.6}>
           <PieChart>
             <Pie
               dataKey="value"
@@ -45,9 +43,8 @@ export default function Piechart() {
               cy="50%"
               outerRadius={140}
               fill="#8884d8"
-              // Correctly type the parameter for the label function
-              label={({ name }: LabelProps) => name}
               labelLine={false}
+              label={({ name }: LabelProps) => name}
             >
               {data01.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
