@@ -51,7 +51,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
           </div>
 
           {/* Top of Card */}
-          <div className="flex items-center mb-5">
+          <div className="flex items-center mb-1 mt-[-0.5em]">
             <div className="">
               <img className="w-20 h-20 mr-4 max-[428px]:w-16 max-[428px]:h-16" src={job.image} alt={job.title} />
             </div>
@@ -62,7 +62,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
           </div>
 
           {/* Job Roles Pills */}
-          <div className="mb-10">
+          <div className="mb-6">
             <span
               className="bg-blue-100 text-blue-800 text-sm max-[428px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300"
             >
