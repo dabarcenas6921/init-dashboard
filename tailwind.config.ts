@@ -5,13 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/flowbite/**/*.js",
     "node_modules/preline/dist/*.js",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
         primary: "#1A1E22",
         primary_yellow: "#FFD550",
-        discord_purple: "#7289da",
+        discord_purple: "#7289DA",
         light_yellow: "#FFF1B8",
         primary_gray: "#D1D1D1",
         secondary: "#FFFFFF",

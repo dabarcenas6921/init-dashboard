@@ -28,6 +28,7 @@ export default function Carousel() {
           <SwiperSlide>
             <Image
               src="/assets/images/people2.png"
+              priority={true}
               width={0}
               height={0}
               sizes="100vw"

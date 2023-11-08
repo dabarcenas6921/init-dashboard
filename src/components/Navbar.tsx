@@ -5,8 +5,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="border-gray-200 bg-primary pb-8 pt-4">
-      <div className="mx-auto flex flex-wrap items-center justify-between">
+    <nav className=" border-gray-200 bg-primary pb-8 pt-4">
+      <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link href="/">
           <svg
             className="h-6 cursor-pointer self-center whitespace-nowrap text-white  hover:text-primary_yellow"
@@ -27,7 +27,7 @@ export default function Navbar() {
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="order-3 rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
+          className="order-3 rounded p-2 focus:outline-none focus:ring sm:order-3 lg:hidden"
         >
           <svg
             className="h-5 w-5"
@@ -48,10 +48,10 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-0 w-full md:block md:w-auto`}
+          } relative z-0 w-full lg:block lg:w-auto`}
           id="navbar-default"
         >
-          <ul className="mt-4 flex flex-col bg-gray-900 p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
+          <ul className="mt-4 flex flex-col bg-gray-900 p-4 lg:mt-0 lg:flex-row lg:space-x-8 lg:border-0 lg:bg-primary">
             <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
               <Link href="/jobs">Job Opportunities</Link>
             </li>
@@ -69,7 +69,7 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-gray-900 p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-gray-900 p-4 lg:flex lg:w-auto lg:flex-row lg:bg-primary`}
         >
           <a
             href="https://www.instagram.com/initofficial/"
@@ -90,7 +90,7 @@ export default function Navbar() {
             href="https://discord.gg/init"
             rel="noopener noreferrer"
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-discord_purple hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             <svg
               className="h-5 w-5"
@@ -122,7 +122,7 @@ export default function Navbar() {
             href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
             rel="noopener noreferrer"
             target="_blank"
-            className="hover:bg-light_yellow rounded bg-primary_yellow px-5 py-2 font-bold text-primary focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             Join
           </a>
