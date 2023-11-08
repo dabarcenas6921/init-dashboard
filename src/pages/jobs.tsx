@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'flowbite-react';
 import SearchInput from '~/components/SearchInput';
 import type { FilterInput } from '~/components/FilterJobsCard';
@@ -18,14 +18,13 @@ export type SelectedFilters = {
   jobLocation: string[];
 };
 
-
 export default function Jobs() {
 
   let jobPostingsArr: (JobPostingType[] | undefined) = [];
 
 
    ///////////////////////////////
-  // LOGIC FOR SEARCHING JOBS  //
+  //      SEARCHING JOBS       //
   //////////////////////////////
 
   const search = useSearchParams();
@@ -34,7 +33,7 @@ export default function Jobs() {
   const input = { q: encodedSearchQuery };
 
   ///////////////////////////////
-  // LOGIC FOR FILTERING JOBS //
+  //      FILTERING JOBS      //
   //////////////////////////////
 
   const [selectedFilters, setSelectedFilters] = useState<FilterInput>({
@@ -44,7 +43,6 @@ export default function Jobs() {
   });
 
   const resetFilters = () => {
-    // Reset selected filters to their initial empty values
     setSelectedFilters({
       jobType: [],
       jobPosition: [],
@@ -53,6 +51,8 @@ export default function Jobs() {
   };
 
 
+  // Returns job postings based on if the user
+  // Apply's filters or Searches for jobs
   if (getWasApplyFilterClicked()) {
     jobPostingsArr = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {}).data;
   }
@@ -63,10 +63,6 @@ export default function Jobs() {
     jobPostingsArr = api.jobs.getAll.useQuery().data
   }
 
-  console.log("JOB POSTINGS ARRAY!!: ", jobPostingsArr)
-
-
-  
 
   return (
     <main className="min-h-screen">
@@ -125,52 +121,3 @@ export default function Jobs() {
   );
 }
 
-
-
-
-/*
-
-<div className="w-full">
-  {filtersApplied ? (
-    filteredJobPostings.length > 0 ? (
-      <JobCard jobPostings={filteredJobPostings} />
-    ) : (
-      <p>No matching job postings based on filters.</p>
-    )
-  ) : (
-    query.data && query.data.length > 0 ? (
-      <JobCard jobPostings={query.data} />
-    ) : (
-      <p>No matching job postings based on search.</p>
-    )
-  )}
-</div>
-
-
-
-
-<div className="w-full">
-            {query.data && query.data.length > 0 ? (
-              <JobCard jobPostings={query.data} filteredJobs={filteredJobs.data} />
-            ) : (
-              <p>No matching job postings.</p>
-            )}
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-*/

@@ -16,7 +16,6 @@ export function getWasSearchBtnClicked() {
 export default function SearchInput() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  // const searchInputEl = document.getElementById("search-jobs-input-field") 
 
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,7 +26,7 @@ export default function SearchInput() {
     setWasApplyFilterClicked(false)
     setWasSearchBtnClicked(true)
    
-    setSearchQuery("");
+    setSearchQuery("");  // Clears search bar after user submits
     
   }
 
@@ -70,7 +69,6 @@ export default function SearchInput() {
         <button
           id="search-submit-btn"
           className="hover-bg-yellow-500 absolute inset-y-0 right-0 flex items-center justify-center rounded-r-lg bg-primary_yellow px-4 py-2 text-sm font-medium text-black focus:outline-none focus:ring-4 focus:ring-yellow-300"
-          // onClick={onSearch}
         >
           Search
         </button>

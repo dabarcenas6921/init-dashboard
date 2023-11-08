@@ -13,15 +13,16 @@ interface CheckboxState {
 }
 
 export type FilterInput = {
-  jobType: string[]; // Replace with the actual type for jobType
-  jobPosition: string[]; // Replace with the actual type for jobPosition
-  jobLocation: string[]; // Replace with the actual type for jobLocation
+  jobType: string[]; 
+  jobPosition: string[]; 
+  jobLocation: string[]; 
 };
 
 type FilterJobsCardProps = {
   onFilterChange: (filterInput: FilterInput) => void;
-  onResetFilters: () => void; // Define a prop for the reset filters function
+  onResetFilters: () => void; 
 }
+
 
 let wasApplyFilterClicked = false
 
