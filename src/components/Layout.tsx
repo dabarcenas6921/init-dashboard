@@ -12,4 +12,3 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 export default Layout;
-

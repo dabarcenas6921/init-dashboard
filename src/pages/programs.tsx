@@ -1,10 +1,10 @@
-import Image from "next/image";
-// import Test from "src/assets/images/programCards/initexplore.png";
+import Image, { StaticImageData } from "next/image";
+import InitPicture from "../assets/images/programCards/initexplore.png";
 
 export default function Programs() {
   const sampleData: {
     title: string;
-    image: string;
+    image: StaticImageData;
     discription: string;
     open: boolean;
     url: string;
@@ -12,8 +12,8 @@ export default function Programs() {
   }[] = [
     {
       // {index 1} index in mapping
-      title: "Init Explore",
-      image: " Test",
+      title: "Explore",
+      image: InitPicture,
       discription:
         "INIT Explore is a program focused on the software development side of technology. From web development to machine learning to simple scripts, this program aims to expose members to all sorts of different programming languages and frameworks commonly used in the industry.",
 
@@ -24,8 +24,8 @@ export default function Programs() {
     },
     {
       // {index 2} index in mapping
-      title: "init reach",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Reach",
+      image: InitPicture,
       discription:
         "INIT Reach is a program focused on the hardware development side of technology. Using all sorts of machinery, large or small, this program aims inspire members to create their own devices with the technology available today.",
       open: true,
@@ -34,8 +34,8 @@ export default function Programs() {
     },
     {
       // {index 3} index in mapping
-      title: "Init Build",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Build",
+      image: InitPicture,
       discription:
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
@@ -44,8 +44,8 @@ export default function Programs() {
     },
     {
       // {index 4} index in mapping
-      title: "Init Ignite",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Ignite",
+      image: InitPicture,
       discription:
         "INIT Ignite is a program focused on information technology, a field in technology. Commonly overlooked, information technology ensures that the systems running the software are secured and works. ",
       open: false,
@@ -54,8 +54,8 @@ export default function Programs() {
     },
     {
       // {index 5} index in mapping
-      title: "init Hack",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Hack",
+      image: InitPicture,
       discription:
         "INIT Hack is a program focused on the community in Computer Science. Across the country, there are various coding competitions, Hackathons, where students must create a solution by the end of a given time frame. Most students work as teams, with the members being fellow students in the same school. ",
       open: false,
@@ -64,8 +64,8 @@ export default function Programs() {
     },
     {
       // {index 6} index in mapping
-      title: "Init Discover",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Discover",
+      image: InitPicture,
       discription:
         "INIT Discover is a program focused on the academic side of technology. Though often overlooked, research is a viable career path for students interested in academics or furthering advancements in the field. ",
       open: false,
@@ -74,8 +74,8 @@ export default function Programs() {
     },
     {
       // {index 7} index in mapping
-      title: "Init Uplift",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Uplift",
+      image: InitPicture,
       discription:
         "INIT Uplift is a program focused on mentorship. Many incoming freshmen are overwhelmed by the amount of information available to them from the start. Our program aims to guide these new students and help them kickstart their tech careers. Those with experience in the field or program help to navigate freshmen during these rough times and allow them to establish a network or two. Mentor with us or get a mentor today",
 
@@ -85,8 +85,8 @@ export default function Programs() {
     },
     {
       // {index 8} index in mapping
-      title: "Init Launch",
-      image: "/assets/images/programCards/initexplore.png",
+      title: "Launch",
+      image: InitPicture,
       discription:
         "INIT Launch is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots, this program aims teach you the fundamentals of project development in the real world. No experience is required to spark up your portfolio with us.",
       open: false,
@@ -95,13 +95,13 @@ export default function Programs() {
     },
   ];
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen p-4">
       <div className="mb-4 flex flex-col items-center justify-between md:mb-0 md:flex-row">
         <h1 className="mb-4 text-2xl text-white md:mb-0 md:text-3xl">
           Programs
         </h1>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-8 ">
+      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         {/* what ever comes first in the array thats the objects in the array and whats second is the Index */}
         {sampleData.map((programData, index) => {
           const afterINITArray: string =
@@ -120,99 +120,73 @@ export default function Programs() {
           });
 
           return (
-            <div key={index} className="relative mx-auto mt-4 ">
-              <div
-                className=" w-full max-w-sm shadow dark:bg-gray-500"
-                style={{ height: "100%", backgroundColor: "#121827" }}
-              >
+            <div key={index} className="relative mx-auto mt-4">
+              <div className="flex h-full flex-col overflow-hidden rounded-xl bg-zinc-900 shadow">
                 <a href="#">
-                  <Image
-                    className="rounded-t-lg"
-                    alt={programData.title}
-                    src={programData.image}
-                    width={200}
-                    height={200}
-                  />
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <Image
+                      className="rounded-t-lg"
+                      alt={programData.title}
+                      src={programData.image}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
                 </a>
-                <div className="p-5">
-                  <a href="#">
-                    <h5
-                      className={`light:text-red mb-2 text-2xl font-bold tracking-tight text-${programData.color}`}
+                <div className="flex flex-grow flex-col p-5">
+                  <h5
+                    className={`mb-2 flex items-center text-2xl font-bold tracking-tight text-white`}
+                    style={{ color: programData.color }}
+                  >
+                    <svg
+                      className="mr-2 h-4"
+                      fill="currentColor"
+                      strokeWidth="0"
+                      id="Footer INIT Logo"
+                      data-name="Footer INIT Logo"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 1200 480.12"
                     >
-                      {programData.title}
-                    </h5>
-                  </a>
-                  <p className="text-none-500 dark:text-none-500 mb-8 font-poppins">
-                    {/* {programData.discription} */}
+                      <path d="m499.17,75.78c-79.68,0-131.34,62.17-153.23,108.58-3.5,7.01-7.88,17.51-18.39,13.13-11.38-4.38-2.63-21.89,4.38-35.9,7-14.01,11.38-28.9,11.38-49.91v-21.89h0c-77.37,0-140.1,62.73-140.1,140.1v250.23h140.1l1.02-163.32c0-87.13,37.48-123.43,94.39-123.43,49.91,0,86.72,30.4,86.72,134.6v152.16h140.1v-208.2c0-131.34-66.55-196.14-166.37-196.14Z" />
+                      <path d="m1140.2,201.87c33.02,0,59.8-26.77,59.8-59.8v-52.28h-126.09V0h-140.1v338.26c0,111.2,43.78,141.85,136.6,141.85h129.59v-112.08h-84.06c-40.28,0-42.03-1.75-42.03-45.53v-120.64h66.29Z" />
+                      <path d="m800.09,142.42c-27,0-51.55-12.01-69.82-31.6v369.3h138.95V111.55c-18.19,19.17-42.47,30.87-69.13,30.87Z" />
+                      <path d="m799.86,116.1c31.38,0,56.82-25.49,56.82-56.93s-25.44-56.93-56.82-56.93-56.82,25.49-56.82,56.93,25.44,56.93,56.82,56.93Z" />
+                      <path d="m69.82,142.42c-27,0-51.55-12.01-69.82-31.6v369.3h138.95V111.55c-18.19,19.17-42.47,30.87-69.13,30.87Z" />
+                      <ellipse cx="69.59" cy="59.18" rx="56.82" ry="56.93" />
+                    </svg>
+                    {programData.title}
+                  </h5>
+                  <p className="text-md mb-3 flex-grow font-semibold">
                     INIT
-                    <span style={{ color: `${programData.color}` }}>
+                    <span style={{ color: programData.color }}>
                       {" "}
                       {firstWord}{" "}
                     </span>
                     {pAfterFirstWord}
                   </p>
-                  {/* (Ternary.Operator) anything before ? is the condition if the conditon is true it
-                  needs to show whats on the left : and if its false everything
-                  on thr right on the : exampleOne.true ? : exampleTwo.false */}
-                  <div className="botton-container absolute bottom-0 mb-2 ">
+                  <div className="mb-2 self-start">
                     {programData.open ? (
-                      <>
-                        <a
-                          style={{ backgroundColor: `${programData.color}` }}
-                          // This helps Url open in a different tab
-                          target="_blank"
-                          href={programData.url}
-                          className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                        >
-                          Apply Now
-                          <svg
-                            className="ml-2 h-3.5 w-3.5"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 14 10"
-                          >
-                            <path
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M1 5h12m0 0L9 1m4 4L9 9"
-                            />
-                          </svg>
-                        </a>
-                      </>
+                      <a
+                        href={programData.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-opacity-50"
+                        style={{ backgroundColor: programData.color }}
+                      >
+                        Apply Now
+                        {/* SVG Icon */}
+                      </a>
                     ) : (
-                      //Else
-                      <>
-                        <a
-                          style={{
-                            backgroundColor: `${programData.color}`,
-                            opacity: ".45",
-                          }}
-                          // This helps Url open in a different tab
-                          target="_blank"
-                          // href={programData.url}
-                          className=" inline-flex items-center rounded-lg bg-blue-300 px-3 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-gray-400"
-                        >
-                          Applications Closed
-                          <svg
-                            className="ml-2 h-3.5 w-3.5"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 14 10"
-                          >
-                            <path
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M1 5h12m0 0L9 1m4 4L9 9"
-                            />
-                          </svg>
-                        </a>
-                      </>
+                      <div
+                        className="inline-flex w-full items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white"
+                        style={{
+                          backgroundColor: programData.color,
+                          opacity: ".45",
+                        }}
+                      >
+                        Applications Closed
+                        {/* SVG Icon */}
+                      </div>
                     )}
                   </div>
                 </div>
