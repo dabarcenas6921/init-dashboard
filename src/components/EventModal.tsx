@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Modal } from "flowbite-react";
 import { useForm } from "react-hook-form";
-import { CldUploadWidget } from "next-cloudinary";
+import Image from "next/image";
+import axios from "axios";
 
 interface IFormInputs {
   name: string;
@@ -14,7 +15,49 @@ interface IFormInputs {
 
 export default function EventModal() {
   const [openModal, setOpenModal] = useState(false);
+  const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const { register, handleSubmit } = useForm<IFormInputs>();
+
+  const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUD_NAME;
+
+  const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      if (!onLoadEvent.target) return;
+      setImage(onLoadEvent.target.result);
+    };
+
+    if (event.target.files![0]) {
+      reader.readAsDataURL(event.target.files![0] as Blob);
+    }
+  };
+
+  const uploadHandler = async () => {
+    const formData = new FormData();
+    formData.append("file", image as string);
+    formData.append("upload_preset", "init_dashboard_upload");
+
+    try {
+      const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        },
+      );
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      if (res.data.secure_url) {
+        alert("Image uploaded successfully!");
+        setImage(null);
+      }
+    } catch (e) {
+      console.assert(e, "Error, image not uploaded!");
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  };
 
   const onSubmit = (data: IFormInputs) => {
     console.log(data);
@@ -30,7 +73,6 @@ export default function EventModal() {
         Add Event
       </button>
       <Modal
-        dismissible
         show={openModal}
         size="xl"
         popup
@@ -106,45 +148,75 @@ export default function EventModal() {
                   </select>
                 </div>
               </div>
-              <CldUploadWidget
-                options={{
-                  sources: ["local", "google_drive", "dropbox", "url"],
-                }}
-                uploadPreset="<Upload Preset>"
+              <label
+                //onClick={handleOnClick}
+                className={`${
+                  image ? "block" : "flex"
+                } w-full cursor-pointer items-center justify-center border-2 border-dashed border-primary_gray py-10 text-center text-primary_gray hover:border-solid hover:border-primary_yellow hover:text-primary_yellow`}
               >
-                {({ open }) => {
-                  function handleOnClick(
-                    e: React.MouseEvent<Element, MouseEvent>,
-                  ) {
-                    e.preventDefault();
-                    open();
-                  }
-                  return (
-                    <>
-                      <div
-                        onClick={handleOnClick}
-                        className="flex cursor-pointer items-center justify-center border-2 border-dashed border-primary_gray py-10 text-center text-primary_gray hover:border-solid hover:border-primary_yellow hover:text-primary_yellow"
+                {image ? (
+                  <>
+                    <div className="-mt-5 mr-5 flex justify-end">
+                      <button
+                        type="button"
+                        className="flex items-center justify-center rounded-none"
+                        aria-label="Close"
+                        onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+                          e.preventDefault();
+                          setImage(null);
+                        }}
                       >
                         <svg
-                          className="text-current-50 mr-1 h-8 w-8"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
+                          stroke-width="1.5"
                           stroke="currentColor"
+                          className="h-6 w-6 text-white hover:text-primary_yellow"
                         >
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            d="M6 18L18 6M6 6l12 12"
                           />
                         </svg>
-                        <p className="m-0">Upload Event Image</p>
-                      </div>
-                    </>
-                  );
-                }}
-              </CldUploadWidget>
+                      </button>
+                    </div>
+                    <div className="flex justify-center">
+                      <Image
+                        src={image as string}
+                        alt="Uploaded Event Image"
+                        width={200}
+                        height={200}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="text-current-50 mr-1 h-8 w-8"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <p className="m-0">Upload Event Image</p>
+                  </>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={fileChangeHandler}
+                ></input>
+              </label>
               <div className="w-full text-sm">
                 <label htmlFor="description" className="mb-1 block font-medium">
                   Description
