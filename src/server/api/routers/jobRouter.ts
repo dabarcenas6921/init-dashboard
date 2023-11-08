@@ -79,13 +79,9 @@ export const jobRouter = createTRPCRouter({
     .input(FilterInput)
     .query(async ({ input, ctx }) => {
       try {
-        console.log("input.jobType:", input.jobType);
-        console.log("input.jobPosition:", input.jobPosition);
-        console.log("input.jobLocation:", input.jobLocation);
         if (input.jobType?.length === 0 && input.jobPosition?.length === 0 && input.jobLocation?.length === 0) {
           // If no filters are provided, return all job postings
           const jobPostings = await ctx.db.jobPosting.findMany();
-          console.log("YOOOOO")
           return jobPostings;
         }
 
