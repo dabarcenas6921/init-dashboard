@@ -1,65 +1,32 @@
 import React, { PureComponent } from "react";
-import {
-  LineChart as RechartsLineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 
 const data = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 50,
+    name: "Gerald",
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 324,
+    name: "Steve",
   },
   {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 500,
+    name: "Sam",
   },
   {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 987,
+    name: "Andy",
   },
   {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 1200,
+    name: "Kevin",
   },
   {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 1600,
+    name: "John",
   },
   {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2000,
+    name: "Mike",
   },
 ];
 
-export const ChartComponent = () => {
-  const maxAmt = Math.max(...data.map((item) => item.amt));
-
+export default function MyBarChart() {
   return (
-    <div className="h-35 relative">
+    <div className="h-34 relative">
       <div className="absolute right-0 top-0 mr-2">
         <svg
           className="h-8 w-8 text-white dark:text-white"
@@ -73,11 +40,11 @@ export const ChartComponent = () => {
         </svg>
       </div>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-medium text-white">Total Registrations</h2>
+        <h2 className="text-lg font-medium text-white">Team Leads</h2>
       </div>
       <div className="mt-10">
-        <p className="text-4xl text-white">{maxAmt}</p>
+        <p className="text-4xl text-white">{data.length}</p>
       </div>
     </div>
   );
-};
+}

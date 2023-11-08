@@ -18,16 +18,17 @@ const data = [
 ];
 
 export default function MyBarChart() {
+  const totalValue = data.reduce((acc, item) => acc + item.$, 0);
   return (
     <div>
       <p className="flex justify-center font-medium text-white">
         Yearly Spending
       </p>
-      <div className="mt-5 max-w-full" style={{ width: "100%", height: 400 }}>
+      <div className="mt-5 max-w-full" style={{ width: "100%", height: 581 }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            width={500}
-            height={300}
+            width={400}
+            height={490}
             data={data}
             margin={{
               top: 0,
@@ -48,6 +49,7 @@ export default function MyBarChart() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <p className="flex justify-center text-xl">Total: ${totalValue}</p>
     </div>
   );
 }

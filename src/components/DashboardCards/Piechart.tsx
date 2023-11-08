@@ -1,30 +1,29 @@
 import React from "react";
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-  Legend,
-} from "recharts";
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
-const data01 = [
-  { name: "Google", value: 400 },
-  { name: "Microsoft", value: 300 },
-  { name: "FIU", value: 300 },
-  { name: "Salesforce", value: 200 },
-  { name: "Bungie", value: 278 },
-  { name: "Knight Foundation", value: 189 },
+// Define an interface for your data objects
+interface IData {
+  name: string;
+  value: number;
+  color: string;
+}
+
+const data01: IData[] = [
+  { name: "Google", value: 400, color: "#0088FE" },
+  { name: "Microsoft", value: 300, color: "#00C49F" },
+  { name: "FIU", value: 300, color: "#FFBB28" },
+  { name: "Salesforce", value: 200, color: "#FF8042" },
+  { name: "Bungie", value: 278, color: "#8884d8" },
+  { name: "Knight Foundation", value: 189, color: "#A4DE6C" },
 ];
 
-const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#8884d8",
-  "#a4de6c",
-];
+// Calculate the total funding
+const totalFunding = data01.reduce((acc, cur) => acc + cur.value, 0);
+
+// Define an interface for the label's props
+interface LabelProps {
+  name: string;
+}
 
 export default function Piechart() {
   return (
@@ -32,7 +31,10 @@ export default function Piechart() {
       <p className="flex justify-center font-medium text-white">
         Company Funding
       </p>
-      <div className="max-w-xs" style={{ width: 900, height: 224 }}>
+      <div
+        className="flex max-w-3xl justify-center"
+        style={{ width: "100%", height: "100%" }}
+      >
         <ResponsiveContainer>
           <PieChart>
             <Pie
@@ -41,21 +43,24 @@ export default function Piechart() {
               data={data01}
               cx="50%"
               cy="50%"
-              outerRadius={70}
+              outerRadius={140}
               fill="#8884d8"
-              label
+              // Correctly type the parameter for the label function
+              label={({ name }: LabelProps) => name}
+              labelLine={false}
             >
               {data01.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
+                <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
       </div>
+      {/* Display the total funding */}
+      <p className="flex justify-center text-xl">
+        Total Funding: ${totalFunding.toLocaleString()}
+      </p>
     </div>
   );
 }
