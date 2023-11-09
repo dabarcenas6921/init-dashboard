@@ -59,7 +59,7 @@ export default function Jobs() {
     jobPostingsArr = filterQuery.data;
     if (filterQuery.isLoading) {
       return (
-        <div className="w-full flex justify-center items-center h-[80vh]">
+        <div className="w-full flex justify-center items-center h-[72vh]">
           <Spinner color="warning" size="xl"/>
         </div>
       );
@@ -70,7 +70,7 @@ export default function Jobs() {
     jobPostingsArr = searchQuery.data;
     if (searchQuery.isLoading) {
       return (
-        <div className="w-full flex justify-center items-center h-[80vh]">
+        <div className="w-full flex justify-center items-center h-[72vh]">
           <Spinner color="warning" size="xl"/>
         </div>
       );
@@ -81,7 +81,7 @@ export default function Jobs() {
     jobPostingsArr = allJobsQuery.data;
     if (allJobsQuery.isLoading) {
       return (
-        <div className="w-full flex justify-center items-center h-[80vh]">
+        <div className="w-full flex justify-center h-[72vh]">
           <Spinner color="warning" size="xl"/>
         </div>
       );
