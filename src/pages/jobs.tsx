@@ -10,6 +10,7 @@ import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
+import { Spinner } from 'flowbite-react';
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -54,13 +55,37 @@ export default function Jobs() {
   // Returns job postings based on if the user
   // Apply's filters or Searches for jobs
   if (getWasApplyFilterClicked()) {
-    jobPostingsArr = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {}).data;
+    const filterQuery = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {});
+    jobPostingsArr = filterQuery.data;
+    if (filterQuery.isLoading) {
+      return (
+        <div className="w-full flex justify-center items-center h-[80vh]">
+          <Spinner color="warning" size="xl"/>
+        </div>
+      );
+    }
   }
   else if (getWasSearchBtnClicked()) {
-    jobPostingsArr = api.jobs.getByQuery.useQuery(input).data
+    const searchQuery = api.jobs.getByQuery.useQuery(input);
+    jobPostingsArr = searchQuery.data;
+    if (searchQuery.isLoading) {
+      return (
+        <div className="w-full flex justify-center items-center h-[80vh]">
+          <Spinner color="warning" size="xl"/>
+        </div>
+      );
+    }
   }
   else {
-    jobPostingsArr = api.jobs.getAll.useQuery().data
+    const allJobsQuery = api.jobs.getAll.useQuery();
+    jobPostingsArr = allJobsQuery.data;
+    if (allJobsQuery.isLoading) {
+      return (
+        <div className="w-full flex justify-center items-center h-[80vh]">
+          <Spinner color="warning" size="xl"/>
+        </div>
+      );
+    }
   }
 
 
@@ -106,7 +131,7 @@ export default function Jobs() {
               {jobPostingsArr && jobPostingsArr.length > 0 ? (
                 <JobCard jobPostings={jobPostingsArr} />
               ) : (
-                <p>No matching job postings.</p>
+                <p className="flex justify-center items-center h-3/6">No matching job postings.</p>
               )}
           </div>
 
