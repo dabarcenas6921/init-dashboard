@@ -9,7 +9,7 @@ export default function ThisWeekCard() {
           <div className="mt-7 flex justify-center">
             <a
               href="<events />"
-              className="rounded-lg bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black focus:outline-none focus:ring-4 focus:ring-blue-300"
+              className="flex items-center rounded-lg bg-primary_yellow px-6 py-3.5 font-bold text-primary  hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
             >
               Register Now!
             </a>
