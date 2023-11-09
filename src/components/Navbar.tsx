@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { UserButton, useUser, SignOutButton } from "@clerk/nextjs";
 import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const user = useUser();
 
   return (
     <nav className=" border-gray-200 bg-primary pb-8 pt-4">
@@ -118,14 +121,22 @@ export default function Navbar() {
               <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
             </svg>
           </a>
-          <a
-            href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            Join
-          </a>
+          {user.isSignedIn ? (
+            <SignOutButton>
+              <span className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600">
+                Sign Out
+              </span>
+            </SignOutButton>
+          ) : (
+            <a
+              href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
+            >
+              Join
+            </a>
+          )}
         </div>
       </div>
     </nav>
