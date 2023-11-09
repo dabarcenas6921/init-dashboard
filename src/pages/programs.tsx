@@ -1,5 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import InitPicture from "../assets/images/programCards/initexplore.png";
+import InitReach from "../assets/images/programCards/initreach.png";
+import InitBuild from "../assets/images/programCards/initbuild.png";
 
 export default function Programs() {
   const sampleData: {
@@ -25,7 +27,7 @@ export default function Programs() {
     {
       // {index 2} index in mapping
       title: "Reach",
-      image: InitPicture,
+      image: InitReach,
       discription:
         "INIT Reach is a program focused on the hardware development side of technology. Using all sorts of machinery, large or small, this program aims inspire members to create their own devices with the technology available today.",
       open: true,
@@ -35,7 +37,7 @@ export default function Programs() {
     {
       // {index 3} index in mapping
       title: "Build",
-      image: InitPicture,
+      image: InitBuild,
       discription:
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
