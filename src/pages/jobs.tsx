@@ -81,7 +81,7 @@ export default function Jobs() {
     jobPostingsArr = allJobsQuery.data;
     if (allJobsQuery.isLoading) {
       return (
-        <div className="w-full flex justify-center h-[72vh]">
+        <div className="w-full flex justify-center items-center h-[72vh]">
           <Spinner color="warning" size="xl"/>
         </div>
       );
