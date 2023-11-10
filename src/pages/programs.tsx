@@ -2,6 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import InitPicture from "../assets/images/programCards/initexplore.png";
 import InitReach from "../assets/images/programCards/initreach.png";
 import InitBuild from "../assets/images/programCards/initbuild.png";
+import InitHack from "../assets/images/programCards/inithack.png";
 
 export default function Programs() {
   const sampleData: {
@@ -57,7 +58,7 @@ export default function Programs() {
     {
       // {index 5} index in mapping
       title: "Hack",
-      image: InitPicture,
+      image: InitHack,
       discription:
         "INIT Hack is a program focused on the community in Computer Science. Across the country, there are various coding competitions, Hackathons, where students must create a solution by the end of a given time frame. Most students work as teams, with the members being fellow students in the same school. ",
       open: false,
@@ -122,7 +123,11 @@ export default function Programs() {
           });
 
           return (
-            <div key={index} className="relative mx-auto mt-4">
+            <div
+              key={index}
+              className="firstrow relative mx-auto mt-4 w-full"
+              style={{ height: "530px" }}
+            >
               <div className="flex h-full flex-col overflow-hidden rounded-xl bg-zinc-900 shadow">
                 <a href="#">
                   <div className="relative h-56 w-full overflow-hidden">
@@ -158,7 +163,10 @@ export default function Programs() {
                     </svg>
                     {programData.title}
                   </h5>
-                  <p className="text-md mb-3 flex-grow font-semibold">
+                  <p
+                    className="text-md mb-3 flex-grow overflow-y-auto font-semibold"
+                    style={{ height: "100px" }}
+                  >
                     INIT
                     <span style={{ color: programData.color }}>
                       {" "}
