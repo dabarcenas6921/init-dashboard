@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Dropdown } from 'flowbite-react';
+import DeleteJobModal from './DeleteJobModal';
 
 export type Job = {
   image: string;
@@ -21,7 +22,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
   if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
     return <p>No matching job postings.</p>;
   }
-  
+
   return (
     <div className={`w-full flex flex-wrap items-start justify-evenly ${jobPostings.length === 2 ? 'xl:justify-evenly' : 'xl:justify-between'}`}>
       {jobPostings.map((job, index) => (
@@ -39,12 +40,13 @@ export default function JobCard({ jobPostings }: JobCardProps) {
                   <p>Edit</p>
                 </a>
               </Dropdown.Item>
+
               <Dropdown.Item>
                 <a
                   className="block px-4 py-2 text-sm text-red-600 hover.bg-gray-100 dark:text-gray-200 dark:hover-bg-gray-600 dark:hover:text-white"
                   href="#"
                 >
-                  <p>Delete</p>
+                  <DeleteJobModal />
                 </a>
               </Dropdown.Item>
             </Dropdown>
