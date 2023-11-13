@@ -12,25 +12,25 @@ const tableId =
 const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_PERSONAL_ACCESS_TOKEN;
 
 export default function MasonBody() {
-  async function fetchDataFromAirtable() {
-    try {
-      const response = await axios.get(
-        `https://api.airtable.com/v0/${baseId}/${tableId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
-        },
-      );
-      console.log(response.data);
-    } catch (error) {
-      // Handle error
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
-    fetchDataFromAirtable();
+    const fetchDataFromAirtable = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.airtable.com/v0/${baseId}/${tableId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+            },
+          },
+        );
+        console.log(response.data);
+      } catch (error) {
+        // Handle error
+        console.error(error);
+      }
+    };
+
+    fetchDataFromAirtable().catch(console.error);
   }, []);
 
   return (
