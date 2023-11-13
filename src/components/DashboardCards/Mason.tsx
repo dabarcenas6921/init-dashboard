@@ -4,8 +4,35 @@ import YearToDate from "./YearToDate";
 import MyBarChart from "./Barchart";
 import TeamLeads from "./TeamLeads";
 import Piechart from "./Piechart";
+import axios from "axios";
+import { useEffect } from "react";
+const baseId = process.env.NEXT_PUBLIC_AIRTABLE_SHELLHACKS_BASE_ID;
+const tableId =
+  process.env.NEXT_PUBLIC_AIRTABLE_SHELLHACKS_VOLUNTEER_SCHEDULE_TABLE;
+const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_PERSONAL_ACCESS_TOKEN;
 
 export default function MasonBody() {
+  useEffect(() => {
+    const fetchDataFromAirtable = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.airtable.com/v0/${baseId}/${tableId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+            },
+          },
+        );
+        console.log(response.data);
+      } catch (error) {
+        // Handle error
+        console.error(error);
+      }
+    };
+
+    fetchDataFromAirtable().catch(console.error);
+  }, []);
+
   return (
     // On mobile, the content will stack (flex-col). On medium screens and up, it will be side by side (md:flex-row).
     <div className="flex flex-col md:flex-row">
