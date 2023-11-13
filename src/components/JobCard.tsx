@@ -3,7 +3,7 @@ import { Card, Dropdown } from 'flowbite-react';
 import DeleteJobModal from './DeleteJobModal';
 
 export type Job = {
-  id?: number,
+  id: number,
   image: string;
   title: string;
   company: string;
@@ -20,28 +20,32 @@ type JobCardProps = {
 
 export default function JobCard({ jobPostings }: JobCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
   const openModal = (job: Job) => {
     setIsModalOpen(true);
-    console.log("Selected Job:", job.id);
+    setSelectedJob(job);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedJob(null);
   };
 
   if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
     return <p>No matching job postings.</p>;
   }
 
+  
+
   return (
     <div className={`w-full flex flex-wrap items-start justify-evenly ${jobPostings.length === 2 ? 'xl:justify-evenly' : 'xl:justify-between'}`}>
-      <DeleteJobModal isOpen={isModalOpen} onClose={closeModal} />
       {jobPostings.map((job, index) => (
         <Card
           key={index}
           className="max-w-xs min-w-[16rem] bg-[#121415] border-[#121415] mb-8 max-[820px]:mb-8"
         >
+          <DeleteJobModal isOpen={isModalOpen && selectedJob === job} onClose={closeModal} id={job.id} />
           <div className="text-white flex justify-end px-4">
             <Dropdown inline label="" className="">
               <Dropdown.Item>

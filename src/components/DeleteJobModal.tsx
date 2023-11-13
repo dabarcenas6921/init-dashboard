@@ -1,16 +1,35 @@
 'use client';
-
 import { Modal } from 'flowbite-react';
 import React from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { api } from "~/utils/api";
+import { useRouter } from 'next/router'
 
 interface DeleteJobModalProps {
   isOpen: boolean;
   onClose: () => void;
+  id?: number; // Optional id prop
 }
 
-export default function DeleteJobModal({ isOpen, onClose }: DeleteJobModalProps) {
+export default function DeleteJobModal({ isOpen, onClose, id }: DeleteJobModalProps) {
 
+  const router = useRouter()
+
+  const mutation = api.jobs.delete.useMutation()
+
+  function deleted() {
+    console.log("DELETED JOB:", id ?? "No ID available");
+    if (id) {
+      mutation.mutate({id})
+      isOpen = !isOpen
+      router.replace(router.asPath).catch(console.error)
+    }
+    
+    
+    
+  }
+
+  
   return (
     <>
       <Modal 
@@ -19,9 +38,7 @@ export default function DeleteJobModal({ isOpen, onClose }: DeleteJobModalProps)
         onClose={onClose} 
         popup
         dismissible
-        style={{
-          overflow: isOpen ? "initial" : "auto"
-        }}
+        className={`${isOpen ? "overflow:initial" : "overflow-auto"}`}
       >
         <Modal.Header className="bg-primary" />
         <Modal.Body className="bg-primary">
@@ -35,6 +52,7 @@ export default function DeleteJobModal({ isOpen, onClose }: DeleteJobModalProps)
                 className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
                             font-medium text-black hover:bg-yellow-500 focus:outline-none 
                             focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900" 
+                            onClick={deleted}
                 >
                 {"Yes, I'm sure"}
               </button>
@@ -55,3 +73,4 @@ export default function DeleteJobModal({ isOpen, onClose }: DeleteJobModalProps)
 }
 
 // onClick={() => setOpenModal(false)}
+
