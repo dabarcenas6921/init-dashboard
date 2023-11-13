@@ -7,7 +7,7 @@ const EventData = z.object({
   time: z.date(),
   location: z.string(),
   picture: z.string(),
-  tag: z.string(),
+  program: z.string(),
   rsvpLink: z.string(),
 });
 
@@ -63,7 +63,7 @@ export const eventRouter = createTRPCRouter({
         time: z.date().optional(),
         location: z.string().optional(),
         picture: z.string().optional(),
-        tag: z.string().optional(),
+        program: z.string().optional(),
         rsvpLink: z.string().optional(),
       }),
     )
@@ -77,7 +77,7 @@ export const eventRouter = createTRPCRouter({
             time: input.time,
             location: input.location,
             picture: input.picture,
-            tag: input.tag,
+            program: input.program,
             rsvpLink: input.rsvpLink,
           },
         });

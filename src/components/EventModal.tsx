@@ -3,21 +3,24 @@ import { Modal } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import axios from "axios";
+import { api } from "~/utils/api";
 
 interface IFormInputs {
   name: string;
   program: string;
+  picture: string;
   description: string;
   location: string;
-  dateTime: Date;
+  time: Date;
   rsvpLink: string;
 }
 
 export default function EventModal() {
   const [openModal, setOpenModal] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
-  const { register, handleSubmit } = useForm<IFormInputs>();
-
+  const [filename, setFilename] = useState("");
+  const { register, handleSubmit, reset } = useForm<IFormInputs>();
+  const createEvent = api.events.create.useMutation();
   const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUD_NAME;
 
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +33,18 @@ export default function EventModal() {
 
     if (event.target.files![0]) {
       reader.readAsDataURL(event.target.files![0] as Blob);
+      const filenameWithExt = event.target.files![0].name;
+      setFilename(filenameWithExt.substring(0, filenameWithExt.indexOf("."))); //removes extension from filename
     }
   };
 
-  const uploadHandler = async () => {
+  const onSubmit = async (data: IFormInputs) => {
     const formData = new FormData();
     formData.append("file", image as string);
     formData.append("upload_preset", "init_dashboard_upload");
+    formData.append("public_id", filename);
+    formData.append("filename_override", "true");
+    let secure_url = "";
 
     try {
       const res = await axios.post(
@@ -47,26 +55,29 @@ export default function EventModal() {
         },
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      if (res.data.secure_url) {
-        alert("Image uploaded successfully!");
-        setImage(null);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+      secure_url = res.data.secure_url;
+
+      if (secure_url) {
+        console.log("Image uploaded successfully!");
       }
     } catch (e) {
-      console.assert(e, "Error, image not uploaded!");
+      console.log(e, "Error, image not uploaded!");
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  };
+    const dateObject = new Date(data.time);
+    data = { ...data, picture: secure_url, time: dateObject };
 
-  const onSubmit = (data: IFormInputs) => {
-    console.log(data);
+    createEvent.mutate(data);
+    setOpenModal(false);
+    setImage(null);
+    reset(); //reset method from react-hook-form; resets form fields
   };
 
   return (
     <>
       <button
-        className="hover:bg-light-yellow inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary_yellow px-4 py-3 text-sm font-semibold text-black transition-all hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-light_yellow md:w-auto"
+        className="hover:bg-light-yellow inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary_yellow px-3 py-2 text-sm font-semibold text-black transition-all hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-light_yellow md:w-auto lg:px-4 lg:py-3"
         type="button"
         onClick={() => setOpenModal(true)}
       >
@@ -137,10 +148,12 @@ export default function EventModal() {
                   >
                     <option className="italic">-- Select a Program --</option>
                     <option>Build</option>
-                    <option>Code</option>
                     <option>Discover</option>
+                    <option>Explore</option>
+                    <option>General</option>
                     <option>Hack</option>
                     <option>Ignite</option>
+                    <option>Industry</option>
                     <option>Launch</option>
                     <option>Reach</option>
                     <option>ShellHacks</option>
@@ -249,7 +262,7 @@ export default function EventModal() {
                     Date and Time
                   </label>
                   <input
-                    {...register("dateTime")}
+                    {...register("time")}
                     type="datetime-local"
                     className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
                     required
