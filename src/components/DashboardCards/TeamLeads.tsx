@@ -3,47 +3,139 @@ import React, { PureComponent } from "react";
 const data = [
   {
     name: "Gerald",
+    schedule: "Fri - Sat",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
   {
     name: "Steve",
+    schedule: "Sat - Sun",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
   {
     name: "Sam",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
   {
     name: "Andy",
+    schedule: "Sat - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
   {
     name: "Kevin",
+    schedule: "Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
   {
     name: "John",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
   {
     name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
+  },
+  {
+    name: "Mike",
+    schedule: "Mon - Fri",
+    time: "9:00 AM - 5:00 PM",
+    contact: "foolsfool@gmail.com",
   },
 ];
 
 export default function MyBarChart() {
   return (
-    <div className="h-34 relative">
-      <div className="absolute right-0 top-0 mr-2">
-        <svg
-          className="h-8 w-8 text-white dark:text-white"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 19"
-        >
-          <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z" />
-          <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z" />
-        </svg>
-      </div>
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-medium text-white">Team Leads</h2>
-      </div>
-      <div className="mt-10">
-        <p className="text-4xl text-white">{data.length}</p>
+    <div className="overflow-x-auto">
+      <h1 className="text-center text-lg font-semibold text-white sm:text-xl">
+        Volunteer Schedule
+      </h1>
+      <div className="max-h-[420px] overflow-y-auto">
+        {/* Use divs instead of table on small screens */}
+        <div className="mt-5 w-full text-sm text-gray-400 sm:hidden">
+          {data.map((item, index) => (
+            <div key={index} className="mb-4 rounded bg-zinc-800 p-4">
+              <div className="font-medium text-white">{item.name}</div>
+              <div className="text-yellow-300">{item.schedule}</div>
+              <div className="text-white">{item.time}</div>
+              <div className="text-white">{item.contact}</div>
+            </div>
+          ))}
+        </div>
+        {/* Show table on larger screens */}
+        <table className="hidden w-full text-left text-gray-400 sm:block">
+          <thead className="bg-zinc-800 text-xs uppercase text-gray-700">
+            <tr>
+              <th scope="col" className="px-6 py-3 text-white">
+                Volunteer Name
+              </th>
+              <th scope="col" className="px-6 py-3 text-white">
+                Schedule
+              </th>
+              <th scope="col" className="px-6 py-3 text-white">
+                Time
+              </th>
+              <th scope="col" className="px-6 py-3 text-white">
+                Contact
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index} className="border-b border-gray-700 bg-zinc-800">
+                <td className="px-6 py-4 font-medium text-white">
+                  {item.name}
+                </td>
+                <td className="px-6 py-4 text-yellow-300">{item.schedule}</td>
+                <td className="px-6 py-4 text-white">{item.time}</td>
+                <td className="px-6 py-4 text-white">{item.contact}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

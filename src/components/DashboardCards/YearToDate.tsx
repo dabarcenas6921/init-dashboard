@@ -1,14 +1,12 @@
 import React from "react";
 import {
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  LabelList,
-  Cell,
 } from "recharts";
 
 // Updated data to represent months
@@ -27,46 +25,52 @@ const data = [
   { name: "Dec", value: 6500 },
 ];
 
-// Compute the total sum
 const totalValue = data.reduce((acc, item) => acc + item.value, 0);
 
 export default function YearToDate() {
   return (
-    <div className="max-w-3xl" style={{ width: 900, height: 478 }}>
-      <div>
-        <h1 className="flex justify-center font-medium text-white">
-          YTD Funding
-        </h1>
-        <div className="mt-5 max-w-full" style={{ width: "100%", height: 370 }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              width={500}
-              height={300}
-              data={data}
-              margin={{
-                top: 20,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" stroke="white" />
-              <YAxis stroke="white" />
-              <Tooltip
-                contentStyle={{ backgroundColor: "white", color: "black" }}
-                itemStyle={{ color: "black" }}
-              />
-              <Bar dataKey="value" fill="#FFD550">
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-        <p className="mt-8 flex justify-center text-xl">Total: ${totalValue}</p>
-      </div>
+    <div style={{ width: "100%", height: "475px" }}>
+      <h1 style={{ textAlign: "center", color: "white" }}>YTD Funding</h1>
+      <ResponsiveContainer width="100%" height="90%">
+        <AreaChart
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#FFD550" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#FFD550" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+
+          <XAxis dataKey="name" stroke="white" />
+          <YAxis stroke="white" />
+          <Tooltip
+            contentStyle={{ backgroundColor: "white" }}
+            itemStyle={{ color: "black" }}
+            formatter={(value) => [`$${value.toLocaleString()}`]}
+            labelFormatter={() => ""}
+          />
+          <Area
+            type="monotone"
+            dataKey="value"
+            stroke="#FFD550"
+            fillOpacity={1}
+            fill="url(#colorUv)"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+      <p
+        className="flex justify-center text-xl"
+        style={{ textAlign: "center" }}
+      >
+        Total: ${totalValue.toLocaleString()}
+      </p>
     </div>
   );
 }

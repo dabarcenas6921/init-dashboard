@@ -32,8 +32,11 @@ export default function Piechart() {
         Company Funding
       </p>
       <div className="flex justify-center">
-        {/* Set a specific aspect ratio for the ResponsiveContainer */}
-        <ResponsiveContainer width="100%" aspect={1.6}>
+        {/* Use Tailwind's responsive prefix to set different aspect ratios for different screen sizes */}
+        <ResponsiveContainer
+          width="100%"
+          className="aspect-square sm:aspect-video"
+        >
           <PieChart>
             <Pie
               dataKey="value"
@@ -54,7 +57,6 @@ export default function Piechart() {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      {/* Display the total funding */}
       <p className="flex justify-center text-xl">
         Total Funding: ${totalFunding.toLocaleString()}
       </p>
