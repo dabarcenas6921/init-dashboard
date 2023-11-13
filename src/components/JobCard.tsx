@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Dropdown } from 'flowbite-react';
 import DeleteJobModal from './DeleteJobModal';
 
 export type Job = {
+  id?: number,
   image: string;
   title: string;
   company: string;
@@ -18,6 +19,16 @@ type JobCardProps = {
 };
 
 export default function JobCard({ jobPostings }: JobCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (job: Job) => {
+    setIsModalOpen(true);
+    console.log("Selected Job:", job.id);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
     return <p>No matching job postings.</p>;
@@ -25,6 +36,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
 
   return (
     <div className={`w-full flex flex-wrap items-start justify-evenly ${jobPostings.length === 2 ? 'xl:justify-evenly' : 'xl:justify-between'}`}>
+      <DeleteJobModal isOpen={isModalOpen} onClose={closeModal} />
       {jobPostings.map((job, index) => (
         <Card
           key={index}
@@ -41,16 +53,17 @@ export default function JobCard({ jobPostings }: JobCardProps) {
                 </a>
               </Dropdown.Item>
 
-              <Dropdown.Item>
+              <Dropdown.Item onClick={() => openModal(job)}>
                 <a
                   className="block px-4 py-2 text-sm text-red-600 hover.bg-gray-100 dark:text-gray-200 dark:hover-bg-gray-600 dark:hover:text-white"
                   href="#"
                 >
-                  <DeleteJobModal />
+                  <p>Delete</p>
                 </a>
               </Dropdown.Item>
             </Dropdown>
           </div>
+          
 
           {/* Top of Card */}
           <div className="flex items-center mb-1 mt-[-0.5em]">
