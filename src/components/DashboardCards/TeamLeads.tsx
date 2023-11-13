@@ -1,4 +1,9 @@
-import React, { PureComponent } from "react";
+import axios from "axios";
+import { useEffect } from "react";
+const baseId = process.env.NEXT_PUBLIC_AIRTABLE_SHELLHACKS_BASE_ID;
+const tableId =
+  process.env.NEXT_PUBLIC_AIRTABLE_SHELLHACKS_VOLUNTEER_SCHEDULE_TABLE;
+const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_PERSONAL_ACCESS_TOKEN;
 
 const data = [
   {
@@ -88,6 +93,27 @@ const data = [
 ];
 
 export default function MyBarChart() {
+  useEffect(() => {
+    const fetchDataFromAirtable = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.airtable.com/v0/${baseId}/${tableId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+            },
+          },
+        );
+        console.log(response.data);
+      } catch (error) {
+        // Handle error
+        console.error(error);
+      }
+    };
+
+    fetchDataFromAirtable().catch(console.error);
+  }, []);
+
   return (
     <div className="overflow-x-auto">
       <h1 className="text-center text-lg font-semibold text-white sm:text-xl">
