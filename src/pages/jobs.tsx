@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Dropdown } from "flowbite-react";
 import SearchInput, { setWasSearchBtnClicked } from "~/components/SearchInput";
 import type { FilterInput } from "~/components/FilterJobsCard";
-import FilterJobsCard from "~/components/FilterJobsCard";
+import FilterJobsCard, { setWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import JobCard from "~/components/JobCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { api } from "~/utils/api";
@@ -97,7 +97,7 @@ export default function Jobs() {
       {/* Container to keep everything in line */}
       <div className="mx-auto max-w-screen-xl">
         {/* Title and Search Bar */}
-        <div className="mb-4 flex flex-col items-center justify-between px-8 md:mb-8 md:flex-row">
+        <div className="mb-4 flex flex-col items-center justify-between  md:mb-8 md:flex-row">
           <h1 className="mb-4 text-xl text-white md:mb-0 md:text-2xl lg:text-3xl">
             Upcoming Jobs
           </h1>

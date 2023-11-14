@@ -109,7 +109,7 @@ export default function JobCard({ jobPostings }: JobCardProps) {
               href={job.url}
               rel="noopener noreferrer"
               target="_blank"
-              className="rounded block bg-primary_yellow px-5 py-2 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem] font-bold text-primary text-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600"
+              className="rounded block bg-primary_yellow px-5 py-2 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem] font-bold text-primary text-sm hover:bg-light_yellow focus:ring-light_yellow"
             >
               Apply
             </a>

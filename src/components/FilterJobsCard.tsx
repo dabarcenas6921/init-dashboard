@@ -124,7 +124,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
           <h2 className="text-xl mb-4">Filter</h2>
           {/* Reset Filters Button */}
           <p 
-              className="text-xs text-primary_yellow cursor-pointer "
+              className="text-xs text-primary_yellow cursor-pointer hover:underline"
               onClick={resetFilters}
           >
               Clear filters
@@ -231,8 +231,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
             id="filter-btn"
             type="button"
             className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
-                        font-medium text-black hover:bg-yellow-500 focus:outline-none 
-                        focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+                        font-medium text-black hover:bg-light_yellow focus:ring-light_yellow dark:focus:ring-yellow-900"
           onClick={handleSubmit}
           >
             Apply Filter
