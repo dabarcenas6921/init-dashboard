@@ -1,3 +1,11 @@
+/*
+      This Component should be imported into Mason.tsx and replace the TeamLeads component if we want to use real data.
+      other than that it should be the same as the mock data version. Its just a matter of switching the components out. 
+      You may have any type typescript error but thats easily fixable using ChatPT
+
+
+
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -74,7 +82,7 @@ export default function MyBarChart() {
         Volunteer Schedule
       </h1>
       <div className="max-h-[420px] overflow-y-auto">
-        {/* Display data in cards for smaller screens */}
+        
         <div className="mt-5 w-full text-sm text-gray-400 sm:hidden">
           {volunteers.map((item, index) => (
             <div key={index} className="mb-4 rounded bg-zinc-800 p-4">
@@ -86,7 +94,7 @@ export default function MyBarChart() {
           ))}
         </div>
 
-        {/* Display data in a table for larger screens */}
+       
         <table className="hidden w-full text-left text-gray-400 sm:block">
           <thead className="bg-zinc-800 text-xs uppercase text-gray-700">
             <tr>
@@ -121,3 +129,4 @@ export default function MyBarChart() {
     </div>
   );
 }
+*/
