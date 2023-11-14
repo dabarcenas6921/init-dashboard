@@ -38,7 +38,7 @@ export default function EventCard({
           <span
             className={`mb-1 block text-xs font-semibold uppercase ${
               program === "ShellHacks" || program === "General"
-                ? "text-primary"
+                ? "text-primary_yellow"
                 : `text-${program.toLowerCase()}`
             }`}
           >

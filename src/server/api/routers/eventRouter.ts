@@ -11,6 +11,8 @@ const EventData = z.object({
   rsvpLink: z.string(),
 });
 
+export type EventType = z.infer<typeof EventData>;
+
 export const eventRouter = createTRPCRouter({
   //Protect this route once user authentication is completed
   create: publicProcedure.input(EventData).mutation(async ({ input, ctx }) => {
@@ -35,6 +37,31 @@ export const eventRouter = createTRPCRouter({
       throw new Error("Failed to get events");
     }
   }),
+
+  getByQuery: publicProcedure
+    .input(
+      z.object({
+        q: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      try {
+        const decodedQuery = input.q.replace(/\+/g, " ").replace(/%20/g, " ");
+
+        const events = await ctx.db.event.findMany({
+          where: {
+            OR: [
+              { name: { contains: decodedQuery.toLowerCase() } },
+              { program: { contains: decodedQuery.toLowerCase() } },
+            ],
+          },
+        });
+        return events;
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to get events by query");
+      }
+    }),
 
   delete: publicProcedure
     .input(
