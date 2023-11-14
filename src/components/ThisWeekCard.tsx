@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ThisWeekCard() {
   return (
     <div className="mb-20 mt-20 w-full max-w-6xl gap-4 px-4 md:grid md:grid-cols-2 md:px-0">
@@ -7,12 +9,12 @@ export default function ThisWeekCard() {
             This Week
           </h5>
           <div className="mt-7 flex justify-center">
-            <a
-              href="<events />"
+            <Link
+              href="/events"
               className="flex items-center rounded-lg bg-primary_yellow px-6 py-3.5 font-bold text-primary  hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
             >
               Register Now!
-            </a>
+            </Link>
           </div>
         </div>
       </div>

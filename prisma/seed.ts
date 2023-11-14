@@ -1,5 +1,6 @@
-import { jobPostings } from '../src/Data/jobPostingsData'
-import { PrismaClient } from '@prisma/client'
+import { events } from "../src/Data/eventsData";
+import { jobPostings } from "../src/Data/jobPostingsData";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -11,7 +12,8 @@ async function main() {
     }
 }
 
-main().catch(e => {
+main()
+  .catch((e) => {
     console.log(e);
     process.exit(1)
 }).finally(() => {

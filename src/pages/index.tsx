@@ -70,7 +70,7 @@ export default function Home() {
         <section>
           <a
             href="programs"
-            className="xl:mt-30 mt-10 flex justify-center text-3xl md:text-4xl lg:mt-10"
+            className="xl:mt-30 mt-10 flex justify-center text-3xl hover:text-yellow-200 md:text-4xl lg:mt-10"
           >
             🧠 Programs
           </a>
@@ -88,7 +88,7 @@ export default function Home() {
                     href="https://shellhacks.net/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-span-3 text-yellow-200"
+                    className="text-span-3 text-yellow-200 hover:text-yellow-400 hover:underline"
                   >
                     ShellHacks
                   </a>
