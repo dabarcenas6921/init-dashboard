@@ -17,18 +17,24 @@ export default function DeleteJobModal({ isOpen, onClose, id }: DeleteJobModalPr
 
   const mutation = api.jobs.delete.useMutation()
 
-  function deleted() {
+  async function deleted() {
     console.log("DELETED JOB:", id ?? "No ID available");
+    
     if (id) {
-      mutation.mutate({id})
-      isOpen = !isOpen
-      router.replace(router.asPath).catch(console.error)
+      try {
+        await mutation.mutateAsync({ id }); // Using mutateAsync to wait for completion
+        router.reload();
+      } catch (error) {
+        console.error("Error deleting job posting:", error);
+        // Handle error if necessary
+      }
     }
-    
-    
-    
   }
 
+  async function deletedAndClose() {
+    await deleted();
+    onClose();
+  }
   
   return (
     <>
@@ -52,7 +58,8 @@ export default function DeleteJobModal({ isOpen, onClose, id }: DeleteJobModalPr
                 className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
                             font-medium text-black hover:bg-yellow-500 focus:outline-none 
                             focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900" 
-                            onClick={deleted}
+                            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                            onClick={deletedAndClose}
                 >
                 {"Yes, I'm sure"}
               </button>
