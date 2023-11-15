@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Dropdown } from "flowbite-react";
 import SearchInput, { setWasSearchBtnClicked } from "~/components/SearchInput";
 import type { FilterInput } from "~/components/FilterJobsCard";
-import FilterJobsCard, { setWasApplyFilterClicked } from "~/components/FilterJobsCard";
+import FilterJobsCard from "~/components/FilterJobsCard";
 import JobCard from "~/components/JobCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { api } from "~/utils/api";
@@ -21,7 +21,7 @@ export type SelectedFilters = {
 };
 
 export default function Jobs() {
-  let jobPostingsArr: JobPostingType[] | undefined = [];
+  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([])
 
   ///////////////////////////////
   //      SEARCHING JOBS       //
@@ -55,42 +55,52 @@ export default function Jobs() {
   // Apply's filters or Searches for jobs
   if (getWasApplyFilterClicked()) {
     const filterQuery = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {});
-    jobPostingsArr = filterQuery.data;
-    if (filterQuery.isLoading) {
-      return (
-        <div className="w-full flex justify-center items-center h-[72vh]">
-          <Spinner color="warning" size="xl"/>
-        </div>
-      );
+    if (filterQuery.data) {
+      setJobPostings(filterQuery.data)
     }
+    
+    // if (filterQuery.isLoading) {
+    //   return (
+    //     <div className="w-full flex justify-center items-center h-[72vh]">
+    //       <Spinner color="warning" size="xl"/>
+    //     </div>
+    //   );
+    // }
   }
   else if (getWasSearchBtnClicked()) {
     const searchQuery = api.jobs.getByQuery.useQuery(input);
-    jobPostingsArr = searchQuery.data;
-    if (searchQuery.isLoading) {
-      return (
-        <div className="w-full flex justify-center items-center h-[72vh]">
-          <Spinner color="warning" size="xl"/>
-        </div>
-      );
+    if (searchQuery.data) {
+      setJobPostings(searchQuery.data)
     }
+    // if (searchQuery.isLoading) {
+    //   return (
+    //     <div className="w-full flex justify-center items-center h-[72vh]">
+    //       <Spinner color="warning" size="xl"/>
+    //     </div>
+    //   );
+    // }
   }
   else {
     const allJobsQuery = api.jobs.getAll.useQuery();
-    jobPostingsArr = allJobsQuery.data;
-    if (allJobsQuery.isLoading) {
-      return (
-        <div className="w-full flex justify-center items-center h-[72vh]">
-          <Spinner color="warning" size="xl"/>
-        </div>
-      );
+    if (allJobsQuery.data) {
+      setJobPostings(allJobsQuery.data)
     }
+    console.log("INSIDE ELSE")
+    // if (allJobsQuery.isLoading) {
+    //   return (
+    //     <div className="w-full flex justify-center items-center h-[72vh]">
+    //       <Spinner color="warning" size="xl"/>
+    //     </div>
+    //   );
+    // }
   }
 
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
   };
+
+  console.log("JOB POSTINGS: ", jobPostings)
 
   return (
     <main className="min-h-screen">
@@ -141,8 +151,8 @@ export default function Jobs() {
           </div>
 
           <div className="w-full">
-              {jobPostingsArr && jobPostingsArr.length > 0 ? (
-                <JobCard jobPostings={jobPostingsArr} />
+              {jobPostings && jobPostings.length > 0 ? (
+                <JobCard jobPostings={jobPostings} />
               ) : (
                 <p className="flex justify-center items-center h-3/6">No matching job postings.</p>
               )}
