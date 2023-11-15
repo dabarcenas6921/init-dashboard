@@ -1,5 +1,12 @@
 import React from "react";
-import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  Legend,
+} from "recharts";
 
 // Define an interface for your data objects
 interface IData {
@@ -8,13 +15,13 @@ interface IData {
   color: string;
 }
 
+//Ideally, you would want to fetch this data from the Notion/Airtable API. Don't have permissions to do so right now, so I'm hardcoding it in.
 const data01: IData[] = [
-  { name: "Google", value: 400, color: "#0088FE" },
-  { name: "Microsoft", value: 300, color: "#00C49F" },
-  { name: "FIU", value: 300, color: "#FFBB28" },
-  { name: "Salesforce", value: 200, color: "#FF8042" },
-  { name: "Bungie", value: 278, color: "#8884d8" },
-  { name: "Knight Foundation", value: 189, color: "#A4DE6C" },
+  { name: "Venue", value: 1000, color: "#e11d48" },
+  { name: "Food", value: 2000, color: "#3b82f6" },
+  { name: "Snacks and drinks", value: 4000, color: "#16a34a" },
+  { name: "Decorations", value: 5000, color: "#fcd34d" },
+  { name: "Shirts", value: 3000, color: "#fb923c" },
 ];
 
 // Calculate the total funding
@@ -29,10 +36,9 @@ export default function Piechart() {
   return (
     <div>
       <p className="flex justify-center font-medium text-white">
-        Company Funding
+        Shellhacks Budget
       </p>
       <div className="flex justify-center">
-        {/* Use Tailwind's responsive prefix to set different aspect ratios for different screen sizes */}
         <ResponsiveContainer
           width="100%"
           className="aspect-square sm:aspect-video"
@@ -46,14 +52,14 @@ export default function Piechart() {
               cy="50%"
               outerRadius={140}
               fill="#8884d8"
-              labelLine={false}
-              label={({ name }: LabelProps) => name}
+              // Remove labelLine and label props if not needed
             >
               {data01.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
             <Tooltip />
+            <Legend layout="vertical" align="right" verticalAlign="middle" />
           </PieChart>
         </ResponsiveContainer>
       </div>
