@@ -6,7 +6,7 @@ export const events = [
     time: new Date("2023-11-08T21:00:00.000Z"),
     location: "CBC 155",
     picture:
-      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1699911150/init-dashboard/Interview%20Prep%20Image.avif",
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1699911150/init-dashboard/events/Interview%20Prep%20Image.avif",
     program: "Reach",
     rsvpLink: "https://lu.ma/p31somhk",
   },
@@ -17,7 +17,7 @@ export const events = [
     time: new Date("2023-10-26T20:00:00.000Z"),
     location: "CASE 132",
     picture:
-      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1699914651/init-dashboard/Mock%20Interview.jpg",
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1699914651/init-dashboard/events/Mock%20Interview.jpg",
     program: "Explore",
     rsvpLink: "https://lu.ma/pzc4g76u",
   },

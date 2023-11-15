@@ -4,8 +4,8 @@ export const jobPostings = [
         title: "Software Engineer",
         company: "Netflix",
         jobType: "Fulltime",
-        jobPosition: "New-grad",
-        jobLocation: "On-site",
+        jobPosition: "New-Grad",
+        jobLocation: "On-Site",
         date: "10/14/23",
         url: "https://jobs.netflix.com/jobs/291980521"
     },
@@ -16,7 +16,7 @@ export const jobPostings = [
         company: "Google",
         jobType: "Fulltime",
         jobPosition: "Internship",
-        jobLocation: "On-site",
+        jobLocation: "On-Site",
         date: "10/11/23",
         url: "https://www.google.com/about/careers/applications/jobs/results/?src=Online/Google%20Website/ByF&utm_source=Online%20&utm_medium=careers_site%20&utm_campaign=ByF&company=Fitbit&company=Google&company=YouTube&distance=50&employment_type=INTERN"
     },
@@ -38,7 +38,7 @@ export const jobPostings = [
         company: "Amazon",
         jobType: "Fulltime",
         jobPosition: "Internship",
-        jobLocation: "On-site",
+        jobLocation: "On-Site",
         date: "10/14/23",
         url: "https://www.amazon.jobs/en/jobs/2408098/software-development-engineer-internship-2024-us"
     },
@@ -49,7 +49,7 @@ export const jobPostings = [
         company: "Google",
         jobType: "Fulltime",
         jobPosition: "Internship",
-        jobLocation: "On-site",
+        jobLocation: "On-Site",
         date: "10/11/23",
         url: "https://www.google.com/about/careers/applications/jobs/results/?src=Online/Google%20Website/ByF&utm_source=Online%20&utm_medium=careers_site%20&utm_campaign=ByF&company=Fitbit&company=Google&company=YouTube&distance=50&employment_type=INTERN"
     },
@@ -60,7 +60,7 @@ export const jobPostings = [
         company: "Netflix",
         jobType: "Fulltime",
         jobPosition: "New-grad",
-        jobLocation: "On-site",
+        jobLocation: "On-Site",
         date: "10/14/23",
         url: "https://jobs.netflix.com/jobs/291980521"
     }

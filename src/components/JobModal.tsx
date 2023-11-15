@@ -6,21 +6,23 @@ import axios from "axios";
 import { api } from "~/utils/api";
 
 interface IFormInputs {
-  name: string;
-  program: string;
-  picture: string;
-  description: string;
-  location: string;
-  time: Date;
-  rsvpLink: string;
+  title: string;
+  company: string;
+  image: string;
+  jobType: string;
+  jobPosition: string;
+  jobLocation: string;
+  date: string;
+  url: string;
 }
 
-export default function EventModal() {
+export default function JobModal() {
   const [openModal, setOpenModal] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [filename, setFilename] = useState("");
+  const [date, setDate] = useState<Date | null>(null);
   const { register, handleSubmit, reset } = useForm<IFormInputs>();
-  const createEvent = api.events.create.useMutation();
+  const createJob = api.jobs.create.useMutation();
   const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUD_NAME;
 
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +45,7 @@ export default function EventModal() {
     formData.append("file", image as string);
     formData.append("upload_preset", "init_dashboard_upload");
     formData.append("public_id", filename);
-    formData.append("folder", "init-dashboard/events");
+    formData.append("folder", "init-dashboard/jobs");
     formData.append("filename_override", "true");
     let secure_url = "";
 
@@ -66,10 +68,17 @@ export default function EventModal() {
       console.log(e, "Error, image not uploaded!");
     }
 
-    const dateObject = new Date(data.time);
-    data = { ...data, picture: secure_url, time: dateObject };
+    data = {
+      ...data,
+      image: secure_url,
+      date: date!.toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "2-digit",
+      }),
+    };
 
-    createEvent.mutate(data);
+    createJob.mutate(data);
     setOpenModal(false);
     setImage(null);
     reset(); //reset method from react-hook-form; resets form fields
@@ -82,7 +91,7 @@ export default function EventModal() {
         type="button"
         onClick={() => setOpenModal(true)}
       >
-        Add Event
+        Add Job
       </button>
       <Modal
         show={openModal}
@@ -94,7 +103,7 @@ export default function EventModal() {
           <div className="space-y-5">
             <div className="mt-5 flex items-center whitespace-nowrap">
               <h3 className="flex w-full justify-center text-xl font-medium text-primary_yellow">
-                Add a New Event
+                Add a New Job
               </h3>
               <div>
                 <button
@@ -128,38 +137,28 @@ export default function EventModal() {
             >
               <div className="space-y-5 whitespace-nowrap text-sm sm:flex sm:items-center sm:justify-between sm:space-y-0">
                 <div className="w-full sm:mr-2">
-                  <label htmlFor="name" className="mb-1 block font-medium">
-                    Event Name
+                  <label htmlFor="title" className="mb-1 block font-medium">
+                    Job Title
                   </label>
                   <input
-                    {...register("name")}
+                    {...register("title")}
                     type="text"
                     className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
-                    placeholder="e.g. Workshop, Hackathon, ..."
+                    placeholder="e.g. SWE, Project Manager, ..."
                     required
                   />
                 </div>
                 <div className="w-full sm:ml-2">
-                  <label htmlFor="program" className="mb-1 block font-medium">
-                    Program
+                  <label htmlFor="company" className="mb-1 block font-medium">
+                    Company
                   </label>
-                  <select
-                    {...register("program")}
-                    className="block w-full cursor-pointer rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
-                  >
-                    <option className="italic">-- Select a Program --</option>
-                    <option>Build</option>
-                    <option>Discover</option>
-                    <option>Explore</option>
-                    <option>General</option>
-                    <option>Hack</option>
-                    <option>Ignite</option>
-                    <option>Industry</option>
-                    <option>Launch</option>
-                    <option>Reach</option>
-                    <option>ShellHacks</option>
-                    <option>Uplift</option>
-                  </select>
+                  <input
+                    {...register("company")}
+                    type="text"
+                    className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                    placeholder="e.g. Google, Amazon, ..."
+                    required
+                  />
                 </div>
               </div>
               <label
@@ -198,7 +197,7 @@ export default function EventModal() {
                     <div className="flex justify-center">
                       <Image
                         src={image as string}
-                        alt="Uploaded Event Image"
+                        alt="Uploaded Company Image"
                         width={200}
                         height={200}
                       />
@@ -220,7 +219,7 @@ export default function EventModal() {
                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    <p className="m-0">Upload Event Image</p>
+                    <p className="m-0">Upload Company Image</p>
                   </>
                 )}
                 <input
@@ -230,40 +229,60 @@ export default function EventModal() {
                   onChange={fileChangeHandler}
                 ></input>
               </label>
-              <div className="w-full text-sm">
-                <label htmlFor="description" className="mb-1 block font-medium">
-                  Description
-                </label>
-                <textarea
-                  {...register("description")}
-                  id="decription"
-                  rows={4}
-                  className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
-                  placeholder="Write about the event here..."
-                ></textarea>
+              <div className="space-y-5 whitespace-nowrap text-sm sm:flex sm:items-center sm:justify-between sm:space-y-0">
+                <div className="w-full sm:mr-2">
+                  <label htmlFor="jobType" className="mb-1 block font-medium">
+                    Fulltime/Parttime
+                  </label>
+                  <select
+                    {...register("jobType")}
+                    className="block w-full cursor-pointer rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                  >
+                    <option className="italic">-- Select a Type --</option>
+                    <option>Fulltime</option>
+                    <option>Parttime</option>
+                  </select>
+                </div>
+                <div className="w-full sm:ml-2">
+                  <label
+                    htmlFor="jobPosition"
+                    className="mb-1 block font-medium"
+                  >
+                    Position
+                  </label>
+                  <select
+                    {...register("jobPosition")}
+                    className="block w-full cursor-pointer rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                  >
+                    <option className="italic">-- Select a Position --</option>
+                    <option>Internship</option>
+                    <option>New Grad</option>
+                  </select>
+                </div>
               </div>
+
               <div className="space-y-5 whitespace-nowrap text-sm sm:flex sm:items-center sm:justify-between sm:space-y-0">
                 <div className="w-full text-sm sm:mr-2">
-                  <label htmlFor="location" className="mb-1 block font-medium">
+                  <label htmlFor="program" className="mb-1 block font-medium">
                     Location
                   </label>
-                  <input
-                    {...register("location")}
-                    type="text"
-                    name="location"
-                    id="location"
-                    className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
-                    placeholder="e.g. MMC, BBC, Room, ..."
-                    required
-                  />
+                  <select
+                    {...register("jobLocation")}
+                    className="block w-full cursor-pointer rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
+                  >
+                    <option className="italic">-- Select a Location --</option>
+                    <option>On-Site</option>
+                    <option>Hybrid</option>
+                    <option>Remote</option>
+                  </select>
                 </div>
                 <div className="w-full text-sm sm:ml-2">
-                  <label htmlFor="date-time" className="mb-1 block font-medium">
-                    Date and Time
+                  <label htmlFor="date" className="mb-1 block font-medium">
+                    Date Posted
                   </label>
                   <input
-                    {...register("time")}
-                    type="datetime-local"
+                    onChange={(e) => setDate(new Date(e.target.value))}
+                    type="date"
                     className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
                     required
                   />
@@ -271,15 +290,16 @@ export default function EventModal() {
               </div>
               <div className="w-full text-sm">
                 <label htmlFor="rsvpLink" className="mb-1 block font-medium">
-                  RSVP Link
+                  Link to Job Posting
                 </label>
                 <input
-                  {...register("rsvpLink")}
+                  {...register("url")}
                   type="url"
-                  name="rsvpLink"
-                  id="rsvpLink"
+                  name="url"
+                  id="url"
                   className="block w-full rounded-sm text-xs text-primary shadow-sm focus:border-none focus:ring-light_yellow"
-                  placeholder="e.g. https://lu.ma/..."
+                  placeholder="e.g. https://google.com/..."
+                  min={new Date().toISOString().split("T")[0]}
                   required
                 />
               </div>
@@ -287,7 +307,7 @@ export default function EventModal() {
                 type="submit"
                 className="hover:bg-light-yellow inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary_yellow px-4 py-3 text-sm font-semibold text-black transition-all hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-light_yellow dark:focus:ring-offset-gray-800"
               >
-                Confirm Event
+                Confirm Job
               </button>
             </form>
           </div>
