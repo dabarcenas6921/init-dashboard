@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
 import SearchInput, { setWasSearchBtnClicked } from "~/components/SearchInput";
 import type { FilterInput } from "~/components/FilterJobsCard";
@@ -22,6 +22,10 @@ export type SelectedFilters = {
 
 export default function Jobs() {
   const [jobPostings, setJobPostings] = useState<JobPostingType[]>([])
+
+  useEffect(() => {
+    console.log("AYOOO")
+  }, [jobPostings])
 
   ///////////////////////////////
   //      SEARCHING JOBS       //
@@ -59,26 +63,26 @@ export default function Jobs() {
       setJobPostings(filterQuery.data)
     }
     
-    // if (filterQuery.isLoading) {
-    //   return (
-    //     <div className="w-full flex justify-center items-center h-[72vh]">
-    //       <Spinner color="warning" size="xl"/>
-    //     </div>
-    //   );
-    // }
+    if (filterQuery.isLoading) {
+      return (
+        <div className="w-full flex justify-center items-center h-[72vh]">
+          <Spinner color="warning" size="xl"/>
+        </div>
+      );
+    }
   }
   else if (getWasSearchBtnClicked()) {
     const searchQuery = api.jobs.getByQuery.useQuery(input);
     if (searchQuery.data) {
       setJobPostings(searchQuery.data)
     }
-    // if (searchQuery.isLoading) {
-    //   return (
-    //     <div className="w-full flex justify-center items-center h-[72vh]">
-    //       <Spinner color="warning" size="xl"/>
-    //     </div>
-    //   );
-    // }
+    if (searchQuery.isLoading) {
+      return (
+        <div className="w-full flex justify-center items-center h-[72vh]">
+          <Spinner color="warning" size="xl"/>
+        </div>
+      );
+    }
   }
   else {
     const allJobsQuery = api.jobs.getAll.useQuery();
@@ -86,14 +90,16 @@ export default function Jobs() {
       setJobPostings(allJobsQuery.data)
     }
     console.log("INSIDE ELSE")
-    // if (allJobsQuery.isLoading) {
-    //   return (
-    //     <div className="w-full flex justify-center items-center h-[72vh]">
-    //       <Spinner color="warning" size="xl"/>
-    //     </div>
-    //   );
-    // }
+    if (allJobsQuery.isLoading) {
+      return (
+        <div className="w-full flex justify-center items-center h-[72vh]">
+          <Spinner color="warning" size="xl"/>
+        </div>
+      );
+    }
   }
+
+  
 
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
