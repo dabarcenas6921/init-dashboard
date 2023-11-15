@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   BarChart,
@@ -31,7 +31,7 @@ export default function Attendance() {
   }
 
   // Custom label component
-  const CustomAxisTick: React.FC<CustomAxisTickProps> = ({ x, y, payload }) => {
+  function CustomAxisTick({ x, y, payload }: CustomAxisTickProps) {
     const words = payload.value.split(": ");
     const lineHeight = 16; // Adjust the line height as needed
     return (
@@ -50,7 +50,7 @@ export default function Attendance() {
         ))}
       </g>
     );
-  };
+  }
 
   return (
     <div className="mx-auto mt-5 max-w-4xl rounded-lg  p-4 shadow-md">
