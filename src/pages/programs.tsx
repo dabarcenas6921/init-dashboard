@@ -132,7 +132,7 @@ export default function Programs() {
                 <a href="#">
                   <div className="relative h-56 w-full overflow-hidden">
                     <Image
-                      className="rounded-t-lg"
+                      className="rounded-t-lg sm:object-left md:object-left  2xl:object-top"
                       alt={programData.title}
                       src={programData.image}
                       layout="fill"

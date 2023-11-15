@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -17,7 +17,7 @@ model Event {
   time        DateTime
   location    String
   picture     String // Assuming this is a URL or file path to the image
-  tag         String
+  program     String
   rsvpLink    String
 }
 

@@ -17,6 +17,13 @@ export default {
         primary_gray: "#D1D1D1",
         secondary: "#FFFFFF",
         light_purple: "#D0C3FC",
+        build: "#FC6C3F",
+        discover: "#FF3E9E",
+        explore: "#EB6A65",
+        ignite: "#87DE65",
+        hack: "#A27BFC",
+        launch: "#11CEBB",
+        reach: "#6FA4F4",
       },
       height: {
         "128": "32rem", // Adds h-128 for 32rem/512px height
