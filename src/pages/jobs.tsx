@@ -23,10 +23,6 @@ export type SelectedFilters = {
 export default function Jobs() {
   const [jobPostings, setJobPostings] = useState<JobPostingType[]>([])
 
-  useEffect(() => {
-    console.log("AYOOO")
-  }, [jobPostings])
-
   ///////////////////////////////
   //      SEARCHING JOBS       //
   //////////////////////////////
