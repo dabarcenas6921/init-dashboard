@@ -1,47 +1,36 @@
 import React from "react";
 import {
-  AreaChart,
-  Area,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  ReferenceLine,
 } from "recharts";
 
-// Your budget data
 const data = [
   { month: "January", actual: 3800 },
   { month: "February", actual: 4200 },
   { month: "March", actual: 3500 },
-  // ... more data
+  { month: "April", actual: 4000 },
+  { month: "May", actual: 4500 },
+  { month: "June", actual: 3700 },
+  { month: "July", actual: 4800 },
+  { month: "August", actual: 3900 },
+  { month: "September", actual: 4100 },
+  { month: "October", actual: 3600 },
+  { month: "November", actual: 4200 },
+  { month: "December", actual: 3800 },
 ];
 
-// Static budget value for the example
-const budgetValue = 4000;
-
-const gradientOffset = () => {
-  const dataMax = Math.max(...data.map((i) => i.actual));
-  const dataMin = Math.min(...data.map((i) => i.actual));
-  const budgetMax = Math.max(budgetValue, dataMax);
-  const budgetMin = Math.min(budgetValue, dataMin);
-
-  if (budgetMax <= 0) {
-    return 0;
-  }
-  if (budgetMin >= 0) {
-    return 1;
-  }
-
-  return dataMax / (dataMax - dataMin);
-};
-
-const off = gradientOffset();
+const budgetValue = 4000; // Static budget value
 
 const Budgeting: React.FC = () => {
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <AreaChart
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart
         data={data}
         margin={{
           top: 10,
@@ -52,21 +41,16 @@ const Budgeting: React.FC = () => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" />
-        <YAxis />
+        <YAxis domain={["auto", "auto"]} />
         <Tooltip />
-        <defs>
-          <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset={off} stopColor="green" stopOpacity={1} />
-            <stop offset={off} stopColor="red" stopOpacity={1} />
-          </linearGradient>
-        </defs>
-        <Area
-          type="monotone"
-          dataKey="actual"
-          stroke="#000"
-          fill="url(#splitColor)"
+        <Line type="monotone" dataKey="spending" />
+        <ReferenceLine
+          y={budgetValue}
+          label="Budget"
+          stroke="red"
+          strokeDasharray="3 3"
         />
-      </AreaChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 };
