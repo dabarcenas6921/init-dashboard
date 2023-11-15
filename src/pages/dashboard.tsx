@@ -4,7 +4,7 @@ import Explore from "~/components/DashboardCards/Explore";
 import Guilds from "~/components/DashboardCards/Guilds";
 import Main from "~/components/DashboardCards/Main";
 import Reach from "~/components/DashboardCards/Reach";
-import ShellHacks from "~/components/DashboardCards/ShellHacks";
+import ShellHacks from "~/components/DashboardCards/ShellhacksCards/ShellHacks";
 
 type CardName =
   | "Main"
