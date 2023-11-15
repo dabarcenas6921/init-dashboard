@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
@@ -11,9 +12,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   return (
     <div className="bg-primary font-poppins font-extrabold text-white">
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ClerkProvider {...pageProps}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ClerkProvider>
     </div>
   );
 };
