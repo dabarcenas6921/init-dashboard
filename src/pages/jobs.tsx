@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
 import SearchInput, { setWasSearchBtnClicked } from "~/components/SearchInput";
 import type { FilterInput } from "~/components/FilterJobsCard";
@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
-import { Spinner } from 'flowbite-react';
+import { Spinner } from "flowbite-react";
 import EventModal from "~/components/EventModal";
 
 // Define a type for the selected filters
@@ -21,21 +21,12 @@ export type SelectedFilters = {
 };
 
 export default function Jobs() {
-  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([])
-
-  ///////////////////////////////
-  //      SEARCHING JOBS       //
-  //////////////////////////////
-
+  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
   const router = useRouter();
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
   const encodedSearchQuery = encodeURI(searchQuery ?? "");
   const input = { q: encodedSearchQuery };
-
-  ///////////////////////////////
-  //      FILTERING JOBS      //
-  //////////////////////////////
 
   const [selectedFilters, setSelectedFilters] = useState<FilterInput>({
     jobType: [],
@@ -43,64 +34,31 @@ export default function Jobs() {
     jobLocation: [],
   });
 
-  const resetFilters = () => {
-    setSelectedFilters({
-      jobType: [],
-      jobPosition: [],
-      jobLocation: [],
-    });
-  };
+  const filterQuery = api.jobs.filterBySelectedFilters.useQuery(
+    selectedFilters,
+    {
+      enabled: getWasApplyFilterClicked(),
+    },
+  );
+  const searchResultsQuery = api.jobs.getByQuery.useQuery(input, {
+    enabled: getWasSearchBtnClicked(),
+  });
+  const allJobsQuery = api.jobs.getAll.useQuery();
 
-  // Returns job postings based on if the user
-  // Apply's filters or Searches for jobs
-  if (getWasApplyFilterClicked()) {
-    const filterQuery = api.jobs.filterBySelectedFilters.useQuery(selectedFilters ?? {});
+  useEffect(() => {
     if (filterQuery.data) {
-      setJobPostings(filterQuery.data)
+      setJobPostings(filterQuery.data);
+    } else if (searchResultsQuery.data) {
+      setJobPostings(searchResultsQuery.data);
+    } else if (allJobsQuery.data) {
+      setJobPostings(allJobsQuery.data);
     }
-    
-    // if (filterQuery.isLoading) {
-    //   return (
-    //     <div className="w-full flex justify-center items-center h-[72vh]">
-    //       <Spinner color="warning" size="xl"/>
-    //     </div>
-    //   );
-    // }
-  }
-  else if (getWasSearchBtnClicked()) {
-    const searchQuery = api.jobs.getByQuery.useQuery(input);
-    if (searchQuery.data) {
-      setJobPostings(searchQuery.data)
-    }
-    // if (searchQuery.isLoading) {
-    //   return (
-    //     <div className="w-full flex justify-center items-center h-[72vh]">
-    //       <Spinner color="warning" size="xl"/>
-    //     </div>
-    //   );
-    // }
-  }
-  else {
-    const allJobsQuery = api.jobs.getAll.useQuery();
-    if (allJobsQuery.data) {
-      setJobPostings(allJobsQuery.data)
-    }
-    console.log("INSIDE ELSE")
-    // if (allJobsQuery.isLoading) {
-    //   return (
-    //     <div className="w-full flex justify-center items-center h-[72vh]">
-    //       <Spinner color="warning" size="xl"/>
-    //     </div>
-    //   );
-    // }
-  }
+  }, [filterQuery.data, searchResultsQuery.data, allJobsQuery.data]);
 
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
   };
-
-  console.log("JOB POSTINGS: ", jobPostings)
 
   return (
     <main className="min-h-screen">
@@ -137,7 +95,13 @@ export default function Jobs() {
             >
               <FilterJobsCard
                 onFilterChange={setSelectedFilters}
-                onResetFilters={resetFilters}
+                onResetFilters={() =>
+                  setSelectedFilters({
+                    jobType: [],
+                    jobPosition: [],
+                    jobLocation: [],
+                  })
+                }
               />
             </Dropdown>
           </div>
@@ -146,16 +110,24 @@ export default function Jobs() {
           <div className="mr-[5%] hidden md:block">
             <FilterJobsCard
               onFilterChange={setSelectedFilters}
-              onResetFilters={resetFilters}
+              onResetFilters={() =>
+                setSelectedFilters({
+                  jobType: [],
+                  jobPosition: [],
+                  jobLocation: [],
+                })
+              }
             />
           </div>
 
           <div className="w-full">
-              {jobPostings && jobPostings.length > 0 ? (
-                <JobCard jobPostings={jobPostings} />
-              ) : (
-                <p className="flex justify-center items-center h-3/6">No matching job postings.</p>
-              )}
+            {jobPostings && jobPostings.length > 0 ? (
+              <JobCard jobPostings={jobPostings} />
+            ) : (
+              <p className="flex h-3/6 items-center justify-center">
+                No matching job postings.
+              </p>
+            )}
           </div>
         </div>
       </div>
