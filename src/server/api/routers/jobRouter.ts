@@ -33,7 +33,6 @@ const FilterInput = z.object({
   jobLocation: z.array(z.string()).optional(),
 });
 
-
 export const jobRouter = createTRPCRouter({
   // Create Job Procedure
   create: publicProcedure.input(JobData).mutation(async ({ input, ctx }) => {
@@ -69,7 +68,7 @@ export const jobRouter = createTRPCRouter({
     )
     .query(async ({ input, ctx }) => {
       try {
-        const decodedQuery = input.q.replace(/\+/g, ' ').replace(/%20/g, ' ');
+        const decodedQuery = input.q.replace(/\+/g, " ").replace(/%20/g, " ");
 
         const jobPostings = await ctx.db.jobPosting.findMany({
           where: {
@@ -86,12 +85,15 @@ export const jobRouter = createTRPCRouter({
       }
     }),
 
-
-    filterBySelectedFilters: publicProcedure
+  filterBySelectedFilters: publicProcedure
     .input(FilterInput)
     .query(async ({ input, ctx }) => {
       try {
-        if (input.jobType?.length === 0 && input.jobPosition?.length === 0 && input.jobLocation?.length === 0) {
+        if (
+          input.jobType?.length === 0 &&
+          input.jobPosition?.length === 0 &&
+          input.jobLocation?.length === 0
+        ) {
           // If no filters are provided, return all job postings
           const jobPostings = await ctx.db.jobPosting.findMany();
           return jobPostings;
@@ -100,14 +102,13 @@ export const jobRouter = createTRPCRouter({
         const jobPostings: JobPostingType[] = []; // Initialize an array to collect job postings
         const addedJobPostingIds = new Set<number>(); // Initialize a set to store added job posting IDs
         if (input.jobType) {
-          
-          for (const type of input.jobType) {           
+          for (const type of input.jobType) {
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
                 jobType: {
-                  contains: type 
-                }
-              }
+                  contains: type,
+                },
+              },
             });
 
             postingsOfType.forEach((post) => {
@@ -119,20 +120,19 @@ export const jobRouter = createTRPCRouter({
               }
             });
           }
-  
         }
         if (input.jobPosition) {
-          console.log(input.jobPosition)
+          console.log(input.jobPosition);
           for (let pos of input.jobPosition) {
             if (pos === "newGrad") {
-              pos = "New-grad"
+              pos = "New-grad";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
                 jobPosition: {
-                  contains: pos
-                }
-              }
+                  contains: pos,
+                },
+              },
             });
 
             postingsOfType.forEach((post) => {
@@ -144,21 +144,20 @@ export const jobRouter = createTRPCRouter({
               }
             });
           }
-      
-        } 
+        }
 
         if (input.jobLocation) {
-          console.log(input.jobLocation)
+          console.log(input.jobLocation);
           for (let loc of input.jobLocation) {
             if (loc === "onSite") {
-              loc = "On-site"
+              loc = "On-site";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
                 jobLocation: {
-                  contains: loc
-                }
-              }
+                  contains: loc,
+                },
+              },
             });
 
             postingsOfType.forEach((post) => {
@@ -170,19 +169,14 @@ export const jobRouter = createTRPCRouter({
               }
             });
           }
-      
         }
-       
-        return jobPostings;
 
+        return jobPostings;
       } catch (error) {
         console.log(error);
         throw new Error("Failed to filter job postings");
       }
     }),
-  
-
-
 
   // Delete Job Posting Procedure
   delete: publicProcedure
