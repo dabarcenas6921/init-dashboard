@@ -30,7 +30,7 @@ const totalValue = data.reduce((acc, item) => acc + item.value, 0);
 export default function YearToDate() {
   return (
     <div style={{ width: "100%", height: "475px" }}>
-      <h1 style={{ textAlign: "center", color: "white" }}>YTD Funding</h1>
+      <h1 style={{ textAlign: "center", color: "white" }}>Funding by Month</h1>
       <ResponsiveContainer width="100%" height="90%">
         <AreaChart
           data={data}
