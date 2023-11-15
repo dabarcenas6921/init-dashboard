@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
-import EventModal from "~/components/EventModal";
+import JobModal from "~/components/JobModal";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -85,7 +85,7 @@ export default function Jobs() {
                 See All Jobs
               </button>
             )}
-            <EventModal />
+            <JobModal />
             <SearchInput searchType="job" />
           </div>
         </div>

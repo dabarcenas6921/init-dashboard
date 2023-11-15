@@ -43,6 +43,7 @@ export default function EventModal() {
     formData.append("file", image as string);
     formData.append("upload_preset", "init_dashboard_upload");
     formData.append("public_id", filename);
+    formData.append("folder", "init-dashboard/events");
     formData.append("filename_override", "true");
     let secure_url = "";
 
@@ -162,7 +163,6 @@ export default function EventModal() {
                 </div>
               </div>
               <label
-                //onClick={handleOnClick}
                 className={`${
                   image ? "block" : "flex"
                 } w-full cursor-pointer items-center justify-center border-2 border-dashed border-primary_gray py-10 text-center text-primary_gray hover:border-solid hover:border-primary_yellow hover:text-primary_yellow`}
