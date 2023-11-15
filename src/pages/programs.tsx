@@ -1,8 +1,12 @@
 import Image, { StaticImageData } from "next/image";
 import InitPicture from "../assets/images/programCards/initexplore.png";
 import InitReach from "../assets/images/programCards/initreach.png";
-import InitBuild from "../assets/images/programCards/initbuild.png";
-import InitHack from "../assets/images/programCards/inithack.png";
+import InitBuild from "../assets/images/programCards/initbuild.jpg";
+import InitIgnite from "../assets/images/programCards/InitIgnite.jpg";
+import InitHack from "../assets/images/programCards/inithack.jpg";
+import InitDiscover from "../assets/images/programCards/InitDiscover.jpg";
+import InitUplift from "../assets/images/programCards/inituplift.jpg";
+import InitLaunch from "../assets/images/programCards/initlaunch.jpg";
 
 export default function Programs() {
   const sampleData: {
@@ -48,7 +52,7 @@ export default function Programs() {
     {
       // {index 4} index in mapping
       title: "Ignite",
-      image: InitPicture,
+      image: InitIgnite,
       discription:
         "INIT Ignite is a program focused on information technology, a field in technology. Commonly overlooked, information technology ensures that the systems running the software are secured and works. ",
       open: false,
@@ -68,7 +72,7 @@ export default function Programs() {
     {
       // {index 6} index in mapping
       title: "Discover",
-      image: InitPicture,
+      image: InitDiscover,
       discription:
         "INIT Discover is a program focused on the academic side of technology. Though often overlooked, research is a viable career path for students interested in academics or furthering advancements in the field. ",
       open: false,
@@ -78,7 +82,7 @@ export default function Programs() {
     {
       // {index 7} index in mapping
       title: "Uplift",
-      image: InitPicture,
+      image: InitUplift,
       discription:
         "INIT Uplift is a program focused on mentorship. Many incoming freshmen are overwhelmed by the amount of information available to them from the start. Our program aims to guide these new students and help them kickstart their tech careers. Those with experience in the field or program help to navigate freshmen during these rough times and allow them to establish a network or two. Mentor with us or get a mentor today",
 
@@ -89,7 +93,7 @@ export default function Programs() {
     {
       // {index 8} index in mapping
       title: "Launch",
-      image: InitPicture,
+      image: InitLaunch,
       discription:
         "INIT Launch is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots, this program aims teach you the fundamentals of project development in the real world. No experience is required to spark up your portfolio with us.",
       open: false,
@@ -104,7 +108,7 @@ export default function Programs() {
           Programs
         </h1>
       </div>
-      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+      <div className="  grid gap-8  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         {/* what ever comes first in the array thats the objects in the array and whats second is the Index */}
         {sampleData.map((programData, index) => {
           const afterINITArray: string =
@@ -132,7 +136,7 @@ export default function Programs() {
                 <a href="#">
                   <div className="relative h-56 w-full overflow-hidden">
                     <Image
-                      className="rounded-t-lg sm:object-left md:object-left  2xl:object-top"
+                      className="rounded-t-lg max-[2560px]:object-top min-[320px]:object-left sm:object-left md:object-left  2xl:object-top"
                       alt={programData.title}
                       src={programData.image}
                       layout="fill"
