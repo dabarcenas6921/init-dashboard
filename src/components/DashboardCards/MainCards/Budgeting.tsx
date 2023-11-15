@@ -29,7 +29,7 @@ const budgetValue = 4000;
 
 export default function Budgeting() {
   return (
-    <div className="mx-auto max-w-4xl rounded-lg  p-4 shadow-md">
+    <div className="mx-auto max-w-4xl rounded-lg  p-4 ">
       <h2 className="mb-4 text-center text-xl font-bold text-white">
         Monthly Budgeting
       </h2>

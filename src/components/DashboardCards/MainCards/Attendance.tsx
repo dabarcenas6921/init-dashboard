@@ -42,7 +42,7 @@ export default function Attendance() {
             y={index * lineHeight}
             dy={0}
             textAnchor="middle"
-            fill="#666"
+            fill="white"
             key={index}
           >
             {word}
@@ -53,7 +53,7 @@ export default function Attendance() {
   }
 
   return (
-    <div className="mx-auto mt-5 max-w-4xl rounded-lg  p-4 shadow-md">
+    <div className="mx-auto mt-5 max-w-4xl rounded-lg p-4">
       <h2 className="mb-4 text-center text-xl font-bold text-white">
         Event Sign-Ups vs Check-Ins
       </h2>
@@ -65,20 +65,31 @@ export default function Attendance() {
             left: 20,
             bottom: 40, // Increased bottom margin
           }}
-          barCategoryGap="10%"
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#FF8C00" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#CD7F32" stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id="seconduv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#FFD550" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#FFD550" stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <XAxis
             dataKey="eventName"
             height={60}
+            stroke="white"
             tick={<CustomAxisTick x={0} y={0} payload={undefined} />}
             interval={0}
           />
-          <YAxis />
-          <Tooltip />
+          <YAxis stroke="white" />
+          <Tooltip
+            contentStyle={{ backgroundColor: "white", color: "black" }}
+          />
           <Legend />
-          <Bar dataKey="signUp" fill="#8884d8" name="Signed Up" />
-          <Bar dataKey="checkIn" fill="#82ca9d" name="Checked In" />
+          <Bar dataKey="signUp" fill="url(#colorUv)" name="Signed Up" />
+          <Bar dataKey="checkIn" fill="url(#seconduv)" name="Checked In" />
         </BarChart>
       </ResponsiveContainer>
     </div>
