@@ -54,7 +54,7 @@ export default function Attendance() {
 
   return (
     <div className="mx-auto mt-5 max-w-4xl rounded-lg  p-4 shadow-md">
-      <h2 className="mb-4 text-center text-xl font-semibold text-white">
+      <h2 className="mb-4 text-center text-xl font-bold text-white">
         Event Sign-Ups vs Check-Ins
       </h2>
       <ResponsiveContainer width="100%" height={400}>
