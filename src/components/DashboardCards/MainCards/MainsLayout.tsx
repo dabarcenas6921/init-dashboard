@@ -2,6 +2,7 @@ import TotalMembers from "./TotalMembers";
 import TotalExecs from "./TotalExecs";
 import MemberSuccess from "./MemberSuccess";
 import Demographic from "./Demographic";
+import Attendance from "./Attendance";
 
 export default function MainsLayout() {
   return (
@@ -42,7 +43,7 @@ export default function MainsLayout() {
               href="#"
               className="block w-full rounded-lg bg-zinc-800 p-4 shadow-xl"
             >
-              {/*Card component goes here*/}
+              <Attendance />
             </a>
           </div>
         </div>
