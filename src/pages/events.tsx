@@ -1,10 +1,13 @@
 import EventCard from "../components/EventCard";
 import EventModal from "../components/EventModal";
 import { useState } from "react";
+import { UserButton, useUser, SignOutButton } from "@clerk/nextjs";
 
 export default function Events() {
   const testDate = new Date("2023-11-20T15:30:00Z");
   const [visible, setVisible] = useState(false);
+
+  const user = useUser();
 
   return (
     <main className="min-h-screen p-4 md:p-0">
@@ -13,7 +16,7 @@ export default function Events() {
           Upcoming Events
         </h1>
         <div className="flex w-full flex-col items-center space-y-4 md:w-auto md:flex-row md:space-x-5 md:space-y-0">
-          <EventModal />
+          {user.isSignedIn && <EventModal />}
           <Search />
         </div>
       </div>

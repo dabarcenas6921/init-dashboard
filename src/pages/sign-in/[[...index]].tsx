@@ -45,12 +45,36 @@ export default function SignInPage() {
               backgroundColor: "black",
             },
             footerActionLink: {
-              color: "blue",
+              color: "#FFD550",
               "&:hover, &:focus, &:active": {
-                color: "magenta",
+                color: "#FFF1B8",
               },
             },
             formFieldAction: "hidden",
+            formResendCodeLink: {
+              color: "#FFD550",
+              "&:hover, &:focus, &:active": {
+                color: "#FFF1B8",
+              },
+            },
+            otpCodeFieldInput: {
+              color: "black",
+            },
+            otpCodeFieldInputs: {
+              gap: 5,
+            },
+            fipksp: {
+              color: "white",
+            },
+            headerBackLink: {
+              textDecorationColor: "white",
+              color: "#FFD550",
+              "&:hover, &:focus, &:active": {
+                color: "#FFF1B8",
+                textDecorationColor: "#FFF1B8",
+              },
+            },
+            headerBackIcon: "hidden",
           },
           variables: {
             colorBackground: "#19191A",

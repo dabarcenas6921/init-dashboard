@@ -45,9 +45,9 @@ export default function SignUpPage() {
               backgroundColor: "black",
             },
             footerActionLink: {
-              color: "blue",
+              color: "#FFD550",
               "&:hover, &:focus, &:active": {
-                color: "magenta",
+                color: "#FFF1B8",
               },
             },
             formFieldAction: "hidden",
@@ -55,12 +55,23 @@ export default function SignUpPage() {
               color: "black",
             },
             formResendCodeLink: {
-              color: "blue",
+              color: "#FFD550",
               "&:hover, &:focus, &:active": {
-                color: "magenta",
-                buttonOpacity: 1.5,
+                color: "#FFF1B8",
               },
             },
+            otpCodeFieldInputs: {
+              gap: 5,
+            },
+            headerBackLink: {
+              textDecorationColor: "white",
+              color: "#FFD550",
+              "&:hover, &:focus, &:active": {
+                color: "#FFF1B8",
+                textDecorationColor: "#FFF1B8",
+              },
+            },
+            headerBackIcon: "hidden",
           },
           variables: {
             colorBackground: "#19191A",
