@@ -67,7 +67,7 @@ export default function Workshops() {
       <h1 className="text-center text-lg font-semibold text-white sm:text-xl">
         Sponsors Workshops Schedule
       </h1>
-      <div className="max-h-[420px] overflow-y-auto">
+      <div className="max-h-[555px] overflow-y-auto">
         {/* Display data in cards for smaller screens */}
         <div className="mt-5 w-full text-sm text-gray-400 sm:hidden">
           {volunteers.map((item, index) => (

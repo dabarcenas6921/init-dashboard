@@ -18,8 +18,11 @@ const data02 = [
 
 export default function Demographic() {
   return (
-    <div style={{ width: "100%", height: 450 }}>
-      <ResponsiveContainer>
+    <div className="h-ful w-full">
+      <h2 className="mb-4 text-center text-xl font-bold text-white">
+        Demographics
+      </h2>
+      <ResponsiveContainer width="100%" height={500}>
         <PieChart width={400} height={400}>
           <Pie
             dataKey="value"
