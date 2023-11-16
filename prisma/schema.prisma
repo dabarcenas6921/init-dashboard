@@ -2,12 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Event {
@@ -16,9 +16,21 @@ model Event {
   description String
   time        DateTime
   location    String
-  picture     String   // Assuming this is a URL or file path to the image
-  tag         String
+  picture     String // Assuming this is a URL or file path to the image
+  program     String
   rsvpLink    String
 }
 
 //Create an enum once we migrate to Postgres
+
+model JobPosting {
+  id          Int    @id @default(autoincrement())
+  image       String
+  title       String
+  company     String
+  jobType     String
+  jobPosition String
+  jobLocation String
+  date        String
+  url         String
+}
