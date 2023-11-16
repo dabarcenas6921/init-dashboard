@@ -62,8 +62,8 @@ export const eventRouter = createTRPCRouter({
         const events = await ctx.db.event.findMany({
           where: {
             OR: [
-              { name: { contains: decodedQuery.toLowerCase() } },
-              { program: { contains: decodedQuery.toLowerCase() } },
+              { name: { contains: decodedQuery, mode: "insensitive" } },
+              { program: { contains: decodedQuery, mode: "insensitive" } },
             ],
           },
         });
