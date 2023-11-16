@@ -4,9 +4,9 @@ import InitReach from "../assets/images/programCards/initreach.png";
 import InitBuild from "../assets/images/programCards/initbuild.jpg";
 import InitIgnite from "../assets/images/programCards/InitIgnite.jpg";
 import InitHack from "../assets/images/programCards/inithack.jpg";
-import InitDiscover from "../assets/images/programCards/Initdiscover.jpg";
 import InitUplift from "../assets/images/programCards/inituplift.jpg";
 import InitLaunch from "../assets/images/programCards/initlaunch.jpg";
+import InitDiscover from "../assets/images/programCards/Initdiscover.jpg";
 
 export default function Programs() {
   const sampleData: {
