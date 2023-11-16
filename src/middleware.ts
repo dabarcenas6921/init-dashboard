@@ -8,6 +8,7 @@ export default authMiddleware({
     "/events",
     "/about",
     "/jobs",
+    "/programs",
     "/api/(.*)",
   ],
 });

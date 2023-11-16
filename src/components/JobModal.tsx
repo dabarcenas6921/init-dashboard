@@ -256,7 +256,7 @@ export default function JobModal() {
                   >
                     <option className="italic">-- Select a Position --</option>
                     <option>Internship</option>
-                    <option>New Grad</option>
+                    <option>New-Grad</option>
                   </select>
                 </div>
               </div>
