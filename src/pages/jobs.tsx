@@ -62,6 +62,7 @@ export default function Jobs() {
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
+    router.refresh();
   };
 
   function handleResetFilters() {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Dropdown } from 'flowbite-react';
 import DeleteJobModal from './DeleteJobModal';
+import Image from "next/image";
 
 export type Job = {
   id: number,
@@ -68,7 +69,6 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
               <Dropdown.Item>
                 <a
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                  href="#"
                 >
                   <p>Edit</p>
                 </a>
@@ -77,7 +77,6 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
               <Dropdown.Item onClick={() => openModal(job)}>
                 <a
                   className="block px-4 py-2 text-sm text-red-600 hover.bg-gray-100 dark:text-gray-200 dark:hover-bg-gray-600 dark:hover:text-white"
-                  href="#"
                 >
                   <p>Delete</p>
                 </a>
@@ -89,7 +88,7 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
           {/* Top of Card */}
           <div className="flex items-center mb-1 mt-[-0.5em]">
             <div className="">
-              <img className="w-20 h-20 mr-4 max-[428px]:w-16 max-[428px]:h-16" src={job.image} alt={job.title} />
+              <Image className="w-20 h-20 mr-4 max-[428px]:w-16 max-[428px]:h-16" src={job.image} alt={job.title} width={1000} height={1000} />
             </div>
             <div>
               <h3 className="text-white text-lg max-[428px]:text-[0.84rem] mb-1">{job.title}</h3>

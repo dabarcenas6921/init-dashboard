@@ -3,7 +3,6 @@ import { Modal } from 'flowbite-react';
 import React from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { api } from "~/utils/api";
-import { useRouter } from 'next/router'
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
 
 interface DeleteJobModalProps {
@@ -34,12 +33,10 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings, jo
 
 
   async function deleted() {
-    console.log("DELETED JOB:", id ?? "No ID available");
     
     if (id) {
       try {
         await mutation.mutateAsync({ id }); // Using mutateAsync to wait for completion
-        console.log(jobPostings)
       } catch (error) {
         console.error("Error deleting job posting:", error);
         // Handle error if necessary
