@@ -91,7 +91,9 @@ export default function Jobs(
       jobPosition: [],
       jobLocation: [],
     });
-    console.log("RESET");
+    if (allJobsQuery.data) {
+      setJobPostings(allJobsQuery.data);
+    }
   }
 
   return (
