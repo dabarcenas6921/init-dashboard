@@ -132,7 +132,7 @@ export default function Programs() {
               className="firstrow relative mx-auto mt-4 w-full"
               style={{ height: "530px" }}
             >
-              <div className="flex h-full flex-col overflow-hidden rounded-s-none	 bg-zinc-900  shadow">
+              <div className="flex h-full flex-col overflow-hidden rounded-none bg-zinc-900  shadow">
                 <a href="#">
                   <div className="relative h-56 w-full overflow-hidden">
                     <Image
@@ -184,7 +184,7 @@ export default function Programs() {
                         href={programData.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center rounded-s-none	px-3 py-2 text-center text-sm font-medium text-white hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-opacity-50"
+                        className="inline-flex w-full items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-opacity-50"
                         style={{ backgroundColor: programData.color }}
                       >
                         Apply Now
@@ -192,7 +192,7 @@ export default function Programs() {
                       </a>
                     ) : (
                       <div
-                        className="inline-flex w-full items-center justify-center rounded-s-none	px-3 py-2 text-center text-sm font-medium text-white"
+                        className="inline-flex w-full items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white"
                         style={{
                           backgroundColor: programData.color,
                           opacity: ".45",
