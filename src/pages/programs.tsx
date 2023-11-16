@@ -12,7 +12,7 @@ export default function Programs() {
   const sampleData: {
     title: string;
     image: StaticImageData;
-    discription: string;
+    description: string;
     open: boolean;
     url: string;
     color: string;
@@ -21,7 +21,7 @@ export default function Programs() {
       // {index 1} index in mapping
       title: "Explore",
       image: InitPicture,
-      discription:
+      description:
         "INIT Explore is a program focused on the software development side of technology. From web development to machine learning to simple scripts, this program aims to expose members to all sorts of different programming languages and frameworks commonly used in the industry.",
 
       open: true,
@@ -33,7 +33,7 @@ export default function Programs() {
       // {index 2} index in mapping
       title: "Reach",
       image: InitReach,
-      discription:
+      description:
         "INIT Reach is a program focused on the hardware development side of technology. Using all sorts of machinery, large or small, this program aims inspire members to create their own devices with the technology available today.",
       open: true,
       url: "https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog",
@@ -43,7 +43,7 @@ export default function Programs() {
       // {index 3} index in mapping
       title: "Build",
       image: InitBuild,
-      discription:
+      description:
         "INIT Build is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
@@ -53,7 +53,7 @@ export default function Programs() {
       // {index 4} index in mapping
       title: "Ignite",
       image: InitIgnite,
-      discription:
+      description:
         "INIT Ignite is a program focused on information technology, a field in technology. Commonly overlooked, information technology ensures that the systems running the software are secured and works. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
@@ -63,7 +63,7 @@ export default function Programs() {
       // {index 5} index in mapping
       title: "Hack",
       image: InitHack,
-      discription:
+      description:
         "INIT Hack is a program focused on the community in Computer Science. Across the country, there are various coding competitions, Hackathons, where students must create a solution by the end of a given time frame. Most students work as teams, with the members being fellow students in the same school. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
@@ -73,7 +73,7 @@ export default function Programs() {
       // {index 6} index in mapping
       title: "Discover",
       image: InitDiscover,
-      discription:
+      description:
         "INIT Discover is a program focused on the academic side of technology. Though often overlooked, research is a viable career path for students interested in academics or furthering advancements in the field. ",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
@@ -83,7 +83,7 @@ export default function Programs() {
       // {index 7} index in mapping
       title: "Uplift",
       image: InitUplift,
-      discription:
+      description:
         "INIT Uplift is a program focused on mentorship. Many incoming freshmen are overwhelmed by the amount of information available to them from the start. Our program aims to guide these new students and help them kickstart their tech careers. Those with experience in the field or program help to navigate freshmen during these rough times and allow them to establish a network or two. Mentor with us or get a mentor today",
 
       open: false,
@@ -94,7 +94,7 @@ export default function Programs() {
       // {index 8} index in mapping
       title: "Launch",
       image: InitLaunch,
-      discription:
+      description:
         "INIT Launch is a program focused on project development. Teams have nine weeks to complete a project corresponding to a topic in technology that they may be interested in. From mobile applications to games to even robots, this program aims teach you the fundamentals of project development in the real world. No experience is required to spark up your portfolio with us.",
       open: false,
       url: "https://generalassemb.ly/education/user-experience-design-immersive",
@@ -102,7 +102,7 @@ export default function Programs() {
     },
   ];
   return (
-    <main className="min-h-screen p-4">
+    <main className="mx-auto min-h-screen max-w-7xl p-4 px-8 md:p-0 md:px-8">
       <div className="mb-4 flex flex-col items-center justify-between md:mb-0 md:flex-row">
         <h1 className="mb-4 text-2xl text-white md:mb-0 md:text-3xl">
           Programs
@@ -112,13 +112,11 @@ export default function Programs() {
         {/* what ever comes first in the array thats the objects in the array and whats second is the Index */}
         {sampleData.map((programData, index) => {
           const afterINITArray: string =
-            programData.discription.split("INIT")[1] ?? "";
+            programData.description.split("INIT")[1] ?? "";
           const initArrayWords = afterINITArray.split(" ");
           const firstWord = afterINITArray.split(" ")[1];
 
-          console.log(programData.image);
-
-          //for discription title colors
+          //for description title colors
           let pAfterFirstWord = "";
           initArrayWords.forEach((word, i) => {
             if (i > 1) {
