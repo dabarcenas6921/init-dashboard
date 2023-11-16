@@ -57,7 +57,7 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
       {jobPostings.map((job, index) => (
         <Card
           key={index}
-          className="max-w-xs min-w-[16rem] bg-[#121415] border-[#121415] mb-8 max-[820px]:mb-8"
+          className={`max-w-xs min-w-[16rem] bg-[#121415] ${!isSignedIn && "pt-3"} border-[#121415] mb-8 max-[820px]:mb-8`}
         >
           <DeleteJobModal 
             isOpen={isModalOpen && selectedJob === job} 
