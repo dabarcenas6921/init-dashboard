@@ -32,14 +32,14 @@ export default function JobCard({ jobPostings }: JobCardProps) {
     setSelectedJob(null);
   };
 
-  if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
-    return <p>No matching job postings.</p>;
-  }
+  // if (!Array.isArray(jobPostings) || jobPostings.length === 0) {
+  //   return <p>No matching job postingssss.</p>;
+  // }
 
   
 
   return (
-    <div className={`w-full flex flex-wrap items-start justify-evenly ${jobPostings.length === 2 ? 'xl:justify-evenly' : 'xl:justify-between'}`}>
+    <div className={`w-full grid place-items-center grid-cols-1 min-[980px]:grid-cols-2 min-[1320px]:grid-cols-3 `}>
       {jobPostings.map((job, index) => (
         <Card
           key={index}

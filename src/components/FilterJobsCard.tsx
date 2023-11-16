@@ -23,7 +23,6 @@ type FilterJobsCardProps = {
   onResetFilters: () => void; 
 }
 
-
 let wasApplyFilterClicked = false
 
 export function setWasApplyFilterClicked(value: boolean) {
@@ -33,6 +32,7 @@ export function setWasApplyFilterClicked(value: boolean) {
 export function getWasApplyFilterClicked() {
   return wasApplyFilterClicked
 }
+
 
 const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => {
   const [checkboxState, setCheckboxState] = useState<CheckboxState>({

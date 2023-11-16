@@ -64,6 +64,18 @@ export default function Jobs() {
     router.push("/jobs");
   };
 
+  function handleResetFilters() {
+    setSelectedFilters({
+      jobType: [],
+      jobPosition: [],
+      jobLocation: [],
+    })
+    console.log("RESET")
+
+  }
+
+  console.log("JOB POSTINGS: ", jobPostings)
+
   return (
     <main className="min-h-screen">
       {/* Container to keep everything in line */}
@@ -99,13 +111,7 @@ export default function Jobs() {
             >
               <FilterJobsCard
                 onFilterChange={setSelectedFilters}
-                onResetFilters={() =>
-                  setSelectedFilters({
-                    jobType: [],
-                    jobPosition: [],
-                    jobLocation: [],
-                  })
-                }
+                onResetFilters={handleResetFilters}
               />
             </Dropdown>
           </div>
@@ -114,13 +120,7 @@ export default function Jobs() {
           <div className="mr-[5%] hidden md:block">
             <FilterJobsCard
               onFilterChange={setSelectedFilters}
-              onResetFilters={() =>
-                setSelectedFilters({
-                  jobType: [],
-                  jobPosition: [],
-                  jobLocation: [],
-                })
-              }
+              onResetFilters={handleResetFilters}
             />
           </div>
 
