@@ -22,13 +22,17 @@ export default function Demographic() {
       <h2 className="mb-4 text-center text-xl font-bold text-white">
         Demographics
       </h2>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer
+        width="100%"
+        height={500}
+        className="aspect-square sm:aspect-video"
+      >
         <PieChart>
           <Pie
             dataKey="value"
             isAnimationActive={false}
             data={data01}
-            cx="60%"
+            cx="62%"
             cy="29%"
             outerRadius="50%" // Adjust if needed
             label={({ name }) => `${name}`}
