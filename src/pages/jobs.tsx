@@ -40,10 +40,14 @@ export default function Jobs() {
       enabled: getWasApplyFilterClicked(),
     },
   );
-  const searchResultsQuery = api.jobs.getByQuery.useQuery(input, {
-    enabled: getWasSearchBtnClicked(),
-  });
+  const searchResultsQuery = api.jobs.getByQuery.useQuery(
+    input, 
+    {
+      enabled: getWasSearchBtnClicked(),
+    },
+  );
   const allJobsQuery = api.jobs.getAll.useQuery();
+
 
   useEffect(() => {
     if (filterQuery.data) {

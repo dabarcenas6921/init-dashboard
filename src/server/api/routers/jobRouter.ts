@@ -73,8 +73,8 @@ export const jobRouter = createTRPCRouter({
         const jobPostings = await ctx.db.jobPosting.findMany({
           where: {
             OR: [
-              { title: { contains: decodedQuery.toLowerCase() } },
-              { company: { contains: decodedQuery.toLowerCase() } },
+              { title: { contains: decodedQuery, mode: "insensitive" } },
+              { company: { contains: decodedQuery, mode: "insensitive" } },
             ],
           },
         });
@@ -107,6 +107,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobType: {
                   contains: type,
+                  mode: "insensitive"
                 },
               },
             });
@@ -131,6 +132,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobPosition: {
                   contains: pos,
+                  mode: "insensitive"
                 },
               },
             });
@@ -156,6 +158,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobLocation: {
                   contains: loc,
+                  mode: "insensitive"
                 },
               },
             });
