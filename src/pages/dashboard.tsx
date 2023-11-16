@@ -1,18 +1,25 @@
 import { useState, ReactElement } from "react";
+<<<<<<< HEAD
 import Build from "~/components/DashboardCards/Build";
 import Explore from "~/components/DashboardCards/Explore";
 import Guilds from "~/components/DashboardCards/Guilds";
 import Main from "~/components/DashboardCards/Main/Main";
 import Reach from "~/components/DashboardCards/Reach";
 import ShellHacks from "~/components/DashboardCards/Shellhacks/ShellhacksCards/ShellHacks";
+=======
+// import Build from "~/components/DashboardCards/Build";
+// import Explore from "~/components/DashboardCards/Explore";
+// import Guilds from "~/components/DashboardCards/Guilds";
+import Main from "~/components/DashboardCards/MainCards/Main";
+// import Reach from "~/components/DashboardCards/Reach";
+import ShellHacks from "~/components/DashboardCards/ShellhacksCards/ShellHacks";
+>>>>>>> 6cfa9fc9b9ec90b43b27e16d5da292f5e36c6bf0
 
-type CardName =
-  | "Main"
-  | "ShellHacks"
-  | "Explore"
-  | "Build"
-  | "Reach"
-  | "Guilds";
+type CardName = "Main" | "ShellHacks";
+// | "Explore"
+// | "Build"
+// | "Reach"
+// | "Guilds";
 
 export default function Dashboard() {
   const [activeCard, setActiveCard] = useState<CardName>("Main");
@@ -20,19 +27,19 @@ export default function Dashboard() {
   const cardComponents: Record<CardName, ReactElement> = {
     Main: <Main />,
     ShellHacks: <ShellHacks />,
-    Explore: <Explore />,
-    Build: <Build />,
-    Reach: <Reach />,
-    Guilds: <Guilds />,
+    // Explore: <Explore />,
+    // Build: <Build />,
+    // Reach: <Reach />,
+    // Guilds: <Guilds />,
   };
 
   const buttonLabels: CardName[] = [
     "Main",
     "ShellHacks",
-    "Explore",
-    "Build",
-    "Reach",
-    "Guilds",
+    // "Explore",
+    // "Build",
+    // "Reach",
+    // "Guilds",
   ];
 
   return (
