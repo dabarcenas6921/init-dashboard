@@ -69,11 +69,10 @@ export default function Jobs() {
       jobType: [],
       jobPosition: [],
       jobLocation: [],
-    })
-    if (allJobsQuery.data) {
-      setJobPostings(allJobsQuery.data)
-    }
+    });
+    console.log("HERE:", jobPostings)
 
+    resetJobs();
   }
 
   return (
@@ -126,7 +125,10 @@ export default function Jobs() {
 
           <div className="w-full">
             {jobPostings && jobPostings.length > 0 ? (
-              <JobCard jobPostings={jobPostings} />
+              <JobCard 
+              jobPostings={jobPostings} 
+              setJobPostings={setJobPostings}
+              />
             ) : (
               <p className="flex h-3/6 items-center justify-center">
                 No matching job postings.

@@ -16,9 +16,20 @@ export type Job = {
 
 type JobCardProps = {
   jobPostings: Job[];
+  setJobPostings: React.Dispatch<React.SetStateAction<{
+    id: number;
+    image: string;
+    title: string;
+    company: string;
+    jobType: string;
+    jobPosition: string;
+    jobLocation: string;
+    date: string;
+    url: string;
+}[]>>
 };
 
-export default function JobCard({ jobPostings }: JobCardProps) {
+export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
@@ -45,7 +56,13 @@ export default function JobCard({ jobPostings }: JobCardProps) {
           key={index}
           className="max-w-xs min-w-[16rem] bg-[#121415] border-[#121415] mb-8 max-[820px]:mb-8"
         >
-          <DeleteJobModal isOpen={isModalOpen && selectedJob === job} onClose={closeModal} id={job.id} />
+          <DeleteJobModal 
+            isOpen={isModalOpen && selectedJob === job} 
+            onClose={closeModal} 
+            id={job.id} 
+            setJobPostings={setJobPostings}
+            jobPostings={jobPostings}
+            />
           <div className="text-white flex justify-end px-4">
             <Dropdown inline label="" className="">
               <Dropdown.Item>

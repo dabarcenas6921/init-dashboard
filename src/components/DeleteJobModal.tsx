@@ -4,18 +4,34 @@ import React from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { api } from "~/utils/api";
 import { useRouter } from 'next/router'
+import type { JobPostingType } from "~/server/api/routers/jobRouter";
 
 interface DeleteJobModalProps {
   isOpen: boolean;
   onClose: () => void;
-  id?: number; // Optional id prop
+  id?: number; // Optional id prop,
+  jobPostings: JobPostingType[],
+  setJobPostings: React.Dispatch<React.SetStateAction<{
+    id: number;
+    image: string;
+    title: string;
+    company: string;
+    jobType: string;
+    jobPosition: string;
+    jobLocation: string;
+    date: string;
+    url: string;
+  }[]>>
 }
 
-export default function DeleteJobModal({ isOpen, onClose, id }: DeleteJobModalProps) {
+export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings, jobPostings }: DeleteJobModalProps) {
 
-  const router = useRouter()
+  const mutation = api.jobs.delete.useMutation({
+    onSuccess: (jobPostings) =>{
+      setJobPostings(currentJobPostings => currentJobPostings.filter((job) => job.id !== jobPostings.id))
+    }
+  })
 
-  const mutation = api.jobs.delete.useMutation()
 
   async function deleted() {
     console.log("DELETED JOB:", id ?? "No ID available");
@@ -23,7 +39,7 @@ export default function DeleteJobModal({ isOpen, onClose, id }: DeleteJobModalPr
     if (id) {
       try {
         await mutation.mutateAsync({ id }); // Using mutateAsync to wait for completion
-        router.reload();
+        console.log(jobPostings)
       } catch (error) {
         console.error("Error deleting job posting:", error);
         // Handle error if necessary
