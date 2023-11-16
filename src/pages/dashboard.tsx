@@ -2,9 +2,9 @@ import { useState, ReactElement } from "react";
 import Build from "~/components/DashboardCards/Build";
 import Explore from "~/components/DashboardCards/Explore";
 import Guilds from "~/components/DashboardCards/Guilds";
-import Main from "~/components/DashboardCards/MainCards/Main";
+import Main from "~/components/DashboardCards/Main/Main";
 import Reach from "~/components/DashboardCards/Reach";
-import ShellHacks from "~/components/DashboardCards/ShellhacksCards/ShellHacks";
+import ShellHacks from "~/components/DashboardCards/Shellhacks/ShellhacksCards/ShellHacks";
 
 type CardName =
   | "Main"

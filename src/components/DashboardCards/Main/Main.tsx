@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MainsLayout from "./MainsLayout";
+import MainsLayout from "./MainCards/MainsLayout";
 
 export default function Main() {
   return (
