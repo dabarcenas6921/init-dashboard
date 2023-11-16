@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 const EventData = z.object({
   name: z.string(),
@@ -15,18 +19,20 @@ export type EventType = z.infer<typeof EventData>;
 
 export const eventRouter = createTRPCRouter({
   //Protect this route once user authentication is completed
-  create: publicProcedure.input(EventData).mutation(async ({ input, ctx }) => {
-    try {
-      const event = await ctx.db.event.create({
-        data: input,
-      });
+  create: protectedProcedure
+    .input(EventData)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const event = await ctx.db.event.create({
+          data: input,
+        });
 
-      return event;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Failed to create event");
-    }
-  }),
+        return event;
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to create event");
+      }
+    }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
     try {
@@ -63,7 +69,7 @@ export const eventRouter = createTRPCRouter({
       }
     }),
 
-  delete: publicProcedure
+  delete: protectedProcedure
     .input(
       z.object({
         id: z.number(),
@@ -81,7 +87,7 @@ export const eventRouter = createTRPCRouter({
       }
     }),
 
-  update: publicProcedure
+  update: protectedProcedure
     .input(
       z.object({
         id: z.number(),
