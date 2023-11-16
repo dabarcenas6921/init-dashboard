@@ -70,11 +70,11 @@ export default function Jobs() {
       jobPosition: [],
       jobLocation: [],
     })
-    console.log("RESET")
+    if (allJobsQuery.data) {
+      setJobPostings(allJobsQuery.data)
+    }
 
   }
-
-  console.log("JOB POSTINGS: ", jobPostings)
 
   return (
     <main className="min-h-screen">
