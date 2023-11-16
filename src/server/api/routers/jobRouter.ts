@@ -65,8 +65,8 @@ export const jobRouter = createTRPCRouter({
         const jobPostings = await ctx.db.jobPosting.findMany({
           where: {
             OR: [
-              { title: { contains: decodedQuery.toLowerCase() } },
-              { company: { contains: decodedQuery.toLowerCase() } },
+              { title: { contains: decodedQuery, mode: "insensitive" } },
+              { company: { contains: decodedQuery, mode: "insensitive" } },
             ],
           },
         });
@@ -117,7 +117,7 @@ export const jobRouter = createTRPCRouter({
           console.log(input.jobPosition);
           for (let pos of input.jobPosition) {
             if (pos === "newGrad") {
-              pos = "New-grad";
+              pos = "New-Grad";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
@@ -142,7 +142,7 @@ export const jobRouter = createTRPCRouter({
           console.log(input.jobLocation);
           for (let loc of input.jobLocation) {
             if (loc === "onSite") {
-              loc = "On-site";
+              loc = "On-Site";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
