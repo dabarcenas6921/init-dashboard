@@ -11,6 +11,7 @@ import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
 import JobModal from "~/components/JobModal";
+import { useUser } from "@clerk/nextjs";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -21,6 +22,7 @@ export type SelectedFilters = {
 
 export default function Jobs() {
   let jobPostingsArr: JobPostingType[] | undefined = [];
+  const { isSignedIn } = useUser();
 
   ///////////////////////////////
   //      SEARCHING JOBS       //
@@ -85,7 +87,7 @@ export default function Jobs() {
                 See All Jobs
               </button>
             )}
-            <JobModal />
+            {isSignedIn && <JobModal />}
             <SearchInput searchType="job" />
           </div>
         </div>
