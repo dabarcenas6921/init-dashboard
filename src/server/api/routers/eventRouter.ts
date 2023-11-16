@@ -15,7 +15,18 @@ const EventData = z.object({
   rsvpLink: z.string(),
 });
 
-export type EventType = z.infer<typeof EventData>;
+const EventType = z.object({
+  id: z.number(),
+  name: z.string(),
+  description: z.string(),
+  time: z.date(),
+  location: z.string(),
+  picture: z.string(),
+  program: z.string(),
+  rsvpLink: z.string(),
+});
+
+export type EventType = z.infer<typeof EventType>;
 
 export const eventRouter = createTRPCRouter({
   //Protect this route once user authentication is completed
@@ -57,8 +68,8 @@ export const eventRouter = createTRPCRouter({
         const events = await ctx.db.event.findMany({
           where: {
             OR: [
-              { name: { contains: decodedQuery.toLowerCase() } },
-              { program: { contains: decodedQuery.toLowerCase() } },
+              { name: { contains: decodedQuery, mode: "insensitive" } },
+              { program: { contains: decodedQuery, mode: "insensitive" } },
             ],
           },
         });

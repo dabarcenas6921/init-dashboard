@@ -36,16 +36,16 @@ export default function Carousel() {
               alt="Init Picture"
             />
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <Image
-              src="/assets/images/people3.jpeg"
+              src="/assets/images/people11.jpg"
               width={0}
               height={0}
               sizes="100vw"
               style={{ width: "100%", height: "auto" }}
               alt="Init Picture"
             />
-          </SwiperSlide>
+          </SwiperSlide> */}
           <SwiperSlide>
             <Image
               src="/assets/images/people7.png"

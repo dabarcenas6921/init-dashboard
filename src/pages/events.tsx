@@ -53,10 +53,10 @@ export default function Events() {
       </div>
       <div className="mx-auto mt-8">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-          {events?.map((event, index) => (
+          {events?.map((event) => (
             <EventCard
-              key={index}
-              id={index}
+              key={event.id}
+              id={event.id}
               name={event.name}
               description={event.description}
               picture={event.picture}
