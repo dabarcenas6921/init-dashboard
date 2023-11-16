@@ -108,7 +108,7 @@ export default function Programs() {
           Programs
         </h1>
       </div>
-      <div className="  grid gap-8  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+      <div className=" grid gap-8  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         {/* what ever comes first in the array thats the objects in the array and whats second is the Index */}
         {sampleData.map((programData, index) => {
           const afterINITArray: string =
