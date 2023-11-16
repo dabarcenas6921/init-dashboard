@@ -25,16 +25,18 @@ export default function Home() {
                 achieve economic mobility
               </p>
               <div className="flex flex-col justify-start gap-2 pt-8 md:flex-row md:space-x-3">
-                <button
+                <Link
+                  href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
+                  target="_blank"
                   type="button"
-                  className="rounded-lg bg-yellow-300 px-6 py-3.5 text-center text-base font-medium text-black focus:outline-none focus:ring-4 focus:ring-blue-300"
+                  className="flex items-center justify-center rounded-lg bg-primary_yellow px-6 py-3.5 font-bold text-primary  hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
                 >
                   Join Now
-                </button>
+                </Link>
                 <Link href="https://discord.gg/init">
                   <button
                     type="button"
-                    className="flex w-full items-center justify-center rounded-lg bg-discord_purple px-6 py-3.5 text-base font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    className="flex w-full items-center justify-center rounded-lg bg-discord_purple px-6 py-3.5 text-base font-medium text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                   >
                     <div className="mr-2 h-6 w-6">
                       <svg
@@ -66,11 +68,14 @@ export default function Home() {
           <ThisWeekCard />
         </div>
         <section>
-          <h1 className="xl:mt-30 mt-10 flex justify-center text-3xl md:text-4xl lg:mt-10">
+          <a
+            href="programs"
+            className="xl:mt-30 mt-10 flex justify-center text-3xl hover:text-yellow-200 md:text-4xl lg:mt-10"
+          >
             🧠 Programs
-          </h1>
+          </a>
           <div className="grid grid-cols-1 space-x-0 md:grid-cols-2 md:space-x-5 lg:space-x-0">
-            <div className="flex justify-center md:justify-start">
+            <div className="grid-span-1 flex justify-center md:justify-start">
               <div className="max-w-xl p-4 text-center md:text-left">
                 <p className="text-md pt-5 text-left lg:text-lg">
                   INIT chapters carry out our signature experiential learning
@@ -83,7 +88,7 @@ export default function Home() {
                     href="https://shellhacks.net/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-span-3 text-yellow-200"
+                    className="text-span-3 text-yellow-200 hover:text-yellow-400 hover:underline"
                   >
                     ShellHacks
                   </a>
@@ -95,11 +100,10 @@ export default function Home() {
             </div>
             <Image
               src="/assets/images/programs.png"
-              loading="lazy"
               alt=""
-              width={300}
-              height={208}
-              className="mt-5 w-full"
+              width={600}
+              height={416}
+              className="grid-span-1 mt-5 w-full"
             />
           </div>
         </section>

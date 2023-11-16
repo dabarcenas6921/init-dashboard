@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { UserButton, useUser, SignOutButton } from "@clerk/nextjs";
 import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const user = useUser();
 
   return (
     <nav className=" border-gray-200 bg-primary pb-8 pt-4">
@@ -27,7 +30,7 @@ export default function Navbar() {
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
+          className="order-3 rounded p-2 focus:outline-none focus:ring sm:order-3 lg:hidden"
         >
           <svg
             className="h-5 w-5"
@@ -48,10 +51,10 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-0 w-full md:block md:w-auto`}
+          } relative z-0 w-full lg:block lg:w-auto`}
           id="navbar-default"
         >
-          <ul className="mt-4 flex flex-col bg-primary p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
+          <ul className="mt-4 flex flex-col bg-gray-900 p-4 lg:mt-0 lg:flex-row lg:space-x-8 lg:border-0 lg:bg-primary">
             <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
               <Link href="/jobs">Job Opportunities</Link>
             </li>
@@ -69,7 +72,7 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-gray-900 p-4 lg:flex lg:w-auto lg:flex-row lg:bg-primary`}
         >
           <a
             href="https://www.instagram.com/initofficial/"
@@ -90,7 +93,7 @@ export default function Navbar() {
             href="https://discord.gg/init"
             rel="noopener noreferrer"
             target="_blank"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-discord_purple hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             <svg
               className="h-5 w-5"
@@ -118,14 +121,22 @@ export default function Navbar() {
               <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
             </svg>
           </a>
-          <a
-            href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            Join
-          </a>
+          {user.isSignedIn ? (
+            <SignOutButton>
+              <span className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600">
+                Sign Out
+              </span>
+            </SignOutButton>
+          ) : (
+            <a
+              href="https://airtable.com/appkfpQOssQZfmORj/shrNlrSaT073i6fog"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="rounded bg-primary_yellow px-5 py-2 font-bold text-primary hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-gray-600"
+            >
+              Join
+            </a>
+          )}
         </div>
       </div>
     </nav>
