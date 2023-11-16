@@ -30,7 +30,7 @@ export default function Navbar() {
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="order-3 rounded p-2 focus:outline-none focus:ring sm:order-3 lg:hidden"
+          className="rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
         >
           <svg
             className="h-5 w-5"
@@ -54,7 +54,7 @@ export default function Navbar() {
           } relative z-0 w-full lg:block lg:w-auto`}
           id="navbar-default"
         >
-          <ul className="mt-4 flex flex-col bg-gray-900 p-4 lg:mt-0 lg:flex-row lg:space-x-8 lg:border-0 lg:bg-primary">
+          <ul className="mt-4 flex flex-col bg-primary p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
             <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
               <Link href="/jobs">Job Opportunities</Link>
             </li>
@@ -72,7 +72,7 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-gray-900 p-4 lg:flex lg:w-auto lg:flex-row lg:bg-primary`}
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
         >
           <a
             href="https://www.instagram.com/initofficial/"
