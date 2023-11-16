@@ -7,8 +7,32 @@ import SearchInput, {
 } from "~/components/SearchInput";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type EventType } from "~/server/api/routers/eventRouter";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import superjson from "superjson";
+import { db } from "~/server/db";
 
-export default function Events() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: { db },
+    transformer: superjson,
+  });
+
+  const events = await helpers.events.getAll.fetch();
+  console.log(events);
+
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+    },
+  };
+};
+
+export default function Events(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>,
+) {
   const router = useRouter();
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;

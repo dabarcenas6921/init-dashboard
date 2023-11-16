@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
 import SearchInput, { setWasSearchBtnClicked } from "~/components/SearchInput";
@@ -10,8 +9,12 @@ import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
-import { Spinner } from "flowbite-react";
 import EventModal from "~/components/EventModal";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import superjson from "superjson";
+import { db } from "~/server/db";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -20,8 +23,30 @@ export type SelectedFilters = {
   jobLocation: string[];
 };
 
-export default function Jobs() {
-  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
+// getServerSideProps implementation
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: { db },
+    transformer: superjson,
+  });
+
+  await helpers.jobs.getAll.prefetch();
+
+  const jobPostings = await helpers.jobs.getAll.fetch();
+  console.log(jobPostings);
+
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+    },
+  };
+};
+
+export default function Jobs(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>,
+) {
+  const [jobPostings, setJobPostings] = useState<JobPostingType[]>();
   const router = useRouter();
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
@@ -34,20 +59,16 @@ export default function Jobs() {
     jobLocation: [],
   });
 
+  const allJobsQuery = api.jobs.getAll.useQuery();
   const filterQuery = api.jobs.filterBySelectedFilters.useQuery(
     selectedFilters,
     {
       enabled: getWasApplyFilterClicked(),
     },
   );
-  const searchResultsQuery = api.jobs.getByQuery.useQuery(
-    input, 
-    {
-      enabled: getWasSearchBtnClicked(),
-    },
-  );
-  const allJobsQuery = api.jobs.getAll.useQuery();
-
+  const searchResultsQuery = api.jobs.getByQuery.useQuery(input, {
+    enabled: getWasSearchBtnClicked(),
+  });
 
   useEffect(() => {
     if (filterQuery.data) {
@@ -69,12 +90,9 @@ export default function Jobs() {
       jobType: [],
       jobPosition: [],
       jobLocation: [],
-    })
-    console.log("RESET")
-
+    });
+    console.log("RESET");
   }
-
-  console.log("JOB POSTINGS: ", jobPostings)
 
   return (
     <main className="min-h-screen">
