@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Dropdown } from 'flowbite-react';
 import DeleteJobModal from './DeleteJobModal';
 import Image from "next/image";
+import { useUser } from '@clerk/nextjs';
 
 export type Job = {
   id: number,
@@ -33,7 +34,8 @@ type JobCardProps = {
 export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
-
+  const { isSignedIn } = useUser();
+  
   const openModal = (job: Job) => {
     setIsModalOpen(true);
     setSelectedJob(job);
@@ -62,9 +64,8 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
             onClose={closeModal} 
             id={job.id} 
             setJobPostings={setJobPostings}
-            jobPostings={jobPostings}
             />
-          <div className="text-white flex justify-end px-4">
+          {isSignedIn && <div className="text-white flex justify-end px-4">
             <Dropdown inline label="" className="">
               <Dropdown.Item>
                 <a
@@ -82,7 +83,7 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
                 </a>
               </Dropdown.Item>
             </Dropdown>
-          </div>
+          </div>}
           
 
           {/* Top of Card */}

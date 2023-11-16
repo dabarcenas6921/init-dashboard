@@ -10,8 +10,8 @@ import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
-import { Spinner } from "flowbite-react";
-import EventModal from "~/components/EventModal";
+import JobModal from "~/components/JobModal";
+import { useUser } from "@clerk/nextjs";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -21,6 +21,12 @@ export type SelectedFilters = {
 };
 
 export default function Jobs() {
+  const { isSignedIn } = useUser();
+
+  ///////////////////////////////
+  //      SEARCHING JOBS       //
+  //////////////////////////////
+
   const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
   const router = useRouter();
   const search = useSearchParams();
@@ -62,7 +68,10 @@ export default function Jobs() {
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
-    router.refresh();
+
+    if(isSignedIn) {
+      router.refresh();
+    }
   };
 
   function handleResetFilters() {
@@ -94,7 +103,7 @@ export default function Jobs() {
                 See All Jobs
               </button>
             )}
-            <EventModal />
+            {isSignedIn && <JobModal />}
             <SearchInput searchType="job" />
           </div>
         </div>

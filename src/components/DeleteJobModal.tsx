@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 'use client';
 import { Modal } from 'flowbite-react';
 import React from 'react';
@@ -9,7 +12,6 @@ interface DeleteJobModalProps {
   isOpen: boolean;
   onClose: () => void;
   id?: number; // Optional id prop,
-  jobPostings: JobPostingType[],
   setJobPostings: React.Dispatch<React.SetStateAction<{
     id: number;
     image: string;
@@ -23,7 +25,7 @@ interface DeleteJobModalProps {
   }[]>>
 }
 
-export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings, jobPostings }: DeleteJobModalProps) {
+export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: DeleteJobModalProps) {
 
   const mutation = api.jobs.delete.useMutation({
     onSuccess: (jobPostings) =>{

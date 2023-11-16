@@ -7,6 +7,7 @@ import SearchInput, {
 } from "~/components/SearchInput";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type EventType } from "~/server/api/routers/eventRouter";
+import { useUser } from "@clerk/nextjs";
 
 export default function Events() {
   const router = useRouter();
@@ -15,6 +16,9 @@ export default function Events() {
   const encodedSearchQuery = encodeURI(searchQuery ?? "");
   const input = { q: encodedSearchQuery };
   let events: EventType[] | undefined = [];
+
+  //Checking if user is logged in for conditional rendering of the add event button
+  const { isSignedIn } = useUser();
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   if (getWasSearchBtnClicked()) {
@@ -43,16 +47,16 @@ export default function Events() {
               See All Events
             </button>
           )}
-          <EventModal />
+          {isSignedIn && <EventModal />}
           <SearchInput searchType="event" />
         </div>
       </div>
       <div className="mx-auto mt-8">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-          {events?.map((event, index) => (
+          {events?.map((event) => (
             <EventCard
-              key={index}
-              id={index}
+              key={event.id}
+              id={event.id}
               name={event.name}
               description={event.description}
               picture={event.picture}
