@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-// import axios from "axios";
+import axios from "axios";
 import { api } from "~/utils/api";
 
 interface IFormInputs {
