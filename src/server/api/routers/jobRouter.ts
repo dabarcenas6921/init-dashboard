@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 const JobData = z.object({
   image: z.string(),
@@ -35,7 +39,7 @@ const FilterInput = z.object({
 
 export const jobRouter = createTRPCRouter({
   // Create Job Procedure
-  create: publicProcedure.input(JobData).mutation(async ({ input, ctx }) => {
+  create: protectedProcedure.input(JobData).mutation(async ({ input, ctx }) => {
     try {
       const jobPosting = await ctx.db.jobPosting.create({
         data: input,
@@ -126,7 +130,7 @@ export const jobRouter = createTRPCRouter({
           console.log(input.jobPosition);
           for (let pos of input.jobPosition) {
             if (pos === "newGrad") {
-              pos = "New-grad";
+              pos = "New-Grad";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
@@ -152,7 +156,7 @@ export const jobRouter = createTRPCRouter({
           console.log(input.jobLocation);
           for (let loc of input.jobLocation) {
             if (loc === "onSite") {
-              loc = "On-site";
+              loc = "On-Site";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
@@ -182,7 +186,7 @@ export const jobRouter = createTRPCRouter({
     }),
 
   // Delete Job Posting Procedure
-  delete: publicProcedure
+  delete: protectedProcedure
     .input(
       z.object({
         id: z.number(),
@@ -201,7 +205,7 @@ export const jobRouter = createTRPCRouter({
     }),
 
   // Update Job Posting Procedure
-  update: publicProcedure
+  update: protectedProcedure
     .input(
       z.object({
         id: z.number(),

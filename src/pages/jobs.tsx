@@ -9,12 +9,14 @@ import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
-import EventModal from "~/components/EventModal";
+import JobModal from "~/components/JobModal";
+import { useUser } from "@clerk/nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
 import superjson from "superjson";
 import { db } from "~/server/db";
+import { getAuth } from "@clerk/nextjs/server";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -25,9 +27,18 @@ export type SelectedFilters = {
 
 // getServerSideProps implementation
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Get the authentication context
+  const auth = getAuth(context.req);
+
+  // Create the context for server-side helpers
+  const trpcContext = {
+    auth, // Auth context
+    db, // Database connection
+  };
+
   const helpers = createServerSideHelpers({
     router: appRouter,
-    ctx: { db },
+    ctx: trpcContext,
     transformer: superjson,
   });
 
@@ -46,7 +57,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Jobs(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
-  const [jobPostings, setJobPostings] = useState<JobPostingType[]>();
+  const { isSignedIn } = useUser();
+
+  ///////////////////////////////
+  //      SEARCHING JOBS       //
+  //////////////////////////////
+
+  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
   const router = useRouter();
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
@@ -83,6 +100,10 @@ export default function Jobs(
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
+
+    if (isSignedIn) {
+      router.refresh();
+    }
   };
 
   function handleResetFilters() {
@@ -91,9 +112,9 @@ export default function Jobs(
       jobPosition: [],
       jobLocation: [],
     });
-    if (allJobsQuery.data) {
-      setJobPostings(allJobsQuery.data);
-    }
+    console.log("HERE:", jobPostings);
+
+    resetJobs();
   }
 
   return (
@@ -114,7 +135,7 @@ export default function Jobs(
                 See All Jobs
               </button>
             )}
-            <EventModal />
+            {isSignedIn && <JobModal />}
             <SearchInput searchType="job" />
           </div>
         </div>
@@ -146,7 +167,10 @@ export default function Jobs(
 
           <div className="w-full">
             {jobPostings && jobPostings.length > 0 ? (
-              <JobCard jobPostings={jobPostings} />
+              <JobCard
+                jobPostings={jobPostings}
+                setJobPostings={setJobPostings}
+              />
             ) : (
               <p className="flex h-3/6 items-center justify-center">
                 No matching job postings.

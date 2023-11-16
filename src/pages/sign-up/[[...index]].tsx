@@ -1,9 +1,9 @@
-import { SignIn } from "@clerk/nextjs";
+import { SignUp } from "@clerk/nextjs";
 
-export default function SignInPage() {
+export default function SignUpPage() {
   return (
     <div className="flex min-h-screen justify-center">
-      <SignIn
+      <SignUp
         appearance={{
           elements: {
             formFieldLabel: {
@@ -51,20 +51,17 @@ export default function SignInPage() {
               },
             },
             formFieldAction: "hidden",
+            otpCodeFieldInput: {
+              color: "black",
+            },
             formResendCodeLink: {
               color: "#FFD550",
               "&:hover, &:focus, &:active": {
                 color: "#FFF1B8",
               },
             },
-            otpCodeFieldInput: {
-              color: "black",
-            },
             otpCodeFieldInputs: {
               gap: 5,
-            },
-            fipksp: {
-              color: "white",
             },
             headerBackLink: {
               textDecorationColor: "white",

@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 const EventData = z.object({
   name: z.string(),
@@ -11,22 +15,35 @@ const EventData = z.object({
   rsvpLink: z.string(),
 });
 
-export type EventType = z.infer<typeof EventData>;
+const EventType = z.object({
+  id: z.number(),
+  name: z.string(),
+  description: z.string(),
+  time: z.date(),
+  location: z.string(),
+  picture: z.string(),
+  program: z.string(),
+  rsvpLink: z.string(),
+});
+
+export type EventType = z.infer<typeof EventType>;
 
 export const eventRouter = createTRPCRouter({
   //Protect this route once user authentication is completed
-  create: publicProcedure.input(EventData).mutation(async ({ input, ctx }) => {
-    try {
-      const event = await ctx.db.event.create({
-        data: input,
-      });
+  create: protectedProcedure
+    .input(EventData)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const event = await ctx.db.event.create({
+          data: input,
+        });
 
-      return event;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Failed to create event");
-    }
-  }),
+        return event;
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to create event");
+      }
+    }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
     try {
@@ -51,8 +68,8 @@ export const eventRouter = createTRPCRouter({
         const events = await ctx.db.event.findMany({
           where: {
             OR: [
-              { name: { contains: decodedQuery.toLowerCase() } },
-              { program: { contains: decodedQuery.toLowerCase() } },
+              { name: { contains: decodedQuery, mode: "insensitive" } },
+              { program: { contains: decodedQuery, mode: "insensitive" } },
             ],
           },
         });
@@ -63,7 +80,7 @@ export const eventRouter = createTRPCRouter({
       }
     }),
 
-  delete: publicProcedure
+  delete: protectedProcedure
     .input(
       z.object({
         id: z.number(),
@@ -81,7 +98,7 @@ export const eventRouter = createTRPCRouter({
       }
     }),
 
-  update: publicProcedure
+  update: protectedProcedure
     .input(
       z.object({
         id: z.number(),

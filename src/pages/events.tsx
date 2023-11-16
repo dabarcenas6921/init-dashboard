@@ -7,16 +7,27 @@ import SearchInput, {
 } from "~/components/SearchInput";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type EventType } from "~/server/api/routers/eventRouter";
+import { useUser } from "@clerk/nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
 import superjson from "superjson";
 import { db } from "~/server/db";
+import { getAuth } from "@clerk/nextjs/server";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Get the authentication context
+  const auth = getAuth(context.req);
+
+  // Create the context for server-side helpers
+  const trpcContext = {
+    auth, // Auth context
+    db, // Database connection
+  };
+
   const helpers = createServerSideHelpers({
     router: appRouter,
-    ctx: { db },
+    ctx: trpcContext,
     transformer: superjson,
   });
 
@@ -39,6 +50,9 @@ export default function Events(
   const encodedSearchQuery = encodeURI(searchQuery ?? "");
   const input = { q: encodedSearchQuery };
   let events: EventType[] | undefined = [];
+
+  //Checking if user is logged in for conditional rendering of the add event button
+  const { isSignedIn } = useUser();
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   if (getWasSearchBtnClicked()) {
@@ -67,16 +81,16 @@ export default function Events(
               See All Events
             </button>
           )}
-          <EventModal />
+          {isSignedIn && <EventModal />}
           <SearchInput searchType="event" />
         </div>
       </div>
       <div className="mx-auto mt-8">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-          {events?.map((event, index) => (
+          {events?.map((event) => (
             <EventCard
-              key={index}
-              id={index}
+              key={event.id}
+              id={event.id}
               name={event.name}
               description={event.description}
               picture={event.picture}

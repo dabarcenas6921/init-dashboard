@@ -156,7 +156,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
               className="mr-1.5 rounded-sm cursor-pointer" 
               checked={checkboxState.partTime}
               onChange={handleCheckboxChange}/>
-              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="partTime">Part-time</label>
+              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="partTime">Parttime</label>
             </div>
           </div>
 
@@ -183,7 +183,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
               className="mr-1.5 rounded-sm cursor-pointer"
               checked={checkboxState.newGrad}
               onChange={handleCheckboxChange} />
-              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="newGrad">New-grad</label>
+              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="newGrad">New-Grad</label>
             </div>
           </div>
 
@@ -199,7 +199,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
               className="mr-1.5 rounded-sm cursor-pointer" 
               checked={checkboxState.onSite}
               onChange={handleCheckboxChange}/>
-              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="onSite">On-site</label>
+              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="onSite">On-Site</label>
             </div>
             {/* Hybrid box */}
             <div className="mb-1.5 flex items-center">
