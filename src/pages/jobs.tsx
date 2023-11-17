@@ -23,17 +23,20 @@ export type SelectedFilters = {
 export default function Jobs() {
   const { isSignedIn } = useUser();
 
+  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
+  const router = useRouter();
+
   ///////////////////////////////
   //      SEARCHING JOBS       //
   //////////////////////////////
-
-  const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
-  const router = useRouter();
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
   const encodedSearchQuery = encodeURI(searchQuery ?? "");
   const input = { q: encodedSearchQuery };
 
+  ///////////////////////////////
+  //      SETS FILTERS        //
+  //////////////////////////////
   const [selectedFilters, setSelectedFilters] = useState<FilterInput>({
     jobType: [],
     jobPosition: [],
@@ -41,6 +44,9 @@ export default function Jobs() {
   });
 
 
+  ///////////////////////////////
+  //      API CALLS           //
+  //////////////////////////////
   const filterQuery = api.jobs.filterBySelectedFilters.useQuery(
     selectedFilters,
     {
@@ -55,28 +61,34 @@ export default function Jobs() {
   );
   const allJobsQuery = api.jobs.getAll.useQuery();
 
+
+  /* Added this to only display data
+   * based on if the user SEARCHED
+   * or FILTERED
+   */
   let searchData = searchResultsQuery.data
   let queryData = filterQuery.data
   if (getWasApplyFilterClicked()) {
     searchData = undefined;
   }
-
   if (getWasSearchBtnClicked()) {
     queryData = undefined
   }
 
+
+  // Updates the jobPosting state
   useEffect(() => {
     if (searchData) {
-      console.log("IN SEARCH DATA")
       setJobPostings(searchData);
     } else if (queryData) {
-      console.log("IN FILTER DATA")
       setJobPostings(queryData);
     } else if (allJobsQuery.data) {
       setJobPostings(allJobsQuery.data);
     }
   }, [queryData, searchData, allJobsQuery.data]);
 
+
+  // Displays all the jobs in database
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
@@ -86,7 +98,11 @@ export default function Jobs() {
     }
   };
 
-  function handleResetFilters() {
+
+  /* Resets the filters and displays
+   * all jobs in the database
+   */ 
+  function onResetFilters() {
     setSelectedFilters({
       jobType: [],
       jobPosition: [],
@@ -95,8 +111,7 @@ export default function Jobs() {
     resetJobs();
   }
 
-
-
+  
   return (
     <main className="min-h-screen">
       {/* Container to keep everything in line */}
@@ -110,7 +125,7 @@ export default function Jobs() {
             {getWasSearchBtnClicked() && (
               <button
                 className="cursor-pointer hover:text-primary_yellow hover:underline"
-                onClick={handleResetFilters}
+                onClick={onResetFilters}
               >
                 See All Jobs
               </button>
@@ -132,7 +147,7 @@ export default function Jobs() {
             >
               <FilterJobsCard
                 onFilterChange={setSelectedFilters}
-                onResetFilters={handleResetFilters}
+                onResetFilters={onResetFilters}
               />
             </Dropdown>
           </div>
@@ -141,7 +156,7 @@ export default function Jobs() {
           <div className="mr-[5%] hidden md:block">
             <FilterJobsCard
               onFilterChange={setSelectedFilters}
-              onResetFilters={handleResetFilters}
+              onResetFilters={onResetFilters}
             />
           </div>
 
@@ -162,11 +177,3 @@ export default function Jobs() {
     </main>
   );
 }
-/*
-if(filterQuery.data && searchResultsQuery.data) {
-      const intersectionData = filterQuery.data.filter(job => searchResultsQuery.data.includes(job));
-      console.log("Filter: ", filterQuery.data, "Search: ", searchResultsQuery.data);
-      setJobPostings(intersectionData);
-    } else 
-
-*/

@@ -4,6 +4,12 @@ import { useRouter } from "next/navigation";
 import { setWasApplyFilterClicked } from "./FilterJobsCard";
 import { type SearchProps } from "~/interfaces/Search.interface";
 
+/*
+ * Defined getters and setters to
+ * determine if the user searched
+ * for a job
+ *
+*/
 let wasSearchBtnClicked = false;
 
 export function setWasSearchBtnClicked(value: boolean) {
@@ -18,6 +24,8 @@ export default function SearchInput({ searchType }: SearchProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
+  // Search query provided by the user
+  // Link for video explanation at bottom of code: 
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -77,3 +85,7 @@ export default function SearchInput({ searchType }: SearchProps) {
     </div>
   );
 }
+
+
+// Video Link to explain search functionality: 
+// https://www.youtube.com/watch?v=IYoZvxUbhUQ&t=1219s&ab_channel=ShadeeMerhi

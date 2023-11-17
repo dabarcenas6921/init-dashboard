@@ -10,8 +10,9 @@ import { api } from "~/utils/api";
 interface DeleteJobModalProps {
   isOpen: boolean;
   onClose: () => void;
-  id?: number; // Optional id prop,
-  setJobPostings: React.Dispatch<React.SetStateAction<{
+  id: number;
+
+setJobPostings: React.Dispatch<React.SetStateAction<{
     id: number;
     image: string;
     title: string;
@@ -33,6 +34,7 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: 
   })
 
 
+  // function to delete a job posting
   async function deleted() {
     
     if (id) {
@@ -45,6 +47,7 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: 
     }
   }
 
+  // deletes job posting by calling deleted() and closes the Modal
   async function deletedAndClose() {
     await deleted();
     onClose();
@@ -93,5 +96,4 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: 
   );
 }
 
-// onClick={() => setOpenModal(false)}
 
