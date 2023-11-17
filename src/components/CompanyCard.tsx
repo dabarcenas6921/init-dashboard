@@ -9,9 +9,49 @@ export type Company = {
 
 type CompanyCardProps = {
   company: Company[];
+  setJobPostings: React.Dispatch<
+    React.SetStateAction<
+      {
+        image: string;
+        company: string;
+        id: number;
+        date: string;
+        title: string;
+        jobType: string;
+        jobPosition: string;
+        jobLocation: string;
+        url: string;
+      }[]
+    >
+  >;
+  setGroupByCompany: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchJobsByCompany: (companyName: string) => void;
 };
 
-export default function CompanyCard({ company }: CompanyCardProps) {
+let wasViewJobsClicked = false;
+
+export function setWasViewJobsClicked(value: boolean) {
+  wasViewJobsClicked = value;
+}
+
+export function getWasViewJobsClicked() {
+  return wasViewJobsClicked;
+}
+
+export default function CompanyCard({
+  company,
+  setJobPostings,
+  setGroupByCompany,
+  fetchJobsByCompany,
+}: CompanyCardProps) {
+  function handleSubmit(companyName: string) {
+    setJobPostings((prevArr) =>
+      prevArr.filter((item) => item.company === companyName),
+    );
+    fetchJobsByCompany(companyName);
+    setGroupByCompany(false);
+  }
+
   return (
     <div
       className={`flex w-full flex-wrap items-start justify-evenly ${
@@ -37,7 +77,7 @@ export default function CompanyCard({ company }: CompanyCardProps) {
               {companyCard.name}
             </h3>
             <button
-              //onClick={() => setSearchQuery(companyCard.name)}
+              onClick={() => handleSubmit(companyCard.name)}
               value={companyCard.name}
               rel="noopener noreferrer"
               className="block rounded bg-primary_yellow px-5 py-2 text-sm font-bold text-primary hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem]"

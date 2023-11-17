@@ -13,7 +13,7 @@ import type {
   JobPostingType,
 } from "~/server/api/routers/jobRouter";
 import JobModal from "~/components/JobModal";
-import CompanyCard from "~/components/CompanyCard";
+import CompanyCard, { getWasViewJobsClicked } from "~/components/CompanyCard";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
@@ -63,11 +63,6 @@ export default function Jobs(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
   const { isSignedIn } = useUser();
-
-  ///////////////////////////////
-  //      SEARCHING JOBS       //
-  //////////////////////////////
-
   const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
   const router = useRouter();
   const search = useSearchParams();
@@ -75,6 +70,7 @@ export default function Jobs(
   const encodedSearchQuery = encodeURI(searchQuery ?? "");
   const input = { q: encodedSearchQuery };
 
+  const [companyNameForQuery, setCompanyNameForQuery] = useState<string>("");
   const [selectedFilters, setSelectedFilters] = useState<FilterInput>({
     jobType: [],
     jobPosition: [],
@@ -83,35 +79,48 @@ export default function Jobs(
   const [groupByCompany, setGroupByCompany] = useState(false);
 
   const allJobsQuery = api.jobs.getAll.useQuery();
-
   const filterQuery = api.jobs.filterBySelectedFilters.useQuery(
     selectedFilters,
     {
       enabled: getWasApplyFilterClicked(),
     },
   );
-
   const searchResultsQuery = api.jobs.getByQuery.useQuery(input, {
     enabled: getWasSearchBtnClicked(),
   });
-
-  //let companyCardJobs  = api.jobs.getByCompanyCard.useQuery();
 
   let searchData = searchResultsQuery.data;
   let queryData = filterQuery.data;
   if (getWasApplyFilterClicked()) {
     searchData = undefined;
   }
-
   if (getWasSearchBtnClicked()) {
     queryData = undefined;
   }
-  let companyData = api.jobs.getByCompany.useQuery();
+  const companyData = api.jobs.getByCompany.useQuery();
   if (groupByCompany) {
     companyDataArr = companyData.data;
   } else {
     companyDataArr = undefined;
   }
+
+  // Trigger the query only if companyNameForQuery has a value
+  const companyJobsQuery = api.jobs.getByCompanyCard.useQuery(
+    { companyName: companyNameForQuery },
+    {
+      enabled: !!companyNameForQuery, // This query will only run if companyNameForQuery is not null
+    },
+  );
+
+  const fetchJobsByCompany = async (companyName: string) => {
+    setCompanyNameForQuery(companyName);
+  };
+
+  useEffect(() => {
+    if (companyJobsQuery.status === "success" && companyJobsQuery.data) {
+      setJobPostings(companyJobsQuery.data);
+    }
+  }, [companyJobsQuery.status, companyJobsQuery.data]);
 
   useEffect(() => {
     if (searchData) {
@@ -211,6 +220,9 @@ export default function Jobs(
                       }))
                     : []
                 }
+                setJobPostings={setJobPostings}
+                setGroupByCompany={setGroupByCompany}
+                fetchJobsByCompany={fetchJobsByCompany}
               />
             ) : jobPostings && jobPostings.length > 0 ? (
               <JobCard
@@ -228,11 +240,3 @@ export default function Jobs(
     </main>
   );
 }
-/*
-if(filterQuery.data && searchResultsQuery.data) {
-      const intersectionData = filterQuery.data.filter(job => searchResultsQuery.data.includes(job));
-      console.log("Filter: ", filterQuery.data, "Search: ", searchResultsQuery.data);
-      setJobPostings(intersectionData);
-    } else 
-
-*/

@@ -122,28 +122,20 @@ export const jobRouter = createTRPCRouter({
   getByCompanyCard: publicProcedure
     .input(
       z.object({
-        event: z.object({
-          target: z.object({
-            value: z.string(),
-          }),
-        }),
+        companyName: z.string(),
       }),
     )
     .query(async ({ input, ctx }) => {
       try {
-        const decodedQuery = input.event.target.value
-          .replace(/\+/g, " ")
-          .replace(/%20/g, " ");
-
         const jobPostings = await ctx.db.jobPosting.findMany({
           where: {
-            company: { contains: decodedQuery, mode: "insensitive" },
+            company: { contains: input.companyName, mode: "insensitive" },
           },
         });
         return jobPostings;
       } catch (error) {
         console.log(error);
-        throw new Error("Failed to get job postings by company card");
+        throw new Error("Failed to get job postings by company name");
       }
     }),
 
