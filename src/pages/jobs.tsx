@@ -112,7 +112,7 @@ export default function Jobs(
     },
   );
 
-  const fetchJobsByCompany = async (companyName: string) => {
+  const fetchJobsByCompany = (companyName: string) => {
     setCompanyNameForQuery(companyName);
   };
 
