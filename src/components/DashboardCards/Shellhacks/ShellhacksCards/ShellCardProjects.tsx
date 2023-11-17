@@ -86,18 +86,3 @@ export const ChartComponentProjects = () => {
     </div>
   );
 };
-
-{
-  /* 
-  <div>
-          <img
-            src="/assets/images/coder.png"
-            loading="lazy"
-            alt=""
-            width={50}
-            height={500}
-            className="w-xs"
-          />
-        </div>
-       */
-}

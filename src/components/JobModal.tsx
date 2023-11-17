@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from "react";
 import { Modal } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import axios from "axios";
 import { api } from "~/utils/api";
+import { type SetPostingsStateType } from "./DeleteModal";
 
 interface IFormInputs {
   title: string;
@@ -16,13 +20,21 @@ interface IFormInputs {
   url: string;
 }
 
-export default function JobModal() {
+interface AddModalProps {
+  setPostings: SetPostingsStateType;
+}
+
+export default function JobModal({ setPostings }: AddModalProps) {
   const [openModal, setOpenModal] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [filename, setFilename] = useState("");
   const [date, setDate] = useState<Date | null>(null);
   const { register, handleSubmit, reset } = useForm<IFormInputs>();
-  const createJob = api.jobs.create.useMutation();
+  const createJob = api.jobs.create.useMutation({
+    onSuccess: (posting) => {
+      setPostings((currentPostings: any) => [...currentPostings, posting]);
+    },
+  });
   const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUD_NAME;
 
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

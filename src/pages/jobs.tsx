@@ -147,7 +147,7 @@ export default function Jobs(
                 See All Jobs
               </button>
             )}
-            {isSignedIn && <JobModal />}
+            {isSignedIn && <JobModal setPostings={setJobPostings} />}
             <SearchInput searchType="job" />
           </div>
         </div>

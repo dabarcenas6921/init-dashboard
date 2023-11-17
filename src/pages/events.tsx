@@ -8,12 +8,16 @@ import SearchInput, {
 import { useRouter, useSearchParams } from "next/navigation";
 import { type EventType } from "~/server/api/routers/eventRouter";
 import { useUser } from "@clerk/nextjs";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import {
+  type InferGetServerSidePropsType,
+  type GetServerSideProps,
+} from "next";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
 import superjson from "superjson";
 import { db } from "~/server/db";
 import { getAuth } from "@clerk/nextjs/server";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Get the authentication context
@@ -49,17 +53,24 @@ export default function Events(
   const searchQuery = search ? search.get("q") : null;
   const encodedSearchQuery = encodeURI(searchQuery ?? "");
   const input = { q: encodedSearchQuery };
-  let events: EventType[] | undefined = [];
+  const [events, setEvents] = useState<EventType[]>([]);
 
   //Checking if user is logged in for conditional rendering of the add event button
   const { isSignedIn } = useUser();
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-  if (getWasSearchBtnClicked()) {
-    events = api.events.getByQuery.useQuery(input).data;
-  } else {
-    events = api.events.getAll.useQuery().data;
-  }
+  const allEventsData = api.events.getAll.useQuery().data;
+
+  const searchData = api.events.getByQuery.useQuery(input, {
+    enabled: getWasSearchBtnClicked(),
+  }).data;
+
+  useEffect(() => {
+    if (searchData) {
+      setEvents(searchData);
+    } else if (allEventsData) {
+      setEvents(allEventsData);
+    }
+  }, [searchData, allEventsData]);
 
   const resetEvents = () => {
     setWasSearchBtnClicked(false);
@@ -81,7 +92,7 @@ export default function Events(
               See All Events
             </button>
           )}
-          {isSignedIn && <EventModal />}
+          {isSignedIn && <EventModal setPostings={setEvents} />}
           <SearchInput searchType="event" />
         </div>
       </div>
@@ -98,6 +109,7 @@ export default function Events(
               location={event.location}
               program={event.program}
               rsvpLink={event.rsvpLink}
+              setEvents={setEvents}
             />
           ))}
         </div>
