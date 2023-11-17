@@ -106,6 +106,7 @@ export const jobRouter = createTRPCRouter({
           id: true,
         },
       });
+      console.log(jobPostings);
       return jobPostings.map((post) => ({
         company: post.company,
         image: post.image,
@@ -168,7 +169,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobType: {
                   contains: type,
-                  mode: "insensitive"
+                  mode: "insensitive",
                 },
               },
             });
@@ -193,7 +194,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobPosition: {
                   contains: pos,
-                  mode: "insensitive"
+                  mode: "insensitive",
                 },
               },
             });
@@ -219,7 +220,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobLocation: {
                   contains: loc,
-                  mode: "insensitive"
+                  mode: "insensitive",
                 },
               },
             });

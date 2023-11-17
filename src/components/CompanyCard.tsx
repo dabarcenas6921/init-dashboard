@@ -37,6 +37,8 @@ export default function CompanyCard({ company }: CompanyCardProps) {
               {companyCard.name}
             </h3>
             <button
+              //onClick={() => setSearchQuery(companyCard.name)}
+              value={companyCard.name}
               rel="noopener noreferrer"
               className="block rounded bg-primary_yellow px-5 py-2 text-sm font-bold text-primary hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem]"
             >

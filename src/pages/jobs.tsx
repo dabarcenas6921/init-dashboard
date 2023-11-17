@@ -29,6 +29,8 @@ export type SelectedFilters = {
   jobLocation: string[];
 };
 
+let companyDataArr: CompanyCardType[] | undefined = [];
+
 // getServerSideProps implementation
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Get the authentication context
@@ -79,7 +81,6 @@ export default function Jobs(
     jobLocation: [],
   });
   const [groupByCompany, setGroupByCompany] = useState(false);
-  const [getFromCompany, setGetFromCompany] = useState(false);
 
   const allJobsQuery = api.jobs.getAll.useQuery();
 
@@ -94,6 +95,8 @@ export default function Jobs(
     enabled: getWasSearchBtnClicked(),
   });
 
+  //let companyCardJobs  = api.jobs.getByCompanyCard.useQuery();
+
   let searchData = searchResultsQuery.data;
   let queryData = filterQuery.data;
   if (getWasApplyFilterClicked()) {
@@ -102,6 +105,12 @@ export default function Jobs(
 
   if (getWasSearchBtnClicked()) {
     queryData = undefined;
+  }
+  let companyData = api.jobs.getByCompany.useQuery();
+  if (groupByCompany) {
+    companyDataArr = companyData.data;
+  } else {
+    companyDataArr = undefined;
   }
 
   useEffect(() => {
@@ -191,19 +200,19 @@ export default function Jobs(
           </div>
 
           <div className="w-full">
-            <CompanyCard
-              company={
-                companyDataArr
-                  ? companyDataArr.map((company) => ({
-                      name: company.company,
-                      image: company.image,
-                      id: company.id,
-                    }))
-                  : []
-              }
-            />
-
-            {jobPostings && jobPostings.length > 0 ? (
+            {groupByCompany && jobPostings.length > 0 ? (
+              <CompanyCard
+                company={
+                  companyDataArr
+                    ? companyDataArr.map((company) => ({
+                        name: company.company,
+                        image: company.image,
+                        id: company.id,
+                      }))
+                    : []
+                }
+              />
+            ) : jobPostings && jobPostings.length > 0 ? (
               <JobCard
                 jobPostings={jobPostings}
                 setJobPostings={setJobPostings}
