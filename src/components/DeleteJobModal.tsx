@@ -10,22 +10,19 @@ import { api } from "~/utils/api";
 interface DeleteJobModalProps {
   isOpen: boolean;
   onClose: () => void;
-  id?: number; // Optional id prop,
-  setJobPostings: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-        image: string;
-        title: string;
-        company: string;
-        jobType: string;
-        jobPosition: string;
-        jobLocation: string;
-        date: string;
-        url: string;
-      }[]
-    >
-  >;
+  id: number;
+
+setJobPostings: React.Dispatch<React.SetStateAction<{
+    id: number;
+    image: string;
+    title: string;
+    company: string;
+    jobType: string;
+    jobPosition: string;
+    jobLocation: string;
+    date: string;
+    url: string;
+  }[]>>
 }
 
 export default function DeleteJobModal({
@@ -35,13 +32,13 @@ export default function DeleteJobModal({
   setJobPostings,
 }: DeleteJobModalProps) {
   const mutation = api.jobs.delete.useMutation({
-    onSuccess: (jobPostings) => {
-      setJobPostings((currentJobPostings) =>
-        currentJobPostings.filter((job) => job.id !== jobPostings.id),
-      );
-    },
-  });
+    onSuccess: (jobPostings) =>{
+      setJobPostings(currentJobPostings => currentJobPostings.filter((job) => job.id !== jobPostings.id))
+    }
+  })
 
+
+  // function to delete a job posting
   async function deleted() {
     if (id) {
       try {
@@ -53,6 +50,7 @@ export default function DeleteJobModal({
     }
   }
 
+  // deletes job posting by calling deleted() and closes the Modal
   async function deletedAndClose() {
     await deleted();
     onClose();
@@ -101,4 +99,4 @@ export default function DeleteJobModal({
   );
 }
 
-// onClick={() => setOpenModal(false)}
+

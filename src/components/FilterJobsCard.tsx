@@ -23,6 +23,12 @@ type FilterJobsCardProps = {
   onResetFilters: () => void; 
 }
 
+/*
+ * Defined getters and setters to
+ * determine if the user filtered
+ * for a job
+ *
+*/
 let wasApplyFilterClicked = false
 
 export function setWasApplyFilterClicked(value: boolean) {
@@ -45,10 +51,17 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
     remote: false,
   });
 
+  /*
+   * These will be used to set the selected filters 
+   */
   const [jobTypeArr, setJobTypeArr] = useState<string[]>([]);
   const [jobPosTypeArr, setJobPosTypeArr] = useState<string[]>([]);
   const [jobLocArr, setJobLocArr] = useState<string[]>([]);
 
+
+  /* Populates and depopulates the jobTypeArr, jobPositionArr, and jobLocArr
+   * whenever a checkbox is checked or unchecked
+   */ 
   const handleCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => {
     const { name, checked } = e.target;
     setCheckboxState({ ...checkboxState, [name]: checked });
@@ -79,6 +92,8 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
 
   };
 
+
+  // Unchecks all the filters and sets the selected filters to empty
   const resetFilters = () => {
     setCheckboxState({
       fulltime: false,
@@ -93,12 +108,14 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
     setJobPosTypeArr([]);
     setJobLocArr([]);
 
-    onResetFilters();
+    onResetFilters();  // refer to onResetFilters in jobs.tsx
 
     setWasApplyFilterClicked(false)
     setWasSearchBtnClicked(false)
   };
 
+
+  // Ran when the Apply Filter button is clicked
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -109,7 +126,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
       jobLocation: jobLocArr,
     };
 
-    onFilterChange(filterInput);
+    onFilterChange(filterInput);  // onFilterChange comes from setSelectedFilters in jobs.tsx
 
     setWasApplyFilterClicked(true)
     setWasSearchBtnClicked(false)
