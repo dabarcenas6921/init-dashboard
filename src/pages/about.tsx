@@ -1,21 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
-import init_members from "../assets/images/init-members.jpeg";
-import FIU_Logo from "../assets/images/FIU-Engineering-Logo.svg";
-import knight_foundation from "../assets/images/knight-foundation-logo.svg";
-import lab22c from "../assets/images/Lab2C-logo.svg";
-import mdc_logo from "../assets/images/MDC-Logo.svg";
-import { chapters } from "../../dummy_data/chapters";
-import { team_members } from "../../dummy_data/InitTeam";
+import { chapters } from "../Data/chapters";
+import { team_members } from "../Data/InitTeam";
 import Init_Team from "~/components/Init_Team";
 import Chapter_card from "../components/Chapter_card";
-
-const knight_foundation_logo: StaticImageData =
-  knight_foundation as StaticImageData;
-const lab22c_logo: StaticImageData = lab22c as StaticImageData;
-const FIU_Logo_logo: StaticImageData = FIU_Logo as StaticImageData;
-const mdc_logo_logo: StaticImageData = mdc_logo as StaticImageData;
 
 export default function About() {
   return (
@@ -49,7 +37,7 @@ export default function About() {
         <br />
         <div className="mx-auto mb-10 flex h-auto w-auto flex-wrap items-start justify-center ">
           <Image
-            src={init_members}
+            src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1699917117/init-dashboard/events/%27Empowering%20tech%20talent.jpg"
             alt="Init Members"
             className="rounded-lg"
             width={400}
@@ -82,7 +70,7 @@ export default function About() {
         <br />
         <span className="flex w-full flex-wrap items-center justify-center">
           <Image
-            src={knight_foundation_logo}
+            src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700204766/init-dashboard/about/partners/knight-foundation-logo.svg"
             alt="Knight Foundation Logo"
             className="mb-5  mr-5"
             width={200}
@@ -90,7 +78,7 @@ export default function About() {
             loading="lazy"
           />
           <Image
-            src={lab22c_logo}
+            src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700204767/init-dashboard/about/partners/Lab2C.svg"
             alt="Lab22c Logo"
             className="mb-5  text-sm"
             width={200}
@@ -98,7 +86,7 @@ export default function About() {
             loading="lazy"
           />
           <Image
-            src={FIU_Logo_logo}
+            src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700204830/init-dashboard/about/partners/FIU-Engineering-Logo.svg"
             alt="Init Logo"
             className=" mb-5 text-sm"
             width={200}
@@ -106,7 +94,7 @@ export default function About() {
             loading="lazy"
           />
           <Image
-            src={mdc_logo_logo}
+            src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700204768/init-dashboard/about/partners/MDC-Logo.svg"
             alt="MDC Logo"
             className="mb-5 text-sm"
             width={200}
@@ -119,7 +107,7 @@ export default function About() {
           <p>More partners to be announced soon!</p>
         </section>
         <br />
-        <h1 className="mb-10 text-center text-4xl text-white">🍎 Chapters</h1>
+        <h1 className="my-10 text-center text-4xl text-white">🍎 Chapters</h1>
         <section className="flex justify-center">
           <div className="flex flex-wrap justify-center gap-9 ">
             {chapters.map((chapter) => (
@@ -134,7 +122,7 @@ export default function About() {
           <div className="flex flex-wrap justify-center gap-5 "></div>
         </section>
         <br />
-        <h1 className="text-center text-4xl text-white">✨ Our Team</h1>
+        <h1 className="mt-10 text-center text-4xl text-white">✨ Our Team</h1>
         <div className="flex flex-wrap justify-center">
           {team_members.map((member) => (
             <div key={member.name} className="w-full p-4 md:w-1/3">

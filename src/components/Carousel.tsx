@@ -27,7 +27,7 @@ export default function Carousel() {
         <div className="pr-40">
           <SwiperSlide>
             <Image
-              src="/assets/images/people2.png"
+              src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700205297/init-dashboard/carousel1.png"
               priority={true}
               width={0}
               height={0}
@@ -36,19 +36,9 @@ export default function Carousel() {
               alt="Init Picture"
             />
           </SwiperSlide>
-          {/* <SwiperSlide>
-            <Image
-              src="/assets/images/people11.jpg"
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
-              alt="Init Picture"
-            />
-          </SwiperSlide> */}
           <SwiperSlide>
             <Image
-              src="/assets/images/people7.png"
+              src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700205298/init-dashboard/carousel2.png"
               width={0}
               height={0}
               sizes="100vw"
@@ -58,7 +48,7 @@ export default function Carousel() {
           </SwiperSlide>
           <SwiperSlide>
             <Image
-              src="/assets/images/people8.png"
+              src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700205303/init-dashboard/carousel3.png"
               width={0}
               height={0}
               sizes="100vw"
@@ -68,7 +58,7 @@ export default function Carousel() {
           </SwiperSlide>
           <SwiperSlide>
             <Image
-              src="/assets/images/people9.png"
+              src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700205303/init-dashboard/carousel4.png"
               width={0}
               height={0}
               sizes="100vw"

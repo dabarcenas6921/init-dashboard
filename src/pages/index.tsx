@@ -99,7 +99,7 @@ export default function Home() {
               </div>
             </div>
             <Image
-              src="/assets/images/programs.png"
+              src="https://res.cloudinary.com/dh6y8bufo/image/upload/v1700205306/init-dashboard/programs.png"
               alt=""
               width={600}
               height={416}
