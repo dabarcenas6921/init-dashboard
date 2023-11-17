@@ -1,7 +1,8 @@
 import Image from "next/image";
 import type { EventCard } from "../interfaces/EventCard.interface";
-import { api } from "~/utils/api";
 import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
 
 export default function EventCard({
   id,
@@ -12,11 +13,23 @@ export default function EventCard({
   location,
   program,
   rsvpLink,
+  setEvents,
 }: EventCard) {
-  const deleteMutation = api.events.delete.useMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   //Checking if user is logged in for conditional rendering of the add event button
   const { isSignedIn } = useUser();
+
+  const openModal = (id: number) => {
+    setIsModalOpen(true);
+    setSelectedId(id);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedId(null);
+  };
 
   const date = time.toLocaleDateString("en-us", {
     weekday: "short",
@@ -30,6 +43,27 @@ export default function EventCard({
     timeZoneName: "short",
   });
 
+  const programColor = (program: string) => {
+    switch (program) {
+      case "build":
+        return "text-build";
+      case "discover":
+        return "text-discover";
+      case "explore":
+        return "text-explore";
+      case "ignite":
+        return "text-ignite";
+      case "hack":
+        return "text-hack";
+      case "launch":
+        return "text-launch";
+      case "reach":
+        return "text-reach";
+      default:
+        return "text-primary_yellow";
+    }
+  };
+
   return (
     <div className="group flex h-full flex-col rounded-sm border border-zinc-600 bg-zinc-900 shadow-lg shadow-zinc-900">
       <div className="relative h-52 overflow-hidden rounded-t-sm sm:h-56">
@@ -40,34 +74,41 @@ export default function EventCard({
           height={1000}
           className="absolute h-full w-full object-cover"
         />
-        {isSignedIn && <button
-          onClick={() => deleteMutation.mutate({ id: id })}
-          className="absolute right-4 top-4 rounded-lg bg-primary bg-opacity-70 p-2 text-red-600 hover:bg-opacity-80 hover:text-red-800"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="h-5 w-5"
+        <DeleteModal
+          cardType="event"
+          isOpen={isModalOpen && selectedId === id}
+          onClose={closeModal}
+          id={id}
+          setPostings={setEvents}
+        />
+        {isSignedIn && (
+          <button
+            onClick={() => openModal(id)}
+            className="absolute right-4 top-4 rounded-lg bg-primary bg-opacity-70 p-2 text-red-600 hover:bg-opacity-80 hover:text-red-800"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-            />
-          </svg>
-        </button>}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="h-5 w-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+              />
+            </svg>
+          </button>
+        )}
       </div>
       <div className="flex flex-grow flex-col justify-between p-4 md:p-6">
         <div>
           <span
-            className={`mb-1 block text-xs font-semibold uppercase ${
-              program === "ShellHacks" || program === "General"
-                ? "text-primary_yellow"
-                : `text-${program.toLowerCase()}`
-            }`}
+            className={`mb-1 block text-xs font-semibold uppercase ${programColor(
+              program.toLowerCase(),
+            )}`}
           >
             {program}
           </span>

@@ -14,7 +14,10 @@ import type {
 } from "~/server/api/routers/jobRouter";
 import JobModal from "~/components/JobModal";
 import CompanyCard, { getWasViewJobsClicked } from "~/components/CompanyCard";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import {
+  type GetServerSideProps,
+  type InferGetServerSidePropsType,
+} from "next";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
 import superjson from "superjson";
@@ -171,6 +174,7 @@ export default function Jobs(
                 See All Jobs
               </button>
             )}
+            {!groupByCompany && <SearchInput searchType="job" />}
             <button
               className="hover:bg-light-yellow inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary_yellow px-3 py-2 text-sm font-semibold text-black transition-all hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-light_yellow md:w-auto lg:px-4 lg:py-3"
               type="button"
@@ -178,8 +182,7 @@ export default function Jobs(
             >
               {groupByCompany ? "Group By Postings" : "Group By Company"}
             </button>
-            <JobModal />
-            <SearchInput searchType="job" />
+            {isSignedIn && <JobModal setPostings={setJobPostings} />}
           </div>
         </div>
 
