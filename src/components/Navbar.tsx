@@ -30,7 +30,7 @@ export default function Navbar() {
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded p-2 focus:outline-none focus:ring sm:order-3 xl:hidden"
+          className="rounded p-2 focus:outline-none focus:ring xl:order-3 xl:hidden"
         >
           <svg
             className="h-5 w-5"
