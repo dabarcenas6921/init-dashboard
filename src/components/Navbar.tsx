@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link href="/">
           <svg
-            className="h-6 cursor-pointer self-center whitespace-nowrap text-white  hover:text-primary_yellow"
+            className="h-6 cursor-pointer self-center whitespace-nowrap text-white hover:text-primary_yellow"
             fill="currentColor"
             strokeWidth="0"
             id="Footer INIT Logo"
@@ -77,7 +77,7 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:flex-row md:justify-end md:bg-primary lg:w-auto lg:justify-center`}
         >
           <a
             href="https://www.instagram.com/init.fiu/"
