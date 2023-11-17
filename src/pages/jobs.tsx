@@ -45,7 +45,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   await helpers.jobs.getAll.prefetch();
 
   const jobPostings = await helpers.jobs.getAll.fetch();
-  console.log(jobPostings);
 
   return {
     props: {
@@ -77,7 +76,7 @@ export default function Jobs(
   });
 
   const allJobsQuery = api.jobs.getAll.useQuery();
-  
+
   const filterQuery = api.jobs.filterBySelectedFilters.useQuery(
     selectedFilters,
     {
@@ -85,30 +84,26 @@ export default function Jobs(
     },
   );
 
-  const searchResultsQuery = api.jobs.getByQuery.useQuery(
-    input, 
-    {
-      enabled: getWasSearchBtnClicked(),
-    },
-  );
-  const allJobsQuery = api.jobs.getAll.useQuery();
+  const searchResultsQuery = api.jobs.getByQuery.useQuery(input, {
+    enabled: getWasSearchBtnClicked(),
+  });
 
-  let searchData = searchResultsQuery.data
-  let queryData = filterQuery.data
+  let searchData = searchResultsQuery.data;
+  let queryData = filterQuery.data;
   if (getWasApplyFilterClicked()) {
     searchData = undefined;
   }
 
   if (getWasSearchBtnClicked()) {
-    queryData = undefined
+    queryData = undefined;
   }
 
   useEffect(() => {
     if (searchData) {
-      console.log("IN SEARCH DATA")
+      console.log("IN SEARCH DATA");
       setJobPostings(searchData);
     } else if (queryData) {
-      console.log("IN FILTER DATA")
+      console.log("IN FILTER DATA");
       setJobPostings(queryData);
     } else if (allJobsQuery.data) {
       setJobPostings(allJobsQuery.data);
@@ -133,8 +128,6 @@ export default function Jobs(
 
     resetJobs();
   }
-
-
 
   return (
     <main className="min-h-screen">
