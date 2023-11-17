@@ -40,6 +40,7 @@ export default function Jobs() {
     jobLocation: [],
   });
 
+
   const filterQuery = api.jobs.filterBySelectedFilters.useQuery(
     selectedFilters,
     {
@@ -54,16 +55,27 @@ export default function Jobs() {
   );
   const allJobsQuery = api.jobs.getAll.useQuery();
 
+  let searchData = searchResultsQuery.data
+  let queryData = filterQuery.data
+  if (getWasApplyFilterClicked()) {
+    searchData = undefined;
+  }
+
+  if (getWasSearchBtnClicked()) {
+    queryData = undefined
+  }
 
   useEffect(() => {
-    if (filterQuery.data) {
-      setJobPostings(filterQuery.data);
-    } else if (searchResultsQuery.data) {
-      setJobPostings(searchResultsQuery.data);
+    if (searchData) {
+      console.log("IN SEARCH DATA")
+      setJobPostings(searchData);
+    } else if (queryData) {
+      console.log("IN FILTER DATA")
+      setJobPostings(queryData);
     } else if (allJobsQuery.data) {
       setJobPostings(allJobsQuery.data);
     }
-  }, [filterQuery.data, searchResultsQuery.data, allJobsQuery.data]);
+  }, [queryData, searchData, allJobsQuery.data]);
 
   const resetJobs = () => {
     setWasSearchBtnClicked(false);
@@ -80,10 +92,10 @@ export default function Jobs() {
       jobPosition: [],
       jobLocation: [],
     });
-    console.log("HERE:", jobPostings)
-
     resetJobs();
   }
+
+
 
   return (
     <main className="min-h-screen">
@@ -98,7 +110,7 @@ export default function Jobs() {
             {getWasSearchBtnClicked() && (
               <button
                 className="cursor-pointer hover:text-primary_yellow hover:underline"
-                onClick={resetJobs}
+                onClick={handleResetFilters}
               >
                 See All Jobs
               </button>
@@ -150,3 +162,11 @@ export default function Jobs() {
     </main>
   );
 }
+/*
+if(filterQuery.data && searchResultsQuery.data) {
+      const intersectionData = filterQuery.data.filter(job => searchResultsQuery.data.includes(job));
+      console.log("Filter: ", filterQuery.data, "Search: ", searchResultsQuery.data);
+      setJobPostings(intersectionData);
+    } else 
+
+*/
