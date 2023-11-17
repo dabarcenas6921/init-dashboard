@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserButton, useUser, SignOutButton } from "@clerk/nextjs";
+import { useUser, SignOutButton } from "@clerk/nextjs";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -75,7 +75,7 @@ export default function Navbar() {
           } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
         >
           <a
-            href="https://www.instagram.com/initofficial/"
+            href="https://www.instagram.com/init.fiu/"
             rel="noopener noreferrer"
             target="_blank"
             className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-orange-500 to-purple-500 hover:from-purple-600 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600"

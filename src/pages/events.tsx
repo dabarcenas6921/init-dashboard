@@ -8,8 +8,42 @@ import SearchInput, {
 import { useRouter, useSearchParams } from "next/navigation";
 import { type EventType } from "~/server/api/routers/eventRouter";
 import { useUser } from "@clerk/nextjs";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import superjson from "superjson";
+import { db } from "~/server/db";
+import { getAuth } from "@clerk/nextjs/server";
 
-export default function Events() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Get the authentication context
+  const auth = getAuth(context.req);
+
+  // Create the context for server-side helpers
+  const trpcContext = {
+    auth, // Auth context
+    db, // Database connection
+  };
+
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: trpcContext,
+    transformer: superjson,
+  });
+
+  const events = await helpers.events.getAll.fetch();
+  console.log(events);
+
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+    },
+  };
+};
+
+export default function Events(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>,
+) {
   const router = useRouter();
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;

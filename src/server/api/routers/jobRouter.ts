@@ -13,7 +13,19 @@ const JobData = z.object({
   url: z.string(),
 });
 
-export type JobPostingType = z.infer<typeof JobData>;
+const JobCardType = z.object({
+  id: z.number(),
+  image: z.string(),
+  title: z.string(),
+  company: z.string(),
+  jobType: z.string(),
+  jobPosition: z.string(),
+  jobLocation: z.string(),
+  date: z.string(),
+  url: z.string(),
+});
+
+export type JobPostingType = z.infer<typeof JobCardType>;
 
 // Define the input schema for the filtering procedure
 const FilterInput = z.object({
@@ -156,6 +168,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobType: {
                   contains: type,
+                  mode: "insensitive"
                 },
               },
             });
@@ -180,6 +193,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobPosition: {
                   contains: pos,
+                  mode: "insensitive"
                 },
               },
             });
@@ -205,6 +219,7 @@ export const jobRouter = createTRPCRouter({
               where: {
                 jobLocation: {
                   contains: loc,
+                  mode: "insensitive"
                 },
               },
             });
