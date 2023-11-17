@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link href="/">
           <svg
-            className="h-6 cursor-pointer self-center whitespace-nowrap text-white  hover:text-primary_yellow"
+            className="h-6 cursor-pointer self-center whitespace-nowrap text-white hover:text-primary_yellow"
             fill="currentColor"
             strokeWidth="0"
             id="Footer INIT Logo"
@@ -30,7 +30,7 @@ export default function Navbar() {
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded p-2 focus:outline-none focus:ring sm:order-3 md:hidden"
+          className="rounded p-2 focus:outline-none focus:ring xl:order-3 xl:hidden"
         >
           <svg
             className="h-5 w-5"
@@ -51,10 +51,10 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-0 w-full lg:block lg:w-auto`}
+          } relative z-0 w-full xl:block xl:w-auto`}
           id="navbar-default"
         >
-          <ul className="mt-4 flex flex-col bg-primary p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
+          <ul className="mt-4 flex flex-col bg-primary p-4 xl:mt-0 xl:flex-row xl:space-x-8 xl:border-0 xl:bg-primary">
             {user.isSignedIn && (
               <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
                 <Link href="/dashboard">Dashboards</Link>
@@ -77,7 +77,7 @@ export default function Navbar() {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 md:flex md:w-auto md:flex-row md:bg-primary`}
+          } relative z-10 order-2 flex w-full flex-row justify-center space-x-4 border-gray-800 bg-primary p-4 xl:flex xl:w-auto xl:flex-row xl:bg-primary`}
         >
           <a
             href="https://www.instagram.com/init.fiu/"

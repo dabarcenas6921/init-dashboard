@@ -62,7 +62,7 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
         <Card
           key={index}
           className={`min-w-[16rem] max-w-xs bg-[#121415] ${
-            !isSignedIn && "pt-3"
+            !isSignedIn && "pt-6"
           } mb-8 border-[#121415] max-[820px]:mb-8`}
         >
           <DeleteModal
