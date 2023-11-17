@@ -1,6 +1,7 @@
 export const jobPostings = [
   {
-    image: "https://www.freepnglogos.com/uploads/netflix-logo-app-png-16.png",
+    image:
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1700202460/init-dashboard/jobs/netflix-logo.png",
     title: "Software Engineer",
     company: "Netflix",
     jobType: "Fulltime",
@@ -12,7 +13,7 @@ export const jobPostings = [
 
   {
     image:
-      "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png",
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1700202362/init-dashboard/jobs/google-logo.png",
     title: "Software Engineer",
     company: "Google",
     jobType: "Fulltime",
@@ -24,7 +25,7 @@ export const jobPostings = [
 
   {
     image:
-      "https://tbcdn.talentbrew.com/company/234/gst_v1_0/img/logo-capital-one.svg",
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1700202587/init-dashboard/jobs/capital-one-logo.svg",
     title: "Software Engineer",
     company: "Capital One",
     jobType: "Fulltime",
@@ -36,7 +37,7 @@ export const jobPostings = [
 
   {
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Amazon_icon.svg/2500px-Amazon_icon.svg.png",
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1700202798/init-dashboard/jobs/104477_amazon_icon_b5cspe.png",
     title: "Software Engineer",
     company: "Amazon",
     jobType: "Fulltime",
@@ -48,7 +49,7 @@ export const jobPostings = [
 
   {
     image:
-      "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png",
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1700202362/init-dashboard/jobs/google-logo.png",
     title: "Data Science",
     company: "Google",
     jobType: "Fulltime",
@@ -59,7 +60,8 @@ export const jobPostings = [
   },
 
   {
-    image: "https://www.freepnglogos.com/uploads/netflix-logo-app-png-16.png",
+    image:
+      "https://res.cloudinary.com/dh6y8bufo/image/upload/v1700202460/init-dashboard/jobs/netflix-logo.png",
     title: "Machine Learning",
     company: "Netflix",
     jobType: "Fulltime",

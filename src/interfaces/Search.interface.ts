@@ -1,4 +1,3 @@
 export interface SearchProps {
-    searchType: string;
-  }
-  
+  searchType: string;
+}

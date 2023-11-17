@@ -55,6 +55,11 @@ export default function Navbar() {
           id="navbar-default"
         >
           <ul className="mt-4 flex flex-col bg-primary p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary">
+            {user.isSignedIn && (
+              <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
+                <Link href="/dashboard">Dashboards</Link>
+              </li>
+            )}
             <li className="block cursor-pointer rounded py-2 pl-3 pr-4 text-white hover:text-primary_yellow">
               <Link href="/jobs">Job Opportunities</Link>
             </li>

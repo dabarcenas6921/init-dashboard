@@ -1,7 +1,5 @@
-import type { StaticImageData } from "next/image";
-
 export interface ChapterCardProps {
-  image: StaticImageData;
+  image: string;
   name: string;
   description: string;
 }

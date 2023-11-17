@@ -11,7 +11,10 @@ import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
 import JobModal from "~/components/JobModal";
 import { useUser } from "@clerk/nextjs";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import {
+  type GetServerSideProps,
+  type InferGetServerSidePropsType,
+} from "next";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
 import superjson from "superjson";
@@ -147,7 +150,7 @@ export default function Jobs(
                 See All Jobs
               </button>
             )}
-            {isSignedIn && <JobModal />}
+            {isSignedIn && <JobModal setPostings={setJobPostings} />}
             <SearchInput searchType="job" />
           </div>
         </div>
