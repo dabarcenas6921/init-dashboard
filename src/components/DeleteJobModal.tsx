@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-'use client';
-import { Modal } from 'flowbite-react';
-import React from 'react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+"use client";
+import { Modal } from "flowbite-react";
+import React from "react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { api } from "~/utils/api";
 
 interface DeleteJobModalProps {
@@ -25,8 +25,12 @@ setJobPostings: React.Dispatch<React.SetStateAction<{
   }[]>>
 }
 
-export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: DeleteJobModalProps) {
-
+export default function DeleteJobModal({
+  isOpen,
+  onClose,
+  id,
+  setJobPostings,
+}: DeleteJobModalProps) {
   const mutation = api.jobs.delete.useMutation({
     onSuccess: (jobPostings) =>{
       setJobPostings(currentJobPostings => currentJobPostings.filter((job) => job.id !== jobPostings.id))
@@ -36,7 +40,6 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: 
 
   // function to delete a job posting
   async function deleted() {
-    
     if (id) {
       try {
         await mutation.mutateAsync({ id }); // Using mutateAsync to wait for completion
@@ -52,13 +55,13 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: 
     await deleted();
     onClose();
   }
-  
+
   return (
     <>
-      <Modal 
-        show={isOpen} 
-        size="md" 
-        onClose={onClose} 
+      <Modal
+        show={isOpen}
+        size="md"
+        onClose={onClose}
         popup
         dismissible
         className={`${isOpen ? "overflow:initial" : "overflow-auto"}`}
@@ -71,20 +74,20 @@ export default function DeleteJobModal({ isOpen, onClose, id, setJobPostings }: 
               Are you sure you want to delete this job posting?
             </h3>
             <div className="flex justify-center gap-4">
-              <button 
-                className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
+              <button
+                className="mb-2 mr-2 rounded-lg bg-primary_yellow px-5 py-2.5 text-sm 
                             font-medium text-black hover:bg-yellow-500 focus:outline-none 
-                            focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900" 
-                            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                            onClick={deletedAndClose}
-                >
+                            focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                onClick={deletedAndClose}
+              >
                 {"Yes, I'm sure"}
               </button>
-              <button 
-                className="bg-gray-300 mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
+              <button
+                className="mb-2 mr-2 rounded-lg bg-gray-300 px-5 py-2.5 text-sm 
                 font-medium text-black hover:bg-gray-500 focus:outline-none 
-                focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900" 
-                onClick={onClose}  
+                focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
+                onClick={onClose}
               >
                 {"No, cancel"}
               </button>

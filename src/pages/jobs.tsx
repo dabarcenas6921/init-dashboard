@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
 import SearchInput, { setWasSearchBtnClicked } from "~/components/SearchInput";
@@ -12,6 +11,12 @@ import { getWasSearchBtnClicked } from "~/components/SearchInput";
 import type { JobPostingType } from "~/server/api/routers/jobRouter";
 import JobModal from "~/components/JobModal";
 import { useUser } from "@clerk/nextjs";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import superjson from "superjson";
+import { db } from "~/server/db";
+import { getAuth } from "@clerk/nextjs/server";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -20,7 +25,37 @@ export type SelectedFilters = {
   jobLocation: string[];
 };
 
-export default function Jobs() {
+// getServerSideProps implementation
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Get the authentication context
+  const auth = getAuth(context.req);
+
+  // Create the context for server-side helpers
+  const trpcContext = {
+    auth, // Auth context
+    db, // Database connection
+  };
+
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: trpcContext,
+    transformer: superjson,
+  });
+
+  await helpers.jobs.getAll.prefetch();
+
+  const jobPostings = await helpers.jobs.getAll.fetch();
+
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+    },
+  };
+};
+
+export default function Jobs(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>,
+) {
   const { isSignedIn } = useUser();
 
   const [jobPostings, setJobPostings] = useState<JobPostingType[]>([]);
@@ -43,6 +78,7 @@ export default function Jobs() {
     jobLocation: [],
   });
 
+  const allJobsQuery = api.jobs.getAll.useQuery();
 
   ///////////////////////////////
   //      API CALLS           //
@@ -53,13 +89,10 @@ export default function Jobs() {
       enabled: getWasApplyFilterClicked(),
     },
   );
-  const searchResultsQuery = api.jobs.getByQuery.useQuery(
-    input, 
-    {
-      enabled: getWasSearchBtnClicked(),
-    },
-  );
-  const allJobsQuery = api.jobs.getAll.useQuery();
+
+  const searchResultsQuery = api.jobs.getByQuery.useQuery(input, {
+    enabled: getWasSearchBtnClicked(),
+  });
 
 
   /* Added this to only display data
@@ -72,7 +105,7 @@ export default function Jobs() {
     searchData = undefined;
   }
   if (getWasSearchBtnClicked()) {
-    queryData = undefined
+    queryData = undefined;
   }
 
 
@@ -93,7 +126,7 @@ export default function Jobs() {
     setWasSearchBtnClicked(false);
     router.push("/jobs");
 
-    if(isSignedIn) {
+    if (isSignedIn) {
       router.refresh();
     }
   };
@@ -108,6 +141,7 @@ export default function Jobs() {
       jobPosition: [],
       jobLocation: [],
     });
+
     resetJobs();
   }
 
@@ -162,9 +196,9 @@ export default function Jobs() {
 
           <div className="w-full">
             {jobPostings && jobPostings.length > 0 ? (
-              <JobCard 
-              jobPostings={jobPostings} 
-              setJobPostings={setJobPostings}
+              <JobCard
+                jobPostings={jobPostings}
+                setJobPostings={setJobPostings}
               />
             ) : (
               <p className="flex h-3/6 items-center justify-center">

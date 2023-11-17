@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Card } from 'flowbite-react';
 import DeleteJobModal from './DeleteJobModal';
 import Image from "next/image";
-import { useUser } from '@clerk/nextjs';
+import { useUser } from "@clerk/nextjs";
 
 export type Job = {
-  id: number,
+  id: number;
   image: string;
   title: string;
   company: string;
@@ -18,24 +18,28 @@ export type Job = {
 
 type JobCardProps = {
   jobPostings: Job[];
-  setJobPostings: React.Dispatch<React.SetStateAction<{
-    id: number;
-    image: string;
-    title: string;
-    company: string;
-    jobType: string;
-    jobPosition: string;
-    jobLocation: string;
-    date: string;
-    url: string;
-}[]>>
+  setJobPostings: React.Dispatch<
+    React.SetStateAction<
+      {
+        date: string;
+        id: number;
+        image: string;
+        title: string;
+        company: string;
+        jobType: string;
+        jobPosition: string;
+        jobLocation: string;
+        url: string;
+      }[]
+    >
+  >;
 };
 
 export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const { isSignedIn } = useUser();
-  
+
   const openModal = (job: Job) => {
     setIsModalOpen(true);
     setSelectedJob(job);
@@ -48,16 +52,18 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
 
 
   return (
-    <div className={`w-full grid place-items-center grid-cols-1 min-[980px]:grid-cols-2 min-[1320px]:grid-cols-3 `}>
+    <div
+      className={`grid w-full grid-cols-1 place-items-center min-[980px]:grid-cols-2 min-[1320px]:grid-cols-3 `}
+    >
       {jobPostings.map((job, index) => (
         <Card
           key={index}
           className={`max-w-xs min-w-[16rem] bg-[#121415] ${!isSignedIn && "pt-6"} border-[#121415] mb-8 max-[820px]:mb-8`}
         >
-          <DeleteJobModal 
-            isOpen={isModalOpen && selectedJob === job} 
-            onClose={closeModal} 
-            id={job.id} 
+          <DeleteJobModal
+            isOpen={isModalOpen && selectedJob === job}
+            onClose={closeModal}
+            id={job.id}
             setJobPostings={setJobPostings}
             />
           {isSignedIn && <div className="flex justify-end">
@@ -84,46 +90,47 @@ export default function JobCard({ jobPostings, setJobPostings }: JobCardProps) {
           
 
           {/* Top of Card */}
-          <div className="flex items-center mb-1 mt-[-0.5em]">
+          <div className="mb-1 mt-[-0.5em] flex items-center">
             <div className="">
-              <Image className="w-20 h-20 mr-4 max-[428px]:w-16 max-[428px]:h-16" src={job.image} alt={job.title} width={1000} height={1000} />
+              <Image
+                className="mr-4 h-20 w-20 max-[428px]:h-16 max-[428px]:w-16"
+                src={job.image}
+                alt={job.title}
+                width={1000}
+                height={1000}
+              />
             </div>
             <div>
-              <h3 className="text-white text-lg max-[428px]:text-[0.84rem] mb-1">{job.title}</h3>
+              <h3 className="mb-1 text-lg text-white max-[428px]:text-[0.84rem]">
+                {job.title}
+              </h3>
               <p className="text-sm max-[428px]:text-[0.7rem]">{job.company}</p>
             </div>
           </div>
 
           {/* Job Roles Pills */}
           <div className="mb-6">
-            <span
-              className="bg-blue-100 text-blue-800 text-sm max-[428px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300"
-            >
+            <span className="mr-2 rounded bg-blue-100 px-2.5 py-1.5 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300 max-[428px]:text-[9.25px]">
               {job.jobType}
             </span>
 
-            <span
-              className="bg-green-100 text-green-800 text-sm max-[428px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded  dark:bg-green-900 dark:text-green-300"
-            >
+            <span className="mr-2 rounded bg-green-100 px-2.5 py-1.5 text-sm font-medium text-green-800 dark:bg-green-900  dark:text-green-300 max-[428px]:text-[9.25px]">
               {job.jobPosition}
             </span>
 
-            <span
-              className="bg-yellow-100 text-yellow-800 text-sm max-[428px]:text-[9.25px] font-medium mr-2 px-2.5 py-1.5 rounded dark:bg-yellow-900 dark:text-yellow-300"
-            >
+            <span className="mr-2 rounded bg-yellow-100 px-2.5 py-1.5 text-sm font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 max-[428px]:text-[9.25px]">
               {job.jobLocation}
             </span>
-
           </div>
 
           {/* Date posted and Apply Button */}
-          <div className="flex items-center mb-4">
+          <div className="mb-4 flex items-center">
             <h3 className="mr-8 max-[428px]:text-[0.7rem]">{job.date}</h3>
             <a
               href={job.url}
               rel="noopener noreferrer"
               target="_blank"
-              className="rounded block bg-primary_yellow px-5 py-2 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem] font-bold text-primary text-sm hover:bg-light_yellow focus:ring-light_yellow"
+              className="block rounded bg-primary_yellow px-5 py-2 text-sm font-bold text-primary hover:bg-light_yellow focus:ring-light_yellow max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem]"
             >
               Apply
             </a>
