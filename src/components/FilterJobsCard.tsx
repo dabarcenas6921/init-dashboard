@@ -23,7 +23,6 @@ type FilterJobsCardProps = {
   onResetFilters: () => void; 
 }
 
-
 let wasApplyFilterClicked = false
 
 export function setWasApplyFilterClicked(value: boolean) {
@@ -33,6 +32,7 @@ export function setWasApplyFilterClicked(value: boolean) {
 export function getWasApplyFilterClicked() {
   return wasApplyFilterClicked
 }
+
 
 const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => {
   const [checkboxState, setCheckboxState] = useState<CheckboxState>({
@@ -124,7 +124,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
           <h2 className="text-xl mb-4">Filter</h2>
           {/* Reset Filters Button */}
           <p 
-              className="text-xs text-primary_yellow cursor-pointer "
+              className="text-xs text-primary_yellow cursor-pointer hover:underline"
               onClick={resetFilters}
           >
               Clear filters
@@ -156,7 +156,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
               className="mr-1.5 rounded-sm cursor-pointer" 
               checked={checkboxState.partTime}
               onChange={handleCheckboxChange}/>
-              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="partTime">Part-time</label>
+              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="partTime">Parttime</label>
             </div>
           </div>
 
@@ -183,7 +183,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
               className="mr-1.5 rounded-sm cursor-pointer"
               checked={checkboxState.newGrad}
               onChange={handleCheckboxChange} />
-              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="newGrad">New-grad</label>
+              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="newGrad">New-Grad</label>
             </div>
           </div>
 
@@ -199,7 +199,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
               className="mr-1.5 rounded-sm cursor-pointer" 
               checked={checkboxState.onSite}
               onChange={handleCheckboxChange}/>
-              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="onSite">On-site</label>
+              <label className="text-sm font-normal cursor-pointer pt-[0.1rem]" htmlFor="onSite">On-Site</label>
             </div>
             {/* Hybrid box */}
             <div className="mb-1.5 flex items-center">
@@ -231,8 +231,7 @@ const FilterCard = ({ onFilterChange, onResetFilters }: FilterJobsCardProps) => 
             id="filter-btn"
             type="button"
             className="bg-primary_yellow mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm 
-                        font-medium text-black hover:bg-yellow-500 focus:outline-none 
-                        focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+                        font-medium text-black hover:bg-light_yellow focus:ring-light_yellow dark:focus:ring-yellow-900"
           onClick={handleSubmit}
           >
             Apply Filter

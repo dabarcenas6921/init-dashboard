@@ -124,7 +124,6 @@ export default function EventModal() {
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onSubmit={handleSubmit(onSubmit)}
               className="space-y-5"
-              action="#"
             >
               <div className="space-y-5 whitespace-nowrap text-sm sm:flex sm:items-center sm:justify-between sm:space-y-0">
                 <div className="w-full sm:mr-2">
