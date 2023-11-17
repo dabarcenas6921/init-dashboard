@@ -20,7 +20,7 @@ export default function Carousel() {
           disableOnInteraction: false,
         }}
         modules={[EffectCards, Autoplay]}
-        className="mySwiper h-100 w-8/12 md:w-10/12"
+        className="mySwiper h-100 w-7/12 md:w-10/12"
         slidesPerView={1}
         spaceBetween={10}
       >
