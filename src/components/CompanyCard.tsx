@@ -54,33 +54,33 @@ export default function CompanyCard({
 
   return (
     <div
-      className={`flex w-full flex-wrap items-start justify-evenly ${
-        company.length === 2 ? "xl:justify-evenly" : "xl:justify-between"
-      }`}
+      className={`grid w-full grid-cols-1 place-items-center min-[980px]:grid-cols-2 min-[1320px]:grid-cols-3  `}
     >
       {company.map((companyCard, index) => (
         <Card
           key={index}
-          className="mb-8 min-w-[16rem] max-w-xs border-[#121415] bg-[#121415] max-[820px]:mb-8"
+          className=" mb-8  h-[250px] w-[315px] border-[#121415] bg-[#121415] max-[820px]:mb-8"
         >
-          <div className="mb-1 mt-[-0.5em] flex items-center">
+          <div className="mb-1 mt-[-0.5em] flex items-center self-center">
             <div className="">
-              <img
-                className="mr-4 h-20 w-20 max-[428px]:h-16 max-[428px]:w-16"
+              <Image
+                className=" mt-5 h-[125px] w-full items-center justify-center "
+                width={125}
+                height={125}
                 src={companyCard.image}
                 alt={companyCard.name}
               />
             </div>
           </div>
-          <div className="mb-4 flex items-center">
-            <h3 className="mr-8 max-[428px]:text-[0.7rem]">
+          <div className="mb-4 flex flex-col items-center justify-between gap-5">
+            <h2 className=" w-full flex-nowrap text-center ">
               {companyCard.name}
-            </h3>
+            </h2>
             <button
               onClick={() => handleSubmit(companyCard.name)}
               value={companyCard.name}
               rel="noopener noreferrer"
-              className="block rounded bg-primary_yellow px-5 py-2 text-sm font-bold text-primary hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem]"
+              className="block h-[36px] w-full flex-nowrap rounded bg-primary_yellow px-4  py-2 text-sm font-bold text-primary hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-gray-600 max-[428px]:px-4 max-[428px]:py-1 max-[428px]:text-[0.8rem]"
             >
               Jobs Posted: {companyCard.id}
             </button>
