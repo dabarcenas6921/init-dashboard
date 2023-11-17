@@ -31,7 +31,6 @@
     "@trpc/server": "^10.37.1",
     "axios": "^1.6.1",
     "cloudinary": "^1.41.0",
-    "axios": "^1.6.1",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
     "framer-motion": "^10.16.4",

@@ -6,7 +6,6 @@ import { Modal } from "flowbite-react";
 import React from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { api } from "~/utils/api";
-import type { JobPostingType } from "~/server/api/routers/jobRouter";
 
 interface DeleteJobModalProps {
   isOpen: boolean;
