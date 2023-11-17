@@ -1,9 +1,6 @@
+import exp from "constants";
 import { z } from "zod";
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 const JobData = z.object({
   image: z.string(),
@@ -25,9 +22,20 @@ const FilterInput = z.object({
   jobLocation: z.array(z.string()).optional(),
 });
 
+const CompanyButton = z.object({
+  company: z.string(),
+});
+
+const CompanyCard = z.object({
+  image: z.string(),
+  company: z.string(),
+  id: z.number(),
+});
+export type CompanyCardType = z.infer<typeof CompanyCard>;
+
 export const jobRouter = createTRPCRouter({
   // Create Job Procedure
-  create: protectedProcedure.input(JobData).mutation(async ({ input, ctx }) => {
+  create: publicProcedure.input(JobData).mutation(async ({ input, ctx }) => {
     try {
       const jobPosting = await ctx.db.jobPosting.create({
         data: input,
@@ -77,6 +85,55 @@ export const jobRouter = createTRPCRouter({
       }
     }),
 
+  // Get Jobs by Company Procedure
+  getByCompany: publicProcedure.query(async ({ ctx }) => {
+    try {
+      const jobPostings = await ctx.db.jobPosting.groupBy({
+        by: ["company", "image"],
+        _count: {
+          id: true,
+        },
+      });
+      return jobPostings.map((post) => ({
+        company: post.company,
+        image: post.image,
+        id: post._count.id,
+      }));
+    } catch (error) {
+      console.log(error);
+      throw new Error("Failed to get job postings by company");
+    }
+  }),
+
+  // Get Jobs by Company Card
+  getByCompanyCard: publicProcedure
+    .input(
+      z.object({
+        event: z.object({
+          target: z.object({
+            value: z.string(),
+          }),
+        }),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      try {
+        const decodedQuery = input.event.target.value
+          .replace(/\+/g, " ")
+          .replace(/%20/g, " ");
+
+        const jobPostings = await ctx.db.jobPosting.findMany({
+          where: {
+            company: { contains: decodedQuery, mode: "insensitive" },
+          },
+        });
+        return jobPostings;
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to get job postings by company card");
+      }
+    }),
+
   filterBySelectedFilters: publicProcedure
     .input(FilterInput)
     .query(async ({ input, ctx }) => {
@@ -117,7 +174,7 @@ export const jobRouter = createTRPCRouter({
           console.log(input.jobPosition);
           for (let pos of input.jobPosition) {
             if (pos === "newGrad") {
-              pos = "New-Grad";
+              pos = "New-grad";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
@@ -142,7 +199,7 @@ export const jobRouter = createTRPCRouter({
           console.log(input.jobLocation);
           for (let loc of input.jobLocation) {
             if (loc === "onSite") {
-              loc = "On-Site";
+              loc = "On-site";
             }
             const postingsOfType = await ctx.db.jobPosting.findMany({
               where: {
@@ -171,7 +228,7 @@ export const jobRouter = createTRPCRouter({
     }),
 
   // Delete Job Posting Procedure
-  delete: protectedProcedure
+  delete: publicProcedure
     .input(
       z.object({
         id: z.number(),
@@ -190,7 +247,7 @@ export const jobRouter = createTRPCRouter({
     }),
 
   // Update Job Posting Procedure
-  update: protectedProcedure
+  update: publicProcedure
     .input(
       z.object({
         id: z.number(),

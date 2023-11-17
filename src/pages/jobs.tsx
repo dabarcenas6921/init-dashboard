@@ -9,9 +9,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { api } from "~/utils/api";
 import { getWasApplyFilterClicked } from "~/components/FilterJobsCard";
 import { getWasSearchBtnClicked } from "~/components/SearchInput";
-import type { JobPostingType } from "~/server/api/routers/jobRouter";
+import type {
+  CompanyCardType,
+  JobPostingType,
+} from "~/server/api/routers/jobRouter";
 import JobModal from "~/components/JobModal";
-import { useUser } from "@clerk/nextjs";
+import CompanyCard from "~/components/CompanyCard";
 
 // Define a type for the selected filters
 export type SelectedFilters = {
@@ -22,7 +25,7 @@ export type SelectedFilters = {
 
 export default function Jobs() {
   let jobPostingsArr: JobPostingType[] | undefined = [];
-  const { isSignedIn } = useUser();
+  let companyDataArr: CompanyCardType[] | undefined = [];
 
   ///////////////////////////////
   //      SEARCHING JOBS       //
@@ -52,6 +55,9 @@ export default function Jobs() {
     });
   };
 
+  const [groupByCompany, setGroupByCompany] = useState(false);
+  const [getFromCompany, setGetFromCompany] = useState(false);
+
   // Returns job postings based on if the user
   // Apply's filters or Searches for jobs
   if (getWasApplyFilterClicked()) {
@@ -60,6 +66,8 @@ export default function Jobs() {
     ).data;
   } else if (getWasSearchBtnClicked()) {
     jobPostingsArr = api.jobs.getByQuery.useQuery(input).data;
+  } else if (groupByCompany) {
+    companyDataArr = api.jobs.getByCompany.useQuery().data;
   } else {
     jobPostingsArr = api.jobs.getAll.useQuery().data;
   }
@@ -87,7 +95,14 @@ export default function Jobs() {
                 See All Jobs
               </button>
             )}
-            {isSignedIn && <JobModal />}
+            <button
+              className="hover:bg-light-yellow inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary_yellow px-3 py-2 text-sm font-semibold text-black transition-all hover:bg-light_yellow focus:outline-none focus:ring-2 focus:ring-light_yellow md:w-auto lg:px-4 lg:py-3"
+              type="button"
+              onClick={() => setGroupByCompany(!groupByCompany)}
+            >
+              {groupByCompany ? "Group By Postings" : "Group By Company"}
+            </button>
+            <JobModal />
             <SearchInput searchType="job" />
           </div>
         </div>
@@ -118,6 +133,18 @@ export default function Jobs() {
           </div>
 
           <div className="w-full">
+            <CompanyCard
+              company={
+                companyDataArr
+                  ? companyDataArr.map((company) => ({
+                      name: company.company,
+                      image: company.image,
+                      id: company.id,
+                    }))
+                  : []
+              }
+            />
+
             {jobPostingsArr && jobPostingsArr.length > 0 ? (
               <JobCard jobPostings={jobPostingsArr} />
             ) : (
